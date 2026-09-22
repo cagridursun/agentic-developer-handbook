@@ -1,0 +1,109 @@
+# Roadmap
+
+Milestones are ordered. They are not dated.
+
+Only Milestone 0 is underway. Later milestones are planned work. Nothing in this list past the foundation is implemented.
+
+The learning path is a teaching sequence, not an architecture every application must implement. Skip a concept when the problem does not need it.
+
+## Milestone 0 — Foundation
+
+In progress.
+
+- Repository skeleton
+- Handbook documents: vision, mental model, glossary, architecture
+- Architecture decision records
+- Contribution model, code of conduct, and security reporting
+- Continuous integration
+- A Maven build that succeeds without application code and without API keys
+
+## Milestone 1 — The Model
+
+Not started.
+
+- A real LLM call
+- The difference between a model and an agent
+- What an inference provider is
+- The first Java lab
+
+## Milestone 2 — Structured Output
+
+Not started.
+
+Constrain a model response to a schema the application can validate.
+
+## Milestone 3 — Tools
+
+Not started.
+
+Let the application perform an action the model can only request.
+
+## Milestone 4 — Knowledge / RAG
+
+Not started.
+
+Bring outside information into the prompt. Include the cases where an ordinary query is the right tool and retrieval is not.
+
+## Milestone 5 — Memory
+
+Not started.
+
+Decide what the application keeps across turns, and what it should forget.
+
+## Milestone 6 — Skills
+
+Not started.
+
+Show Agent Skills / `SKILL.md` as instructions for how a task should be performed. A few example skills, not a catalog and not a skill runtime. See [ADR 0004](docs/adr/0004-skills-are-a-building-block.md).
+
+## Milestone 7 — Agent Runtime
+
+Not started.
+
+An execution loop that can call a model, use tools, and stop. This is the first point at which the handbook will call the example an agent.
+
+## Milestone 8 — MCP
+
+Not started.
+
+Connect the runtime to external capabilities through the Model Context Protocol. Show why a local Java call is not a reason to introduce MCP.
+
+## Milestone 9 — Evaluation
+
+Not started.
+
+Check behavior with tests and reviewable examples. Paid provider calls stay opt-in so normal CI does not need API keys.
+
+## Milestone 10 — Observability
+
+Not started.
+
+Logs, metrics, and traces for model calls and tool execution. OpenTelemetry is the intended direction when this milestone starts. It is not a dependency yet.
+
+## Milestone 11 — Security
+
+Not started.
+
+Boundaries: user input, model output, tool arguments, retrieved content, skill text, and protocol messages. The model is not the authorization layer.
+
+## Milestone 12 — Deployment
+
+Not started.
+
+What has to be true to run the reference system as a deployed application. Docker is the intended packaging direction when this milestone starts. It is not part of the repository yet.
+
+## Later
+
+Not scheduled as numbered milestones.
+
+- Multi-agent systems
+- A2A
+- Fine-tuning
+- Additional inference providers
+- Community examples
+
+These topics belong in the handbook. They wait until the single-runtime path is concrete enough that adding them teaches something new.
+
+## How to read this list
+
+[labs/README.md](labs/README.md) describes the lab format. The labs themselves will be added with the milestone that needs them. Empty lab directories are not created in advance.

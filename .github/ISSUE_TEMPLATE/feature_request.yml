@@ -1,0 +1,16 @@
+name: Feature request
+description: Propose a change to the handbook or a lab
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you solving?
+      description: Describe the gap in the current milestone or document. This project is a handbook, not a new agent framework.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What do you propose?
+    validations:
+      required: true

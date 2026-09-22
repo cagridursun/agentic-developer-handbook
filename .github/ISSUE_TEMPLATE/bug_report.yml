@@ -1,0 +1,24 @@
+name: Bug report
+description: Report a defect in the handbook, a lab, or the build
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How can we reproduce it?
+      description: Include the command, document, or lab, and the version of Java you used.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Anything else?
+      description: Logs or screenshots that help. Do not include secrets or API keys.
+    validations:
+      required: false

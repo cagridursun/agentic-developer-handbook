@@ -1,0 +1,28 @@
+# Maven
+target/
+
+# Java
+*.class
+
+# IDE
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local secrets and logs
+.env
+*.log
+
+# Third-party Cursor skills. Project rules under .cursor/rules/ stay tracked.
+.cursor/skills/
+
+# Shared files those skills link to with ../../references/.
+# They live beside skills/, so ignoring skills/ does not cover them.
+.cursor/references/
