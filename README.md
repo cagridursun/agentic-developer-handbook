@@ -43,7 +43,7 @@ The canonical implementation is Java. The conceptual chapters stay readable with
 - How to implement the concepts that you do need in Java
 - What changes when a small example has to survive production: evaluation, observability, security, and deployment
 
-No labs are implemented yet. The list above is the plan, not a catalog of finished features.
+The first two labs, [labs/01-model-call](labs/01-model-call/README.md) and [labs/02-structured-output](labs/02-structured-output/README.md), are implemented and runnable. The rest of the list is the plan, not a catalog of finished features.
 
 ## Learning path
 
@@ -104,17 +104,18 @@ agentic-developer-handbook/
 │   └── adr/
 ├── labs/
 │   ├── README.md
-│   └── 01-model-call/
+│   ├── 01-model-call/
+│   └── 02-structured-output/
 └── .github/
 ```
 
-[docs/architecture.md](docs/architecture.md) records the engineering principles. [docs/adr/](docs/adr/README.md) records the decisions already made. [labs/README.md](labs/README.md) describes how future labs will be written. There is no lab code yet.
+[docs/architecture.md](docs/architecture.md) records the engineering principles. [docs/adr/](docs/adr/README.md) records the decisions already made. [labs/README.md](labs/README.md) describes how labs are written and lists them; the first, [01-model-call](labs/01-model-call/README.md), is runnable.
 
 ## Current status
 
 This repository is at the beginning.
 
-Milestone 0, the foundation, is done: the handbook documents, the contribution model, the architecture decisions, and a Maven build that runs without API keys. Milestone 1 is also done: the first runnable lab, [labs/01-model-call](labs/01-model-call/README.md), makes a real Gemini call and explains why that call is not an agent. Later milestones are not started.
+Milestone 0, the foundation, is done: the handbook documents, the contribution model, the architecture decisions, and a Maven build that runs without API keys. Milestone 1 is done: [labs/01-model-call](labs/01-model-call/README.md) makes a real Gemini call and explains why that call is not an agent. Milestone 2 is done: [labs/02-structured-output](labs/02-structured-output/README.md) constrains the response with a schema and turns it into a typed Java record — still not an agent. Later milestones are not started.
 
 Nothing here stores embeddings or runs an agent.
 
@@ -126,7 +127,7 @@ Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) be
 ./mvnw verify
 ```
 
-On Windows, use `mvnw.cmd verify`. The command checks the build. There is no program to run yet.
+On Windows, use `mvnw.cmd verify`. This builds every module and runs the tests without calling Gemini, so it needs no API key. Running a lab against the real Gemini API does need one; each lab README shows its commands, starting with [labs/01-model-call](labs/01-model-call/README.md).
 
 ## License
 

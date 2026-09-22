@@ -2,7 +2,7 @@
 
 Milestones are ordered. They are not dated.
 
-Milestone 0 and Milestone 1 are done. Later milestones are planned work and are not implemented.
+Milestones 0 through 2 are done. Later milestones are planned work and are not implemented.
 
 The learning path is a teaching sequence, not an architecture every application must implement. Skip a concept when the problem does not need it.
 
@@ -28,7 +28,7 @@ Done. The lab is [labs/01-model-call](labs/01-model-call/README.md).
 
 ## Milestone 2 — Structured Output
 
-Not started.
+Done. The lab is [labs/02-structured-output](labs/02-structured-output/README.md).
 
 Constrain a model response to a schema the application can validate.
 
