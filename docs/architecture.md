@@ -8,7 +8,7 @@ The accepted decisions so far are in [adr/](adr/README.md).
 
 Java 21 is the language of the canonical labs. Conceptual documentation stays free of Java where the idea does not depend on it. Other languages are not promised as parallel implementations.
 
-The root Maven project is a parent POM. It targets Java 21, uses UTF-8, and has no modules yet, because there is no lab yet. The first lab will add the first module. See [ADR 0001](adr/0001-java-first.md).
+The root Maven project is a parent POM. It targets Java 21 and uses UTF-8. Each lab is a child module; the first is [labs/01-model-call](../labs/01-model-call/README.md). See [ADR 0001](adr/0001-java-first.md).
 
 ## Progressive labs
 
@@ -42,4 +42,4 @@ A concept appears first in the smallest form that still teaches it. Structured o
 
 ## What is intentionally absent
 
-Milestone 0 has no application code, no Spring Boot, no Spring AI, no provider SDK, and no database, broker, or container runtime. Adding them now would describe an architecture the repository does not have.
+There is still no Spring Boot, no Spring AI, no provider abstraction, and no database, broker, or container runtime. Lab 01 uses one provider SDK directly, without a wrapper, because one implementation does not justify an abstraction. Infrastructure arrives with the milestone that needs it.

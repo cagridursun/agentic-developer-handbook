@@ -2,7 +2,7 @@
 
 Labs are the runnable half of the handbook. Each one adds a single concept to the previous lab and leaves a build that still works.
 
-No lab is implemented yet. This directory will gain a lab when its milestone starts. Empty lab directories are not created in advance.
+The first lab is available: [01-model-call](01-model-call/README.md). Later labs will be added with their milestones. Empty lab directories are not created in advance.
 
 ## What every lab answers
 
@@ -24,13 +24,11 @@ Evaluation, observability, security, and deployment come after there is a system
 
 The concepts those labs depend on are defined in [docs/mental-model.md](../docs/mental-model.md) and [docs/glossary.md](../docs/glossary.md).
 
-## Planned labs
-
-These names are reserved for later milestones. The directories do not exist.
+## Labs
 
 | Lab | Milestone |
 | --- | --- |
-| `01-model-call` | 1 — The Model |
+| [`01-model-call`](01-model-call/README.md) | 1 — The Model |
 | `02-structured-output` | 2 — Structured Output |
 | `03-tool-calling` | 3 — Tools |
 | `04-rag` | 4 — Knowledge / RAG |
@@ -43,8 +41,10 @@ These names are reserved for later milestones. The directories do not exist.
 | `11-security` | 11 — Security |
 | `12-production` | 12 — Deployment |
 
-Multi-agent systems, A2A, and fine-tuning are not in this list. They are later topics in the roadmap.
+Labs without links are reserved names for later milestones. Their directories do not exist yet. Multi-agent systems, A2A, and fine-tuning are not in this list. They are later topics in the roadmap.
 
 ## Running a lab
 
-There is nothing to run yet. From the repository root, `./mvnw verify` (or `mvnw.cmd verify` on Windows) checks the Maven build. It does not call a model and does not need an API key.
+From the repository root, `./mvnw verify` (or `mvnw.cmd verify` on Windows) builds every lab and runs the tests. It does not call a model and does not need an API key.
+
+Running a lab against the real provider needs an API key. Each lab's README shows its exact commands; for the first lab see [01-model-call](01-model-call/README.md).

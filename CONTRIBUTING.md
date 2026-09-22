@@ -2,7 +2,7 @@
 
 Questions, corrections, and pull requests are welcome. Small changes are easier to review than broad redesigns.
 
-The project is at Milestone 0. Please do not start later milestones unless an issue asks for that work. The current plan is [ROADMAP.md](ROADMAP.md).
+The current milestone is tracked in [ROADMAP.md](ROADMAP.md). Please do not start later milestones unless an issue asks for that work.
 
 ## What we expect
 

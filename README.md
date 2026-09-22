@@ -103,7 +103,8 @@ agentic-developer-handbook/
 │   ├── architecture.md
 │   └── adr/
 ├── labs/
-│   └── README.md
+│   ├── README.md
+│   └── 01-model-call/
 └── .github/
 ```
 
@@ -113,9 +114,9 @@ agentic-developer-handbook/
 
 This repository is at the beginning.
 
-Milestone 0, the foundation, is the current work: the handbook documents, the contribution model, the architecture decisions, and a Maven build that runs without an application and without API keys. Milestone 1, the first Java model call, has not started.
+Milestone 0, the foundation, is done: the handbook documents, the contribution model, the architecture decisions, and a Maven build that runs without API keys. Milestone 1 is also done: the first runnable lab, [labs/01-model-call](labs/01-model-call/README.md), makes a real Gemini call and explains why that call is not an agent. Later milestones are not started.
 
-Nothing here calls a model, stores embeddings, or runs an agent.
+Nothing here stores embeddings or runs an agent.
 
 ## Contributing
 

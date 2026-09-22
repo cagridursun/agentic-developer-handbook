@@ -12,7 +12,7 @@ Short working definitions for this handbook. Where two terms are often mixed up,
 
 **Inference.** Running a trained model to produce an output. Training changes weights. Inference uses them.
 
-**Inference provider.** The service or process that hosts a model and accepts API calls. A provider is not an agent. The same application can target more than one provider later. This repository does not integrate any provider yet.
+**Inference provider.** The service or process that hosts a model and accepts API calls. A provider is not an agent. The same application can target more than one provider later.
 
 **Prompt.** The input for one inference call: instructions, conversation, and any context the application attached.
 

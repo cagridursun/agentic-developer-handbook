@@ -2,13 +2,13 @@
 
 Milestones are ordered. They are not dated.
 
-Only Milestone 0 is underway. Later milestones are planned work. Nothing in this list past the foundation is implemented.
+Milestone 0 and Milestone 1 are done. Later milestones are planned work and are not implemented.
 
 The learning path is a teaching sequence, not an architecture every application must implement. Skip a concept when the problem does not need it.
 
 ## Milestone 0 — Foundation
 
-In progress.
+Done.
 
 - Repository skeleton
 - Handbook documents: vision, mental model, glossary, architecture
@@ -19,7 +19,7 @@ In progress.
 
 ## Milestone 1 — The Model
 
-Not started.
+Done. The lab is [labs/01-model-call](labs/01-model-call/README.md).
 
 - A real LLM call
 - The difference between a model and an agent
