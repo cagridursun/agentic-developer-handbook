@@ -43,7 +43,7 @@ The canonical implementation is Java. The conceptual chapters stay readable with
 - How to implement the concepts that you do need in Java
 - What changes when a small example has to survive production: evaluation, observability, security, and deployment
 
-The first three labs are implemented and runnable: [labs/01-model-call](labs/01-model-call/README.md), [labs/02-structured-output](labs/02-structured-output/README.md), and [labs/03-tool-calling](labs/03-tool-calling/README.md). The rest of the list is the plan, not a catalog of finished features.
+The first four labs are implemented and runnable: [labs/01-model-call](labs/01-model-call/README.md), [labs/02-structured-output](labs/02-structured-output/README.md), [labs/03-tool-calling](labs/03-tool-calling/README.md), and [labs/04-rag](labs/04-rag/README.md). The rest of the list is the plan, not a catalog of finished features.
 
 ## Learning path
 
@@ -106,7 +106,8 @@ agentic-developer-handbook/
 │   ├── README.md
 │   ├── 01-model-call/
 │   ├── 02-structured-output/
-│   └── 03-tool-calling/
+│   ├── 03-tool-calling/
+│   └── 04-rag/
 └── .github/
 ```
 
@@ -116,7 +117,7 @@ agentic-developer-handbook/
 
 This repository is at the beginning.
 
-Milestone 0, the foundation, is done: the handbook documents, the contribution model, the architecture decisions, and a Maven build that runs without API keys. Milestone 1 is done: [labs/01-model-call](labs/01-model-call/README.md) makes a real Gemini call and explains why that call is not an agent. Milestone 2 is done: [labs/02-structured-output](labs/02-structured-output/README.md) constrains the response with a schema and turns it into a typed Java record. Milestone 3 is done: [labs/03-tool-calling](labs/03-tool-calling/README.md) lets the model request one tool call that the application validates and executes — still not an agent runtime. Later milestones are not started.
+Milestone 0, the foundation, is done: the handbook documents, the contribution model, the architecture decisions, and a Maven build that runs without API keys. Milestone 1 is done: [labs/01-model-call](labs/01-model-call/README.md) makes a real Gemini call and explains why that call is not an agent. Milestone 2 is done: [labs/02-structured-output](labs/02-structured-output/README.md) constrains the response with a schema and turns it into a typed Java record. Milestone 3 is done: [labs/03-tool-calling](labs/03-tool-calling/README.md) lets the model request one tool call that the application validates and executes. Milestone 4 is done: [labs/04-rag](labs/04-rag/README.md) retrieves local documentation into the prompt — without embeddings or a vector database, because RAG is a pattern, not a datastore. Later milestones are not started.
 
 Nothing here stores embeddings or runs an agent.
 

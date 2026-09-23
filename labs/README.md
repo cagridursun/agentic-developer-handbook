@@ -2,7 +2,7 @@
 
 Labs are the runnable half of the handbook. Each one adds a single concept to the previous lab and leaves a build that still works.
 
-Three labs are available: [01-model-call](01-model-call/README.md), [02-structured-output](02-structured-output/README.md), and [03-tool-calling](03-tool-calling/README.md). Later labs will be added with their milestones. Empty lab directories are not created in advance.
+Four labs are available: [01-model-call](01-model-call/README.md), [02-structured-output](02-structured-output/README.md), [03-tool-calling](03-tool-calling/README.md), and [04-rag](04-rag/README.md). Later labs will be added with their milestones. Empty lab directories are not created in advance.
 
 ## What every lab answers
 
@@ -31,7 +31,7 @@ The concepts those labs depend on are defined in [docs/mental-model.md](../docs/
 | [`01-model-call`](01-model-call/README.md) | 1 — The Model |
 | [`02-structured-output`](02-structured-output/README.md) | 2 — Structured Output |
 | [`03-tool-calling`](03-tool-calling/README.md) | 3 — Tools |
-| `04-rag` | 4 — Knowledge / RAG |
+| [`04-rag`](04-rag/README.md) | 4 — Knowledge / RAG |
 | `05-memory` | 5 — Memory |
 | `06-skills` | 6 — Skills |
 | `07-agent-runtime` | 7 — Agent Runtime |

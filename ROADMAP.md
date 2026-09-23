@@ -8,7 +8,7 @@ The learning path is a teaching sequence, not an architecture every application 
 
 ## Track A — Canonical Learning Path
 
-The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 3 are done. Later milestones are planned work and are not implemented.
+The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 4 are done. Later milestones are planned work and are not implemented.
 
 ### Milestone 0 — Foundation
 
@@ -44,7 +44,7 @@ Let the application perform an action the model can only request.
 
 ### Milestone 4 — Knowledge / RAG
 
-Not started.
+Done. The lab is [labs/04-rag](labs/04-rag/README.md).
 
 Bring outside information into the prompt. Include the cases where an ordinary query is the right tool and retrieval is not.
 
