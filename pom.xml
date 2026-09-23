@@ -19,6 +19,7 @@
     <module>labs/03-tool-calling</module>
     <module>labs/04-rag</module>
     <module>labs/05-memory</module>
+    <module>labs/06-skills</module>
   </modules>
 
   <licenses>

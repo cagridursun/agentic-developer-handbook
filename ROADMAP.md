@@ -8,7 +8,7 @@ The learning path is a teaching sequence, not an architecture every application 
 
 ## Track A — Canonical Learning Path
 
-The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 5 are done. Later milestones are planned work and are not implemented.
+The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 6 are done. Later milestones are planned work and are not implemented.
 
 ### Milestone 0 — Foundation
 
@@ -56,7 +56,7 @@ Decide what the application keeps across turns, and what it should forget.
 
 ### Milestone 6 — Skills
 
-Not started.
+Done. The lab is [labs/06-skills](labs/06-skills/README.md).
 
 Show Agent Skills / `SKILL.md` as instructions for how a task should be performed. A few example skills, not a catalog and not a skill runtime. See [ADR 0004](docs/adr/0004-skills-are-a-building-block.md).
 

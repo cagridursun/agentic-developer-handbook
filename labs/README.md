@@ -2,7 +2,7 @@
 
 Labs are the runnable half of the handbook. Each one adds a single concept to the previous lab and leaves a build that still works.
 
-Five labs are available: [01-model-call](01-model-call/README.md), [02-structured-output](02-structured-output/README.md), [03-tool-calling](03-tool-calling/README.md), [04-rag](04-rag/README.md), and [05-memory](05-memory/README.md). Later labs will be added with their milestones. Empty lab directories are not created in advance.
+Six labs are available: [01-model-call](01-model-call/README.md), [02-structured-output](02-structured-output/README.md), [03-tool-calling](03-tool-calling/README.md), [04-rag](04-rag/README.md), [05-memory](05-memory/README.md), and [06-skills](06-skills/README.md). Later labs will be added with their milestones. Empty lab directories are not created in advance.
 
 ## What every lab answers
 
@@ -28,7 +28,7 @@ Where it fits the concept, new labs follow an experience-first sequence rather t
 6. Reflect on the trade-offs
 7. Decide whether the capability is actually needed
 
-This is a pedagogical guideline, not a rigid template — natural technical headings beat mechanical ones. [05-memory](05-memory/README.md) is the first lab written this way.
+This is a pedagogical guideline, not a rigid template — natural technical headings beat mechanical ones. [05-memory](05-memory/README.md) and [06-skills](06-skills/README.md) are written this way.
 
 ## How the sequence fits together
 
@@ -47,7 +47,7 @@ The concepts those labs depend on are defined in [docs/mental-model.md](../docs/
 | [`03-tool-calling`](03-tool-calling/README.md) | 3 — Tools |
 | [`04-rag`](04-rag/README.md) | 4 — Knowledge / RAG |
 | [`05-memory`](05-memory/README.md) | 5 — Memory |
-| `06-skills` | 6 — Skills |
+| [`06-skills`](06-skills/README.md) | 6 — Skills |
 | `07-agent-runtime` | 7 — Agent Runtime |
 | `08-mcp` | 8 — MCP |
 | `09-evaluation` | 9 — Evaluation |

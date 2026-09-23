@@ -43,7 +43,7 @@ The canonical implementation is Java. The conceptual chapters stay readable with
 - How to implement the concepts that you do need in Java
 - What changes when a small example has to survive production: evaluation, observability, security, and deployment
 
-The first five labs are implemented and runnable: [labs/01-model-call](labs/01-model-call/README.md), [labs/02-structured-output](labs/02-structured-output/README.md), [labs/03-tool-calling](labs/03-tool-calling/README.md), [labs/04-rag](labs/04-rag/README.md), and [labs/05-memory](labs/05-memory/README.md). The rest of the list is the plan, not a catalog of finished features.
+The first six labs are implemented and runnable: [labs/01-model-call](labs/01-model-call/README.md), [labs/02-structured-output](labs/02-structured-output/README.md), [labs/03-tool-calling](labs/03-tool-calling/README.md), [labs/04-rag](labs/04-rag/README.md), [labs/05-memory](labs/05-memory/README.md), and [labs/06-skills](labs/06-skills/README.md). The rest of the list is the plan, not a catalog of finished features.
 
 ## Learning path
 
@@ -108,17 +108,18 @@ agentic-developer-handbook/
 │   ├── 02-structured-output/
 │   ├── 03-tool-calling/
 │   ├── 04-rag/
-│   └── 05-memory/
+│   ├── 05-memory/
+│   └── 06-skills/
 └── .github/
 ```
 
-[docs/architecture.md](docs/architecture.md) records the engineering principles. [docs/adr/](docs/adr/README.md) records the decisions already made. [labs/README.md](labs/README.md) describes how labs are written and lists the five runnable labs.
+[docs/architecture.md](docs/architecture.md) records the engineering principles. [docs/adr/](docs/adr/README.md) records the decisions already made. [labs/README.md](labs/README.md) describes how labs are written and lists the six runnable labs.
 
 ## Current status
 
 This repository is at the beginning.
 
-Milestone 0, the foundation, is done: the handbook documents, the contribution model, the architecture decisions, and a Maven build that runs without API keys. Milestone 1 is done: [labs/01-model-call](labs/01-model-call/README.md) makes a real Gemini call and explains why that call is not an agent. Milestone 2 is done: [labs/02-structured-output](labs/02-structured-output/README.md) constrains the response with a schema and turns it into a typed Java record. Milestone 3 is done: [labs/03-tool-calling](labs/03-tool-calling/README.md) lets the model request one tool call that the application validates and executes. Milestone 4 is done: [labs/04-rag](labs/04-rag/README.md) retrieves local documentation into the prompt — without embeddings or a vector database, because RAG is a pattern, not a datastore. Milestone 5 is done: [labs/05-memory](labs/05-memory/README.md) shows why conversation history is not memory and builds explicit session memory with remember, update, and forget. Later milestones are not started.
+Milestone 0, the foundation, is done: the handbook documents, the contribution model, the architecture decisions, and a Maven build that runs without API keys. Milestone 1 is done: [labs/01-model-call](labs/01-model-call/README.md) makes a real Gemini call and explains why that call is not an agent. Milestone 2 is done: [labs/02-structured-output](labs/02-structured-output/README.md) constrains the response with a schema and turns it into a typed Java record. Milestone 3 is done: [labs/03-tool-calling](labs/03-tool-calling/README.md) lets the model request one tool call that the application validates and executes. Milestone 4 is done: [labs/04-rag](labs/04-rag/README.md) retrieves local documentation into the prompt — without embeddings or a vector database, because RAG is a pattern, not a datastore. Milestone 5 is done: [labs/05-memory](labs/05-memory/README.md) shows why conversation history is not memory and builds explicit session memory with remember, update, and forget. Milestone 6 is done: [labs/06-skills](labs/06-skills/README.md) extracts a drifting copy-pasted procedure into one reviewable Agent Skills `SKILL.md` that the application selects and loads — a reusable procedure, not a capability. Later milestones are not started.
 
 Nothing here stores embeddings or runs an agent.
 

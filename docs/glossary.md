@@ -38,7 +38,7 @@ Short working definitions for this handbook. Where two terms are often mixed up,
 
 **Vector database.** A store built for similarity search over embeddings. Use it for that search problem. A lookup by id, key, or exact filter belongs in an ordinary database or API.
 
-**Memory.** State the application stores so a later turn can use it. Session history is a simple form. Memory is not the context window, and it is not the knowledge corpus.
+**Memory.** State the application deliberately retains so a later turn can use it — selected, scoped, updatable, and forgettable. Carrying raw session history forward is a crude workaround, not memory design. Memory is not the context window, and it is not the knowledge corpus.
 
 **Skill.** Instructions for how the agent should perform a kind of task. A skill changes procedure. It does not by itself add a new tool or a new fact. In this handbook, skills are one building block, not the product. See [ADR 0004](adr/0004-skills-are-a-building-block.md).
 
