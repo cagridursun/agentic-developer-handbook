@@ -2,7 +2,7 @@
 
 Labs are the runnable half of the handbook. Each one adds a single concept to the previous lab and leaves a build that still works.
 
-Four labs are available: [01-model-call](01-model-call/README.md), [02-structured-output](02-structured-output/README.md), [03-tool-calling](03-tool-calling/README.md), and [04-rag](04-rag/README.md). Later labs will be added with their milestones. Empty lab directories are not created in advance.
+Five labs are available: [01-model-call](01-model-call/README.md), [02-structured-output](02-structured-output/README.md), [03-tool-calling](03-tool-calling/README.md), [04-rag](04-rag/README.md), and [05-memory](05-memory/README.md). Later labs will be added with their milestones. Empty lab directories are not created in advance.
 
 ## What every lab answers
 
@@ -15,6 +15,20 @@ Four labs are available: [01-model-call](01-model-call/README.md), [02-structure
 7. What changes in production?
 
 A lab that cannot answer "when should I not use it" is incomplete. The point of the sequence is to know when to stop adding parts.
+
+## Learning experience
+
+Where it fits the concept, new labs follow an experience-first sequence rather than presenting the finished solution immediately:
+
+1. Understand the limitation
+2. Experience the naive behavior
+3. Break or stress the naive approach
+4. Build the capability
+5. Verify the behavior
+6. Reflect on the trade-offs
+7. Decide whether the capability is actually needed
+
+This is a pedagogical guideline, not a rigid template — natural technical headings beat mechanical ones. [05-memory](05-memory/README.md) is the first lab written this way.
 
 ## How the sequence fits together
 
@@ -32,7 +46,7 @@ The concepts those labs depend on are defined in [docs/mental-model.md](../docs/
 | [`02-structured-output`](02-structured-output/README.md) | 2 — Structured Output |
 | [`03-tool-calling`](03-tool-calling/README.md) | 3 — Tools |
 | [`04-rag`](04-rag/README.md) | 4 — Knowledge / RAG |
-| `05-memory` | 5 — Memory |
+| [`05-memory`](05-memory/README.md) | 5 — Memory |
 | `06-skills` | 6 — Skills |
 | `07-agent-runtime` | 7 — Agent Runtime |
 | `08-mcp` | 8 — MCP |

@@ -18,6 +18,7 @@
     <module>labs/02-structured-output</module>
     <module>labs/03-tool-calling</module>
     <module>labs/04-rag</module>
+    <module>labs/05-memory</module>
   </modules>
 
   <licenses>
