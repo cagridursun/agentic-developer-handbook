@@ -58,7 +58,7 @@ The project is organized as three layers that mature in order:
 
 After the concepts have been taught independently, a composed reference application may demonstrate how *justified* capabilities fit together in one real system. Justified is the operative word: the reference application will use the capabilities its problem actually needs, not one of everything. You probably don't need all of these — that principle applies to our own reference application first.
 
-The contribution rules for each layer are in [CONTRIBUTING.md](CONTRIBUTING.md).
+[ROADMAP.md](ROADMAP.md) organizes this work into tracks: the canonical learning path carries the numbered milestones, and community, ecosystem, reference-application, and advanced-topic work are tracked beside it. The contribution rules for each layer are in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## What we will not become
 

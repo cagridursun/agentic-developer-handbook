@@ -62,7 +62,7 @@ The first three labs are implemented and runnable: [labs/01-model-call](labs/01-
 | Security | What has to be checked at each boundary? |
 | Deployment | What does it take to run it as a production system? |
 
-The same path is described in [VISION.md](VISION.md) and tracked in [ROADMAP.md](ROADMAP.md).
+The same path is described in [VISION.md](VISION.md) and tracked in [ROADMAP.md](ROADMAP.md). The numbered milestones there are this canonical learning path; the roadmap also tracks the project's community, ecosystem, reference-application, and advanced-topic work in separate tracks.
 
 ## Mental model
 

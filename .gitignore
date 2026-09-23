@@ -4,6 +4,9 @@ target/
 # Java
 *.class
 
+# Python bytecode from the sync script tests
+__pycache__/
+
 # IDE
 .idea/
 *.iml

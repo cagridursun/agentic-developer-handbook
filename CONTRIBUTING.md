@@ -2,7 +2,7 @@
 
 Questions, corrections, and pull requests are welcome. Small changes are easier to review than broad redesigns.
 
-The current milestone is tracked in [ROADMAP.md](ROADMAP.md).
+The current milestone is tracked in [ROADMAP.md](ROADMAP.md), and its explicit milestones are mirrored to GitHub Milestones, so issues and pull requests may be associated with the matching milestone. The numbered canonical milestones are maintainer-curated; the project-level milestones carry open-source, community, and ecosystem work. GitHub Milestones are operational tracking, not the canonical roadmap source — ROADMAP.md is.
 
 ## Ways to contribute
 
