@@ -16,6 +16,7 @@
   <modules>
     <module>labs/01-model-call</module>
     <module>labs/02-structured-output</module>
+    <module>labs/03-tool-calling</module>
   </modules>
 
   <licenses>

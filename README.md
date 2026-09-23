@@ -43,7 +43,7 @@ The canonical implementation is Java. The conceptual chapters stay readable with
 - How to implement the concepts that you do need in Java
 - What changes when a small example has to survive production: evaluation, observability, security, and deployment
 
-The first two labs, [labs/01-model-call](labs/01-model-call/README.md) and [labs/02-structured-output](labs/02-structured-output/README.md), are implemented and runnable. The rest of the list is the plan, not a catalog of finished features.
+The first three labs are implemented and runnable: [labs/01-model-call](labs/01-model-call/README.md), [labs/02-structured-output](labs/02-structured-output/README.md), and [labs/03-tool-calling](labs/03-tool-calling/README.md). The rest of the list is the plan, not a catalog of finished features.
 
 ## Learning path
 
@@ -105,23 +105,26 @@ agentic-developer-handbook/
 ├── labs/
 │   ├── README.md
 │   ├── 01-model-call/
-│   └── 02-structured-output/
+│   ├── 02-structured-output/
+│   └── 03-tool-calling/
 └── .github/
 ```
 
-[docs/architecture.md](docs/architecture.md) records the engineering principles. [docs/adr/](docs/adr/README.md) records the decisions already made. [labs/README.md](labs/README.md) describes how labs are written and lists them; the first, [01-model-call](labs/01-model-call/README.md), is runnable.
+[docs/architecture.md](docs/architecture.md) records the engineering principles. [docs/adr/](docs/adr/README.md) records the decisions already made. [labs/README.md](labs/README.md) describes how labs are written and lists the three runnable labs.
 
 ## Current status
 
 This repository is at the beginning.
 
-Milestone 0, the foundation, is done: the handbook documents, the contribution model, the architecture decisions, and a Maven build that runs without API keys. Milestone 1 is done: [labs/01-model-call](labs/01-model-call/README.md) makes a real Gemini call and explains why that call is not an agent. Milestone 2 is done: [labs/02-structured-output](labs/02-structured-output/README.md) constrains the response with a schema and turns it into a typed Java record — still not an agent. Later milestones are not started.
+Milestone 0, the foundation, is done: the handbook documents, the contribution model, the architecture decisions, and a Maven build that runs without API keys. Milestone 1 is done: [labs/01-model-call](labs/01-model-call/README.md) makes a real Gemini call and explains why that call is not an agent. Milestone 2 is done: [labs/02-structured-output](labs/02-structured-output/README.md) constrains the response with a schema and turns it into a typed Java record. Milestone 3 is done: [labs/03-tool-calling](labs/03-tool-calling/README.md) lets the model request one tool call that the application validates and executes — still not an agent runtime. Later milestones are not started.
 
 Nothing here stores embeddings or runs an agent.
 
 ## Contributing
 
-Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before you start. The expected community standard is in [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+Issues and pull requests are welcome, and contributions are broader than typo fixes: documentation, tests, corrections, API compatibility updates, and implementation improvements to completed labs all help.
+
+The numbered labs are the canonical learning path and stay maintainer-curated. In the future, curated community examples will extend the concepts the handbook teaches — providers, integrations, use cases — without redefining that path. The details, including what makes an example acceptable, are in [CONTRIBUTING.md](CONTRIBUTING.md). The expected community standard is in [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ```sh
 ./mvnw verify

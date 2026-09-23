@@ -48,6 +48,18 @@ The handbook will work through these topics. Covering a topic means explaining i
 
 Multi-agent systems, A2A, and fine-tuning are part of the map. They are not early milestones. Most of the learning path is one model, one runtime, and the capabilities that runtime actually needs.
 
+## The long-term shape
+
+The project is organized as three layers that mature in order:
+
+1. **Handbook.** The mental models and engineering guidance in `docs/`: what each concept means, when to use it, and when not to.
+2. **Canonical labs.** The numbered labs under `labs/`: a maintainer-curated sequence of runnable Java examples, each adding one concept. The order is deliberate and stays stable.
+3. **Ecosystem.** Once a concept exists in the canonical path, curated community examples can extend it: alternative inference providers, tool integrations, retrieval backends, memory implementations, skills examples, MCP integrations, evaluation and observability examples, and real-world use cases. Curated means reviewed against the same standard as the labs: an example must teach an architectural decision, not just library syntax.
+
+After the concepts have been taught independently, a composed reference application may demonstrate how *justified* capabilities fit together in one real system. Justified is the operative word: the reference application will use the capabilities its problem actually needs, not one of everything. You probably don't need all of these — that principle applies to our own reference application first.
+
+The contribution rules for each layer are in [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## What we will not become
 
 This project will not become:

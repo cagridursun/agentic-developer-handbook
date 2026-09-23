@@ -2,7 +2,7 @@
 
 Milestones are ordered. They are not dated.
 
-Milestones 0 through 2 are done. Later milestones are planned work and are not implemented.
+Milestones 0 through 3 are done. Later milestones are planned work and are not implemented.
 
 The learning path is a teaching sequence, not an architecture every application must implement. Skip a concept when the problem does not need it.
 
@@ -34,7 +34,7 @@ Constrain a model response to a schema the application can validate.
 
 ## Milestone 3 — Tools
 
-Not started.
+Done. The lab is [labs/03-tool-calling](labs/03-tool-calling/README.md).
 
 Let the application perform an action the model can only request.
 
@@ -100,9 +100,10 @@ Not scheduled as numbered milestones.
 - A2A
 - Fine-tuning
 - Additional inference providers
-- Community examples
+- Curated community examples
+- A composed reference application
 
-These topics belong in the handbook. They wait until the single-runtime path is concrete enough that adding them teaches something new.
+These topics belong in the handbook. The first three wait until the single-runtime path is concrete enough that adding them teaches something new. Curated community examples extend concepts the canonical path has already taught, and the composed reference application comes after the path is mature enough to show how justified capabilities fit together — they grow alongside the numbered milestones, not instead of them. The contribution rules are in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## How to read this list
 
