@@ -43,7 +43,7 @@ The canonical implementation is Java. The conceptual chapters stay readable with
 - How to implement the concepts that you do need in Java
 - What changes when a small example has to survive production: evaluation, observability, security, and deployment
 
-The first seven labs are implemented and runnable: [labs/01-model-call](labs/01-model-call/README.md), [labs/02-structured-output](labs/02-structured-output/README.md), [labs/03-tool-calling](labs/03-tool-calling/README.md), [labs/04-rag](labs/04-rag/README.md), [labs/05-memory](labs/05-memory/README.md), [labs/06-skills](labs/06-skills/README.md), and [labs/07-agent-runtime](labs/07-agent-runtime/README.md). The rest of the list is the plan, not a catalog of finished features.
+The first seven labs are implemented and runnable: [labs/01-model-call](labs/01-model-call/README.md), [labs/02-structured-output](labs/02-structured-output/README.md), [labs/03-tool-calling](labs/03-tool-calling/README.md), [labs/04-rag](labs/04-rag/README.md), [labs/05-memory](labs/05-memory/README.md), [labs/06-skills](labs/06-skills/README.md), and [labs/07-agent-runtime](labs/07-agent-runtime/README.md). After Lab 07, [Capstone 01](capstones/01-agentic-system/README.md) is a composition exercise: decide which of the taught capabilities a realistic problem actually needs — and which it doesn't. The rest of the list is the plan, not a catalog of finished features.
 
 ## Learning path
 
@@ -111,6 +111,8 @@ agentic-developer-handbook/
 │   ├── 05-memory/
 │   ├── 06-skills/
 │   └── 07-agent-runtime/
+├── capstones/
+│   └── 01-agentic-system/
 └── .github/
 ```
 

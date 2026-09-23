@@ -190,11 +190,11 @@ Established:
 - The experience-first format validated in Labs 05, 06, and 07: limitation → naive approach → failure → design → reflection → decision
 - Reflection sections in each experience-first lab
 - "Do I actually need this?" decision checkpoints reinforcing that not every capability is needed
+- [Capstone 01 — Build a Small Agentic System](capstones/01-agentic-system/README.md): composing already-taught concepts with a decisions-first exercise and a reference that deliberately excludes capabilities
 
 Planned:
 
 - Selectively retrofit Labs 01–04 where it materially improves learning
-- A post-Agent-Runtime capstone
 - An Agentic System Readiness Assessment
 - An optional workshop path
 - Later: evaluate a static documentation site

@@ -30,6 +30,10 @@ Where it fits the concept, new labs follow an experience-first sequence rather t
 
 This is a pedagogical guideline, not a rigid template — natural technical headings beat mechanical ones. [05-memory](05-memory/README.md), [06-skills](06-skills/README.md), and [07-agent-runtime](07-agent-runtime/README.md) are written this way.
 
+## After Lab 07
+
+With the agent runtime built, the first composition exercise is available: [Capstone 01 — Build a Small Agentic System](../capstones/01-agentic-system/README.md). Capstones combine concepts the labs have already taught — they never introduce a canonical concept, and they are not numbered labs. The centerpiece is a decisions-first exercise: justify which capabilities the problem needs, and which it deliberately does not.
+
 ## How the sequence fits together
 
 The labs follow [ROADMAP.md](../ROADMAP.md). Early labs are small on purpose. The first lab is a model call, and the handbook does not call that program an agent. The agent runtime — the first lab that earns the word — comes only after tools, knowledge, memory, and skills have each been introduced on their own.

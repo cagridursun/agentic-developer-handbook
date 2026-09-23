@@ -21,6 +21,8 @@
     <module>labs/05-memory</module>
     <module>labs/06-skills</module>
     <module>labs/07-agent-runtime</module>
+    <module>capstones/01-agentic-system/starter</module>
+    <module>capstones/01-agentic-system/reference</module>
   </modules>
 
   <licenses>
