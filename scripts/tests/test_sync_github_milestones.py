@@ -291,11 +291,11 @@ class RepositoryRoadmapTest(unittest.TestCase):
         text = (REPO_ROOT / "ROADMAP.md").read_text(encoding="utf-8")
         cls.milestones = sync.parse_roadmap(text)
 
-    def test_seventeen_milestones_are_synchronized(self):
+    def test_eighteen_milestones_are_synchronized(self):
         canonical = [m for m in self.milestones if m.number is not None]
         projects = [m for m in self.milestones if m.number is None]
         self.assertEqual(13, len(canonical))
-        self.assertEqual(4, len(projects))
+        self.assertEqual(5, len(projects))
 
     def test_canonical_titles_are_unchanged(self):
         titles = [m.title for m in self.milestones if m.number is not None]
@@ -311,6 +311,7 @@ class RepositoryRoadmapTest(unittest.TestCase):
             "Project Milestone — Ecosystem v1",
             "Project Milestone — Reference Application v1",
             "Project Milestone — Advanced Topics v1",
+            "Project Milestone — Guided Learning Experience v1",
         }, titles)
 
     def test_states_match_current_project_reality(self):

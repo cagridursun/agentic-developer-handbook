@@ -20,6 +20,7 @@
     <module>labs/04-rag</module>
     <module>labs/05-memory</module>
     <module>labs/06-skills</module>
+    <module>labs/07-agent-runtime</module>
   </modules>
 
   <licenses>

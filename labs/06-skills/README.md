@@ -86,7 +86,7 @@ The application selects and loads the skill explicitly:
 Skill skill = SkillLoader.load("incident-handoff");
 ```
 
-The model does not choose the skill in this lab. Model-driven skill selection is runtime behavior, and the Agent Runtime is Milestone 7.
+The model does not choose the skill in this lab. Model-driven skill selection needs a runtime: [Lab 07](../07-agent-runtime/README.md) builds that runtime, but intentionally focuses on the execution loop alone — the runtime is the architectural place where dynamic skill selection could later live, and one concept per canonical lab remains the rule.
 
 ## Anatomy of SKILL.md
 

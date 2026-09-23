@@ -8,7 +8,7 @@ The learning path is a teaching sequence, not an architecture every application 
 
 ## Track A — Canonical Learning Path
 
-The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 6 are done. Later milestones are planned work and are not implemented.
+The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 7 are done. Later milestones are planned work and are not implemented.
 
 ### Milestone 0 — Foundation
 
@@ -62,7 +62,7 @@ Show Agent Skills / `SKILL.md` as instructions for how a task should be performe
 
 ### Milestone 7 — Agent Runtime
 
-Not started.
+Done. The lab is [labs/07-agent-runtime](labs/07-agent-runtime/README.md).
 
 An execution loop that can call a model, use tools, and stop. This is the first point at which the handbook will call the example an agent.
 
@@ -176,6 +176,29 @@ Not started.
 - Fine-tuning
 
 These are deliberately not part of the numbered canonical learning path. Most applications are one model, one runtime, and the capabilities that runtime actually needs.
+
+## Track F — Learning Experience
+
+How the handbook teaches, as deliberate design rather than incidental style.
+
+### Project Milestone — Guided Learning Experience v1
+
+In progress.
+
+Established:
+
+- The experience-first format validated in Labs 05, 06, and 07: limitation → naive approach → failure → design → reflection → decision
+- Reflection sections in each experience-first lab
+- "Do I actually need this?" decision checkpoints reinforcing that not every capability is needed
+
+Planned:
+
+- Selectively retrofit Labs 01–04 where it materially improves learning
+- A post-Agent-Runtime capstone
+- An Agentic System Readiness Assessment
+- An optional workshop path
+- Later: evaluate a static documentation site
+- Later: evaluate local-only learning progress tracking
 
 ## How to read this list
 
