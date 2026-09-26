@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Capstone 01 — Build a Small Agentic System</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="../index.html">Agentic Developer Handbook</a>
+      <span class="context">Capstone 01 — Build a Small Agentic System</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="stage-nav" aria-label="Capstone stages">
+      <h2>Stages</h2>
+      <ol id="stage-list"></ol>
+    </nav>
+
+    <main>
+      <!-- ================= Overview ================= -->
+      <section class="stage" id="stage-overview" tabindex="-1" aria-labelledby="h-overview">
+        <p class="stage-kicker">Understand</p>
+        <h1 id="h-overview">Capstone 01 — Build a Small Agentic System</h1>
+        <p>
+          This capstone introduces <strong>no new concept</strong>. You already
+          have everything from Labs 01–07: model, structured output, tools,
+          knowledge, memory, skills, and the bounded agent runtime. The exercise
+          is choosing — and composing — the <strong>smallest justified
+          architecture</strong> for one realistic problem.
+        </p>
+        <p>
+          Excluding a capability with a good reason counts exactly as much as
+          including one. You probably don't need all of these.
+        </p>
+        <p class="muted">
+          Canonical version:
+          <a href="../../capstones/01-agentic-system/README.md">capstones/01-agentic-system/README.md</a>
+          — the repository stays the source of truth; this page is an
+          interactive layer with local-only progress.
+        </p>
+        <div class="stage-actions">
+          <button type="button" class="primary" id="overview-continue">Continue to the challenge</button>
+        </div>
+      </section>
+
+      <!-- ================= Challenge ================= -->
+      <section class="stage" id="stage-challenge" hidden tabindex="-1" aria-labelledby="h-challenge">
+        <p class="stage-kicker">Understand</p>
+        <h1 id="h-challenge">The challenge</h1>
+        <div class="card">
+          <p>
+            <em>"The notifications service is slow after a release. Investigate
+            what is currently known and prepare a concise engineering handoff.
+            Do not claim a root cause without evidence."</em>
+          </p>
+        </div>
+        <p>Everything is fictional (the invented Helio platform), deterministic, and local. Available assets:</p>
+        <ul>
+          <li><strong>Service tools</strong> — read-only status and deployment fixtures for <code>notifications</code>, <code>billing</code>, <code>search</code></li>
+          <li><strong>Runbooks</strong> — <code>notifications.md</code>, <code>deployment.md</code>, <code>incident-response.md</code></li>
+          <li><strong>One skill</strong> — <code>skills/incident-handoff/SKILL.md</code></li>
+        </ul>
+        <div class="notice">
+          <strong>Available does not mean required.</strong> The assets are
+          options, not a checklist.
+        </div>
+        <div class="stage-actions">
+          <button type="button" class="primary" id="challenge-continue">Continue to decisions</button>
+        </div>
+      </section>
+
+      <!-- ================= Decisions ================= -->
+      <section class="stage" id="stage-decisions" hidden tabindex="-1" aria-labelledby="h-decisions">
+        <p class="stage-kicker">Decide</p>
+        <h1 id="h-decisions">Architecture decisions</h1>
+        <p>
+          For each capability: use it or not, why, and the simpler alternative
+          you considered. A justified <strong>No</strong> is worth exactly as
+          much as a justified <strong>Yes</strong> — progress here measures
+          decisions made, never capabilities selected.
+        </p>
+
+        <div id="decision-cards"></div>
+
+        <div class="notice">
+          <strong>MCP</strong> is not a decision in this capstone: it has not
+          been taught yet (Milestone 8), and every capability here is local
+          Java.
+        </div>
+
+        <section class="card" aria-labelledby="h-summary">
+          <h3 id="h-summary">Your architecture so far</h3>
+          <div class="summary-list">
+            <div>
+              <strong>Selected</strong>
+              <ul id="summary-selected"></ul>
+            </div>
+            <div>
+              <strong>Excluded</strong>
+              <ul id="summary-excluded"></ul>
+            </div>
+          </div>
+        </section>
+
+        <div class="stage-actions">
+          <button type="button" class="primary" id="decisions-continue">Continue to decision authority</button>
+        </div>
+      </section>
+
+      <!-- ================= Decision Authority ================= -->
+      <section class="stage" id="stage-authority" hidden tabindex="-1" aria-labelledby="h-authority">
+        <p class="stage-kicker">Decide</p>
+        <h1 id="h-authority">Decision authority</h1>
+        <p>
+          Model influence is not decision authority. Whatever architecture you
+          chose, draw this boundary explicitly for your design.
+        </p>
+
+        <div class="card">
+          <label for="authority-influence">What decisions may the model influence?</label>
+          <textarea id="authority-influence"></textarea>
+
+          <label for="authority-deterministic">What decisions must remain application-controlled or deterministic?</label>
+          <textarea id="authority-deterministic"></textarea>
+        </div>
+
+        <div class="flow" role="img" aria-label="Flow: model, then proposal, then validation, policy and authorization, then execution">Model
+  ↓
+proposal
+  ↓
+validation / policy / authorization
+  ↓
+execution</div>
+
+        <p class="muted">
+          The concept in full:
+          <a href="../../docs/model-vs-decision-authority.md">docs/model-vs-decision-authority.md</a>
+        </p>
+
+        <div class="stage-actions">
+          <button type="button" class="primary" id="authority-continue">Continue to build</button>
+        </div>
+      </section>
+
+      <!-- ================= Build ================= -->
+      <section class="stage" id="stage-build" hidden tabindex="-1" aria-labelledby="h-build">
+        <p class="stage-kicker">Build</p>
+        <h1 id="h-build">Build your design</h1>
+        <p>
+          The browser does not run Maven, and this page will not pretend
+          otherwise. Your work happens in the repository, in the starter
+          module:
+        </p>
+        <pre><code>./mvnw -pl capstones/01-agentic-system/starter compile exec:java</code></pre>
+        <p>
+          Wire your architecture in
+          <a href="../../capstones/01-agentic-system/starter/">starter/</a>
+          (the TODO in <code>StarterMain</code> marks the spot), and record
+          your reasoning in
+          <a href="../../capstones/01-agentic-system/starter/DECISIONS.md">starter/DECISIONS.md</a>
+          — the export on this page can generate it from your answers here.
+        </p>
+        <div class="check-row">
+          <input type="checkbox" id="build-done">
+          <label for="build-done">I implemented my architecture.</label>
+        </div>
+      </section>
+
+      <!-- ================= Verify ================= -->
+      <section class="stage" id="stage-verify" hidden tabindex="-1" aria-labelledby="h-verify">
+        <p class="stage-kicker">Verify</p>
+        <h1 id="h-verify">Verify deterministically</h1>
+        <pre><code>./mvnw verify
+./mvnw -pl capstones/01-agentic-system/starter test</code></pre>
+        <p>
+          Deterministic verification proves your application-controlled
+          behavior: retrieval selection, validation, tool order, bounded
+          stopping. It does <strong>not</strong> prove the agent's answers are
+          good — that is systematic behavioral evaluation, which the handbook
+          covers later (Milestone 9), and this page will not call it that.
+        </p>
+        <div class="check-row">
+          <input type="checkbox" id="verify-done">
+          <label for="verify-done">My deterministic tests pass.</label>
+        </div>
+      </section>
+
+      <!-- ================= Reflection ================= -->
+      <section class="stage" id="stage-reflection" hidden tabindex="-1" aria-labelledby="h-reflection">
+        <p class="stage-kicker">Reflect</p>
+        <h1 id="h-reflection">Reflection</h1>
+        <p>
+          Short answers are fine. The point is judgment, not essays — the full
+          question list lives in the
+          <a href="../../capstones/01-agentic-system/README.md">capstone README</a>.
+        </p>
+        <div class="card" id="reflection-questions"></div>
+        <div class="stage-actions">
+          <button type="button" class="primary" id="reflection-complete">Mark reflection complete</button>
+        </div>
+      </section>
+
+      <!-- ================= Compare ================= -->
+      <section class="stage" id="stage-compare" hidden tabindex="-1" aria-labelledby="h-compare">
+        <p class="stage-kicker">Compare</p>
+        <h1 id="h-compare">Compare with the reference</h1>
+
+        <div id="compare-gate">
+          <div id="gate-incomplete" hidden>
+            <div class="notice">
+              You have not finished your own architecture decisions yet. The
+              comparison is most useful after you have made your own
+              trade-offs.
+            </div>
+            <div class="stage-actions">
+              <button type="button" class="primary" id="gate-return">Return to decisions</button>
+              <button type="button" class="ghost" id="gate-reveal-anyway">Reveal anyway</button>
+            </div>
+          </div>
+          <div id="gate-complete" hidden>
+            <p>
+              Your decisions are complete. The reference is <strong>one
+              defensible architecture, not the answer key</strong> — differences
+              are discussion points, not mistakes.
+            </p>
+            <div class="stage-actions">
+              <button type="button" class="primary" id="gate-reveal">Reveal the reference</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="compare-body" hidden>
+          <p>
+            The reference is one defensible architecture, not the answer key.
+            Nothing here is graded.
+          </p>
+          <table class="compare">
+            <caption class="muted">Your decisions beside the reference (source: reference/DECISIONS.md)</caption>
+            <thead>
+              <tr>
+                <th scope="col">Capability</th>
+                <th scope="col">Your decision</th>
+                <th scope="col">Reference</th>
+              </tr>
+            </thead>
+            <tbody id="compare-rows"></tbody>
+          </table>
+
+          <section class="card" aria-labelledby="h-ref-authority">
+            <h3 id="h-ref-authority">Decision authority in the reference</h3>
+            <div class="summary-list">
+              <div>
+                <strong>Model may influence</strong>
+                <ul id="ref-influence"></ul>
+              </div>
+              <div>
+                <strong>Application retains authority over</strong>
+                <ul id="ref-application"></ul>
+              </div>
+            </div>
+            <p class="muted">
+              This is <a href="../../docs/model-vs-decision-authority.md">LLM vs
+              Decision Authority</a> connected to real code:
+              <a href="../../capstones/01-agentic-system/reference/">reference/</a>.
+            </p>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <aside class="progress-rail" aria-label="Progress">
+      <h2>Progress</h2>
+      <div class="progress-block">
+        <div>
+          <span class="figure" id="stages-figure">0 / 8</span>
+          <span class="muted"> stages</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="stages-fill"></div></div>
+      </div>
+      <div class="progress-block">
+        <div>
+          <span class="figure" id="decisions-figure">0 / 7</span>
+          <span class="muted"> decisions</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="decisions-fill"></div></div>
+      </div>
+      <div class="rail-actions">
+        <button type="button" class="secondary" id="export-download">Export DECISIONS.md</button>
+        <button type="button" class="secondary" id="export-copy">Copy Markdown</button>
+        <button type="button" class="ghost" id="reset-progress">Reset local progress</button>
+      </div>
+    </aside>
+  </div>
+
+  <script type="module" src="../js/app.js"></script>
+</body>
+</html>
