@@ -29,3 +29,7 @@ capability in this capstone is local Java.
 7. Which statements may only be described as hypotheses?
 8. What would change if one tool could modify production?
 9. What would you remove first if the system had to become simpler?
+10. What decisions may the model influence?
+11. What decisions must remain deterministic or application-controlled?
+
+Questions 10 and 11 are the [LLM vs Decision Authority](../../../docs/model-vs-decision-authority.md) boundary applied to your design: model influence is not decision authority.

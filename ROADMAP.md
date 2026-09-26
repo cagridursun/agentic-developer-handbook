@@ -191,14 +191,16 @@ Established:
 - Reflection sections in each experience-first lab
 - "Do I actually need this?" decision checkpoints reinforcing that not every capability is needed
 - [Capstone 01 — Build a Small Agentic System](capstones/01-agentic-system/README.md): composing already-taught concepts with a decisions-first exercise and a reference that deliberately excludes capabilities
+- [Capstone 01 interactive learning UI](site/README.md): a static, backend-free experience with local-only progress, architecture decisions, a decision-authority checkpoint, reflection, and an ungraded reference comparison
+- [LLM vs Decision Authority](docs/model-vs-decision-authority.md) as an explicit handbook concept, wired into the capstone decisions
 
 Planned:
 
 - Selectively retrofit Labs 01–04 where it materially improves learning
 - An Agentic System Readiness Assessment
 - An optional workshop path
-- Later: evaluate a static documentation site
-- Later: evaluate local-only learning progress tracking
+- Broader learning UI/site expansion beyond the capstone remains to be evaluated
+- Local progress beyond the current capstone, if justified
 
 ## How to read this list
 
