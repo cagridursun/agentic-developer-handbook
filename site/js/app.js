@@ -17,6 +17,7 @@ function firstOpenStage() {
 }
 
 function persist() {
+  syncDerivedCompletion();
   saveState(state);
   renderNav();
   renderProgress();
@@ -26,7 +27,13 @@ function persist() {
 
 function decisionComplete(capabilityId) {
   const decision = state.decisions[capabilityId];
-  return Boolean(decision && decision.use && (decision.why || "").trim() !== "");
+
+  return Boolean(
+    decision &&
+    decision.use &&
+    (decision.why || "").trim() !== "" &&
+    (decision.alternative || "").trim() !== ""
+  );
 }
 
 function decidedCount() {
