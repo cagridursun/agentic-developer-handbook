@@ -62,6 +62,12 @@ Security applies at every boundary, not as a final layer painted on at deploymen
 
 The model is not the authorization layer. A prompt that says "only answer if the user is allowed" does not enforce access control. The application does.
 
+## Influence is not authority
+
+Inside the runtime, the model influences the next step: it reasons, proposes, and recommends. The runtime owns the allowed actions, the validation of every argument, the authorization boundary, the budget, the execution, and the stopping. A model proposal may even be executed automatically — after deterministic checks the application wrote in advance — and the authority still never moved to the model.
+
+The distinction has its own page: [LLM vs Decision Authority](model-vs-decision-authority.md).
+
 ## What is not an agent
 
 | Thing | What it actually is |

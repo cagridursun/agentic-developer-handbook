@@ -78,6 +78,8 @@ The Java application decides whether to execute it. The model has no handle to `
 
 **The model proposes an action. The application authorizes and executes it.**
 
+That sentence generalizes far beyond tool calling: model influence is never the same thing as decision authority, and the handbook treats the distinction as its own concept in [LLM vs Decision Authority](../../docs/model-vs-decision-authority.md).
+
 ## Tool declaration vs Java method
 
 What the model knows:

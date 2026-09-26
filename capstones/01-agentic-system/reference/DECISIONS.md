@@ -37,6 +37,25 @@ which follow-up matters is a judgment made from the first observation. When
 the branching is real, letting the model choose among bounded next steps earns
 its complexity. When it is not, prefer the workflow.
 
+## Decision authority in this reference
+
+What the model may influence:
+
+- Which read-only diagnostic tool to request next, from the two exposed to it
+- The synthesis and wording of the final handoff
+- The interpretation of observations — which hypotheses are worth stating
+
+What the application retains authority over:
+
+- The tool allowlist (two read-only tools, a visible switch, no reflection)
+- Argument and service validation before any execution
+- The step budget (4 model decisions) and every stop condition
+- Execution itself — the model never runs anything
+- What counts as authoritative data (tool results, never model recall)
+- Authorization boundaries — nothing in model output can widen them
+
+Model proposals are executed automatically here, but only after those deterministic checks — which is the point of [LLM vs Decision Authority](../../../docs/model-vs-decision-authority.md): automatic execution after application-owned policy does not transfer authority to the model.
+
 ## Boundaries that hold regardless of the choices above
 
 - Tools are read-only; the model proposes, the application validates and executes.

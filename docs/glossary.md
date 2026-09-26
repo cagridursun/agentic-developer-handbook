@@ -58,6 +58,10 @@ Short working definitions for this handbook. Where two terms are often mixed up,
 
 **Guardrail.** A check the application enforces on input or output. Schema validation, allow-lists, and human approval are guardrails. An instruction in the prompt is not a guardrail, and it is not authorization.
 
+**Model proposal.** A candidate action or recommendation produced by the model that still passes through application controls before anything happens. A proposal is influence, not execution.
+
+**Decision authority.** The component or policy whose decision becomes binding on the system: application code, business policy, or a human. A model can inform that decision; it holds authority only where the application deliberately, and safely, delegates it. See [LLM vs Decision Authority](model-vs-decision-authority.md).
+
 ## Model vs agent
 
 A model generates a response for one input. An agent is the application around a model: a runtime, a loop, and a stop condition. If the program cannot take a second step based on the first result, it is not an agent yet.

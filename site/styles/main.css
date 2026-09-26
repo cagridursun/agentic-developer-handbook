@@ -1,0 +1,493 @@
+/* Agentic Developer Handbook — interactive learning site.
+   No framework, no build step. The content is the protagonist. */
+
+:root {
+  --paper: #fbfaf8;
+  --surface: #ffffff;
+  --ink: #1c2128;
+  --muted: #5b6470;
+  --line: #dcd9d3;
+  --accent: #1f6f54;
+  --accent-ink: #ffffff;
+  --accent-soft: #e7f2ed;
+  --warn-soft: #fdf3e3;
+  --warn-line: #e5c37a;
+  --radius: 8px;
+  --content-width: 46rem;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+
+code, pre {
+  font-family: ui-monospace, "Cascadia Code", Consolas, "Liberation Mono", monospace;
+  font-size: 0.9em;
+}
+
+pre {
+  background: var(--ink);
+  color: #e8edf2;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+
+h1, h2, h3 {
+  line-height: 1.25;
+  margin: 0 0 0.5rem;
+}
+
+h1 { font-size: 1.6rem; }
+h2 { font-size: 1.25rem; }
+h3 { font-size: 1.05rem; }
+
+p { margin: 0.5rem 0 1rem; }
+
+a {
+  color: var(--accent);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.muted { color: var(--muted); }
+
+/* ---------- Header ---------- */
+
+.site-header {
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.site-header .inner {
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: 0.9rem 1.25rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.site-header .brand {
+  font-weight: 650;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.site-header .context {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ---------- Landing ---------- */
+
+.landing {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 3rem 1.25rem 4rem;
+}
+
+.landing .lede {
+  font-size: 1.1rem;
+}
+
+.experience-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.4rem;
+  margin-top: 1.5rem;
+}
+
+/* ---------- Three-column app layout ---------- */
+
+.layout {
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr) 15rem;
+  gap: 2rem;
+  align-items: start;
+}
+
+.stage-nav,
+.progress-rail {
+  position: sticky;
+  top: 1.5rem;
+}
+
+/* ---------- Stage navigation ---------- */
+
+.stage-nav h2,
+.progress-rail h2 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.stage-nav ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stage-nav button {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.45rem 0.6rem;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.stage-nav button:hover {
+  background: var(--accent-soft);
+}
+
+.stage-nav button[aria-current="step"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.stage-status {
+  inline-size: 1.25rem;
+  text-align: center;
+  flex: none;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Progress rail ---------- */
+
+.progress-block {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.progress-block .figure {
+  font-size: 1.3rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-track {
+  background: var(--line);
+  border-radius: 99px;
+  height: 0.5rem;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: var(--accent);
+  height: 100%;
+  width: 0;
+  border-radius: 99px;
+  transition: width 200ms ease;
+}
+
+.rail-actions button {
+  width: 100%;
+  margin-top: 0.4rem;
+}
+
+/* ---------- Content stages ---------- */
+
+.stage {
+  max-width: var(--content-width);
+}
+
+.stage[hidden] {
+  display: none;
+}
+
+.stage-kicker {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.notice {
+  background: var(--warn-soft);
+  border: 1px solid var(--warn-line);
+  border-radius: var(--radius);
+  padding: 0.8rem 1rem;
+  margin: 1rem 0;
+}
+
+/* ---------- Buttons ---------- */
+
+button.primary,
+button.secondary,
+button.ghost {
+  font: inherit;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+button.primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border: 1px solid var(--accent);
+}
+
+button.primary:hover { filter: brightness(1.08); }
+
+button.secondary {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+button.secondary:hover { background: var(--accent-soft); }
+
+button.ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid transparent;
+}
+
+button.ghost:hover { color: var(--ink); border-color: var(--line); }
+
+.stage-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+/* ---------- Decision cards ---------- */
+
+.decision-card h3 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.decision-card .hint {
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.usechoice {
+  display: inline-flex;
+  gap: 0.5rem;
+  margin: 0.4rem 0 0.8rem;
+}
+
+.usechoice button {
+  font: inherit;
+  min-width: 4.5rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+/* YES and NO carry identical visual weight: same style when selected. */
+.usechoice button[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+}
+
+label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0.6rem 0 0.25rem;
+}
+
+textarea,
+input[type="text"] {
+  width: 100%;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.55rem 0.7rem;
+  resize: vertical;
+}
+
+textarea { min-height: 4.2rem; }
+
+.check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin: 0.8rem 0;
+}
+
+.check-row input[type="checkbox"] {
+  inline-size: 1.15rem;
+  block-size: 1.15rem;
+  margin-top: 0.25rem;
+  accent-color: var(--accent);
+}
+
+.check-row label {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ---------- Summary / comparison ---------- */
+
+.summary-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.summary-list ul {
+  margin: 0.25rem 0 0;
+  padding-left: 1.1rem;
+}
+
+table.compare {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+table.compare th,
+table.compare td {
+  text-align: left;
+  padding: 0.5rem 0.65rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+table.compare th {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+td.differs {
+  font-style: italic;
+}
+
+details.why {
+  margin: 0.5rem 0;
+}
+
+details.why summary {
+  cursor: pointer;
+  color: var(--accent);
+}
+
+.flow {
+  font-family: ui-monospace, Consolas, monospace;
+  white-space: pre;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 64rem) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .stage-nav,
+  .progress-rail {
+    position: static;
+  }
+
+  .stage-nav ol {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.4rem;
+  }
+
+  .stage-nav button {
+    white-space: nowrap;
+    width: auto;
+  }
+
+  .progress-rail {
+    order: -1;
+  }
+
+  .progress-rail .progress-block {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .progress-rail .progress-block .progress-track {
+    flex: 1;
+    margin-top: 0;
+  }
+
+  .summary-list {
+    grid-template-columns: 1fr;
+  }
+
+  table.compare {
+    display: block;
+    overflow-x: auto;
+  }
+}
