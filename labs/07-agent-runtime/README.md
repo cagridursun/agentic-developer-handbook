@@ -144,6 +144,8 @@ This handbook has refused the word "agent" for six labs. Here is the breakpoint:
 
 That observe → decide → act → observe loop, with the model influencing the next step and the application owning execution and termination, is what this handbook calls an agent. Industry terminology varies — plenty of people call Lab 03 an agent already, and that usage isn't wrong so much as less precise. Within this handbook, the word starts here.
 
+One wording note: "the model chooses the next step" is convenient shorthand used throughout this lab. Precisely, the model *proposes* — it selects a candidate from the actions exposed to it, and the runtime retains authority over whether that proposal is executable. Influence is not authority; the distinction has its own page in [LLM vs Decision Authority](../../docs/model-vs-decision-authority.md).
+
 ## Agent Runtime vs Tool Calling
 
 Lab 03 was one controlled tool round: the application manually encoded model → tool → model → stop. Lab 07 generalizes it: model → decision → optional tool → observation → model → ... → explicit stop. Tool calling is a mechanism the runtime uses; tool calling alone is not the runtime.
