@@ -206,8 +206,10 @@ class SiteIntegrationTest(unittest.TestCase):
         landing = read(SITE / "index.html")
         self.assertIn('href="capstone-01/index.html"', landing)
         self.assertIn('href="readiness-assessment/index.html"', landing)
-        self.assertIn("Build and compare", landing)
-        self.assertIn("Decide what architecture the problem deserves", landing)
+        # Three ways to use the project: Learn (labs), Compose (capstone),
+        # Decide (assessment).
+        for kicker in ["</span> Learn</p>", "</span> Compose</p>", "</span> Decide</p>"]:
+            self.assertIn(kicker, landing)
 
     def test_readiness_ui_exists_and_links_canonical_documents(self):
         page = read(SITE / "readiness-assessment" / "index.html")

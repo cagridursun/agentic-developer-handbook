@@ -8,6 +8,7 @@ A static, backend-free learning layer over the handbook, published at **<https:/
 Boundaries, on purpose:
 
 - No framework, no build step, no npm — semantic HTML, modern CSS, small ES modules
+- One visual system from the launch video: the landing page uses the dark palette (`body.theme-dark`); the interactive pages keep a light paper working surface with the same header, logo, and blues. Tokens are at the top of `styles/main.css`
 - No backend, no accounts, no analytics — progress lives only in your browser's `localStorage`, one namespaced, versioned key per experience (`adh.learning.v1.capstone01`, `adh.learning.v1.readinessAssessment`). Resetting one never touches the other
 - The canonical content stays in the repository: Markdown, Java code, `DECISIONS.md`, and `assessments/`. The site is an interactive layer, not a fork of the handbook
 
@@ -37,11 +38,15 @@ The pages use ES modules, so open them through a local server rather than `file:
 
 ```
 site/
-├── index.html                       # landing page: both experiences
+├── index.html                       # landing page: hero with launch video, path, Learn / Compose / Decide
+├── assets/
+│   ├── video/                       # launch.mp4 (H.264), launch.webm (VP9), launch-poster.jpg — silent
+│   └── images/                      # logo-mark.png (transparent, for dark surfaces), favicon.png
 ├── capstone-01/index.html           # the Capstone 01 experience
 ├── readiness-assessment/index.html  # the readiness assessment experience
 ├── styles/main.css                  # design system, layout, responsive rules
 └── js/
+    ├── landing.js                   # landing: video Pause/Play, reduced motion, missing-file fallback
     ├── app.js                       # Capstone 01: stages, navigation, progress, rendering
     ├── capstone.js                  # Capstone 01 data (sources noted inline)
     ├── storage.js                   # Capstone 01 versioned localStorage wrapper
