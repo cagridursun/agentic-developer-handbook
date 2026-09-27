@@ -58,10 +58,12 @@ representative at an online or offline event.
 
 ## Enforcement
 
-The enforcement contact is not configured yet. Before public launch, the
-maintainer must replace this paragraph with a private contact method.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be
+reported to the community leaders responsible for enforcement at
+cagridursun@gmail.com. All complaints will be reviewed and investigated
+promptly and fairly.
 
-Until then, do not put sensitive personal information in a public GitHub issue.
+Do not put sensitive personal information in a public GitHub issue.
 Vulnerability reports are a separate process, described in [SECURITY.md](SECURITY.md).
 
 All community leaders are obligated to respect the privacy and security of the

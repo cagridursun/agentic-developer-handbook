@@ -4,6 +4,15 @@ Questions, corrections, and pull requests are welcome. Small changes are easier 
 
 The current milestone is tracked in [ROADMAP.md](ROADMAP.md), and its explicit milestones are mirrored to GitHub Milestones, so issues and pull requests may be associated with the matching milestone. The numbered canonical milestones are maintainer-curated; the project-level milestones carry open-source, community, and ecosystem work. GitHub Milestones are operational tracking, not the canonical roadmap source — ROADMAP.md is.
 
+## Where to start
+
+- **Something is wrong** — a broken command, an incorrect statement, a failing test: open a *Bug or correction* issue.
+- **Something was confusing** — a lab, the capstone, or the assessment left you unsure, or two documents seem to contradict each other: open a *Documentation or learning feedback* issue. Learning feedback is as valuable as code.
+- **You want to add something** — a community example, a skill example, an alternative provider: open a *Proposal* issue first and answer the questions below before writing code. Canonical changes are discussed there too.
+- **You want a small first task** — look for issues labelled [`good first issue`](https://github.com/cagridursun/agentic-developer-handbook/labels/good%20first%20issue) or [`help wanted`](https://github.com/cagridursun/agentic-developer-handbook/labels/help%20wanted).
+
+All of these start from [New issue](https://github.com/cagridursun/agentic-developer-handbook/issues/new/choose).
+
 ## Ways to contribute
 
 Contributions are broader than typo fixes. Useful work includes:
@@ -23,7 +32,7 @@ The repository has two contribution surfaces with different rules.
 
 **The canonical path is curated.** The numbered labs and the core conceptual documents form a maintainer-curated learning journey; its order and scope are deliberate. Improving a completed lab is welcome. Implementing a future numbered milestone, reordering the path, or replacing a canonical lab with a vendor or framework tutorial is not — unless an issue explicitly asks for that work. This restriction protects the learning sequence; it does not limit community participation elsewhere.
 
-**Application examples are extensible.** Long term, the project will accept curated community examples around concepts the handbook has already taught: alternative providers, tool integrations, retrieval backends, memory implementations, skills examples, MCP integrations, evaluation and observability examples, and real-world use cases. There is no `examples/` directory yet; when it exists, this section will link to its layout.
+**Application examples are extensible.** Long term, the project will accept curated community examples around concepts the handbook has already taught: alternative providers, tool integrations, retrieval backends, memory implementations, skills examples, MCP integrations, evaluation and observability examples, and real-world use cases. There is no `examples/` directory yet. Propose an example with a *Proposal* issue; the first accepted proposals will define the layout, and this section will link to it.
 
 A substantial example should be able to answer:
 
@@ -103,4 +112,4 @@ Fill those in. A short explanation is enough.
 
 ## Security issues
 
-Do not file a public issue for an undisclosed vulnerability. Read [SECURITY.md](SECURITY.md). The private contact is not configured yet.
+Do not file a public issue for an undisclosed vulnerability. Report it privately through GitHub's **Report a vulnerability** form, as described in [SECURITY.md](SECURITY.md).
