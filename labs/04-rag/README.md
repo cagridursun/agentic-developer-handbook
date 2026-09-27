@@ -66,7 +66,7 @@ This is not production-grade information retrieval, and the code says so. For a 
 
 ## Run it
 
-You need Java 21 and a Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey).
+You need Java 27 and a Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey).
 
 Linux/macOS:
 

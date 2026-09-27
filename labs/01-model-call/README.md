@@ -26,7 +26,7 @@ The application reads an API key from the environment, sends one prompt to a hos
 
 ## Run it
 
-You need Java 21 and a Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey).
+You need Java 27 and a Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey).
 
 ```sh
 export GOOGLE_API_KEY=your-key        # PowerShell: $env:GOOGLE_API_KEY = "your-key"

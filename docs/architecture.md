@@ -6,9 +6,9 @@ The accepted decisions so far are in [adr/](adr/README.md).
 
 ## Java-first reference implementation
 
-Java 21 is the language of the canonical labs. Conceptual documentation stays free of Java where the idea does not depend on it. Other languages are not promised as parallel implementations.
+Java 27 is the language of the canonical labs. It is the current feature release rather than an LTS release; the handbook intentionally follows the current Java platform and does not use preview or incubator features. Conceptual documentation stays free of Java where the idea does not depend on it. Other languages are not promised as parallel implementations.
 
-The root Maven project is a parent POM. It targets Java 21 and uses UTF-8. Each lab is a child module; the first is [labs/01-model-call](../labs/01-model-call/README.md). See [ADR 0001](adr/0001-java-first.md).
+The root Maven project is a parent POM. It compiles with `--release 27` through a single `maven.compiler.release` property and uses UTF-8. Each lab is a child module; the first is [labs/01-model-call](../labs/01-model-call/README.md). See [ADR 0001](adr/0001-java-first.md) and [ADR 0005](adr/0005-upgrade-canonical-java-to-27.md).
 
 ## Progressive labs
 
@@ -32,7 +32,7 @@ A lab that cannot be built and run has not finished the concept. The default pat
 
 ## CI does not need paid API keys
 
-GitHub Actions runs `./mvnw verify` on pull requests and on pushes to `main`. That job checks out the code, uses Java 21, caches Maven dependencies, and stops. It has no secrets.
+GitHub Actions runs `./mvnw verify` on pull requests and on pushes to `main`. That job checks out the code, uses Java 27 (Temurin), caches Maven dependencies, and stops. It has no secrets.
 
 External model-provider integration tests, when they exist, will be opt-in and will stay out of the default verify path.
 

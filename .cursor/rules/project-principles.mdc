@@ -37,7 +37,7 @@ alwaysApply: true
 
 ## Java Principles
 
-- Java 21 is the canonical implementation language.
+- Java 27 is the canonical implementation language (see ADR 0005). Do not use preview or incubator features.
 - Prefer Java records for immutable data structures where appropriate.
 - Prefer constructor injection.
 - Do not use field injection.
