@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agentic System Readiness Assessment</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="../index.html">Agentic Developer Handbook</a>
+      <span class="context">Agentic System Readiness Assessment</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="stage-nav" aria-label="Assessment stages">
+      <h2>Stages</h2>
+      <ol id="stage-list"></ol>
+    </nav>
+
+    <main>
+      <!-- ================= Overview ================= -->
+      <section class="stage" id="stage-overview" tabindex="-1" aria-labelledby="h-overview">
+        <p class="stage-kicker">Understand</p>
+        <h1 id="h-overview">Agentic System Readiness Assessment</h1>
+        <p>
+          <strong>What is the smallest AI/agentic architecture this problem
+          actually needs?</strong> Bring one use case. The assessment asks a
+          fixed order of questions, starting with the simplest possible answer —
+          ordinary software — and only moves toward a model, tools, retrieval,
+          memory, skills, or an agent runtime when an earlier answer makes that
+          necessary.
+        </p>
+        <p>
+          It is willing to conclude <em>"you probably do not need an LLM"</em>,
+          <em>"you need an LLM, but not an agent"</em>, or <em>"a deterministic
+          workflow is simpler than an agent runtime"</em>. Those are good
+          outcomes.
+        </p>
+        <div class="notice">
+          This is not a score, a grade, or a quiz with right answers, and it
+          does not design your system. It is a structured engineering
+          conversation. Every result is derived from your answers by
+          <a href="../../assessments/agentic-system-readiness/README.md#how-the-summary-is-derived">published, deterministic rules</a>
+          — no model is called.
+        </div>
+        <p class="muted">
+          Canonical version:
+          <a href="../../assessments/agentic-system-readiness/README.md">assessments/agentic-system-readiness/README.md</a>
+          and the fillable
+          <a href="../../assessments/agentic-system-readiness/ASSESSMENT.md">ASSESSMENT.md</a>
+          template. Answers stay in this browser only.
+        </p>
+        <div class="stage-actions">
+          <button type="button" class="primary" id="overview-continue">Describe the use case</button>
+        </div>
+      </section>
+
+      <!-- ================= Use case ================= -->
+      <section class="stage" id="stage-usecase" hidden tabindex="-1" aria-labelledby="h-usecase">
+        <p class="stage-kicker">Understand</p>
+        <h1 id="h-usecase">Use case</h1>
+        <p>Start from the problem, not from an AI feature list. Short answers are fine.</p>
+        <div class="card" id="usecase-fields"></div>
+        <div class="stage-actions">
+          <button type="button" class="primary" data-next="simplest">Continue to the simplest solution</button>
+        </div>
+      </section>
+
+      <!-- ================= Simplest solution ================= -->
+      <section class="stage" id="stage-simplest" hidden tabindex="-1" aria-labelledby="h-simplest">
+        <p class="stage-kicker">Decide</p>
+        <h1 id="h-simplest">Simplest solution first</h1>
+        <p>
+          Before any AI capability: could ordinary software do this? Do not
+          introduce an LLM merely because this is an AI handbook.
+        </p>
+        <div id="simplest-questions"></div>
+        <div class="notice" id="simplest-outcome" hidden role="status"></div>
+        <div class="stage-actions">
+          <button type="button" class="primary" data-next="capabilities">Continue to capability decisions</button>
+        </div>
+      </section>
+
+      <!-- ================= Capability decisions ================= -->
+      <section class="stage" id="stage-capabilities" hidden tabindex="-1" aria-labelledby="h-capabilities">
+        <p class="stage-kicker">Decide</p>
+        <h1 id="h-capabilities">Capability decisions</h1>
+
+        <div id="capabilities-closed" hidden>
+          <div class="notice" role="status">
+            <strong id="capabilities-closed-title"></strong>
+            <span id="capabilities-closed-detail"></span>
+          </div>
+          <p>
+            The AI capability questions do not apply while that answer stands.
+            Record what you are deliberately not building on the result page,
+            or return to the simplest-solution questions if the answer changes.
+          </p>
+          <div class="stage-actions">
+            <button type="button" class="secondary" data-go="simplest">Revisit the simplest solution</button>
+            <button type="button" class="primary" data-next="authority">Continue</button>
+          </div>
+        </div>
+
+        <div id="capabilities-open">
+          <p>
+            Answer in order. Each <em>yes</em> makes a capability a candidate
+            (CONSIDER); each <em>no</em> leaves it out (NOT JUSTIFIED). A
+            justified <strong>No</strong> is worth exactly as much as a
+            justified <strong>Yes</strong>.
+          </p>
+          <div id="capability-questions"></div>
+          <div class="stage-actions">
+            <button type="button" class="primary" data-next="authority">Continue to decision authority</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= Decision Authority ================= -->
+      <section class="stage" id="stage-authority" hidden tabindex="-1" aria-labelledby="h-authority">
+        <p class="stage-kicker">Decide</p>
+        <h1 id="h-authority">Decision authority</h1>
+        <p>
+          Choosing capabilities is half the design. The other half is what the
+          model's output is <em>allowed to do</em>. The model may reason,
+          generate, recommend, and propose; the application owns validation,
+          authorization, execution, budgets, and stopping.
+        </p>
+        <p class="notice" id="authority-no-model" hidden>
+          No model is justified in your answers, so nothing is influenced by a
+          model. The questions still have ordinary answers — authoritative data,
+          side effects, authorization — and writing them down is optional here.
+        </p>
+        <div class="card" id="authority-fields"></div>
+        <div class="flow" role="img" aria-label="Flow: model reasoning, then proposal, then application validation, policy, authorization and approval, then execution">Model reasoning
+  ↓
+proposal
+  ↓
+application validation / policy / authorization / approval
+  ↓
+execution</div>
+        <p class="muted">
+          The concept in full:
+          <a href="../../docs/model-vs-decision-authority.md">docs/model-vs-decision-authority.md</a>
+        </p>
+        <div class="stage-actions">
+          <button type="button" class="primary" data-next="runtime">Continue to the runtime boundary</button>
+        </div>
+      </section>
+
+      <!-- ================= Runtime boundary ================= -->
+      <section class="stage" id="stage-runtime" hidden tabindex="-1" aria-labelledby="h-runtime">
+        <p class="stage-kicker">Decide</p>
+        <h1 id="h-runtime">Runtime boundary</h1>
+        <p id="runtime-intro"></p>
+        <div class="card" id="runtime-fields"></div>
+
+        <h2>Production questions for later</h2>
+        <p class="muted">
+          Ask these now so the design leaves room for the answers. They are
+          Milestones 9–11 (evaluation, observability, security) and are not
+          implemented here.
+        </p>
+        <div class="card" id="production-fields"></div>
+        <div class="stage-actions">
+          <button type="button" class="primary" data-next="result">See the result</button>
+        </div>
+      </section>
+
+      <!-- ================= Result ================= -->
+      <section class="stage" id="stage-result" hidden tabindex="-1" aria-labelledby="h-result">
+        <p class="stage-kicker">Review</p>
+        <h1 id="h-result">Result</h1>
+        <div class="result-headline" id="result-headline" role="status"></div>
+        <p class="muted">
+          Derived from your answers by transparent rules. Candidates to
+          consider, not "the correct architecture" — and not universally
+          correct for anyone else's use case.
+        </p>
+
+        <section class="card" aria-labelledby="h-result-usecase">
+          <h2 id="h-result-usecase">Use case</h2>
+          <p id="result-usecase"></p>
+          <p><strong>Simplest alternative considered:</strong> <span id="result-alternative"></span></p>
+        </section>
+
+        <section class="card" aria-labelledby="h-result-caps">
+          <h2 id="h-result-caps">Capabilities</h2>
+          <div class="summary-list">
+            <div>
+              <strong>Candidates to consider</strong>
+              <ul id="result-consider"></ul>
+            </div>
+            <div>
+              <strong>Not currently justified</strong>
+              <ul id="result-not-justified"></ul>
+            </div>
+          </div>
+          <table class="compare status-table">
+            <caption class="muted">Each capability, its status, and the rule that produced it</caption>
+            <thead>
+              <tr>
+                <th scope="col">Capability</th>
+                <th scope="col">Status</th>
+                <th scope="col">Why</th>
+              </tr>
+            </thead>
+            <tbody id="result-rows"></tbody>
+          </table>
+        </section>
+
+        <section class="card" aria-labelledby="h-result-shape">
+          <h2 id="h-result-shape">Likely shape</h2>
+          <div class="flow" id="result-shape"></div>
+          <div id="result-shape-field"></div>
+        </section>
+
+        <section class="card" aria-labelledby="h-result-authority">
+          <h2 id="h-result-authority">Decision authority boundary</h2>
+          <dl class="answers" id="result-authority"></dl>
+        </section>
+
+        <section class="card" aria-labelledby="h-result-rejected">
+          <h2 id="h-result-rejected">Rejected complexity</h2>
+          <ul id="result-rejected"></ul>
+          <div id="result-rejected-field"></div>
+        </section>
+
+        <section class="card" aria-labelledby="h-result-unresolved">
+          <h2 id="h-result-unresolved">Unresolved questions</h2>
+          <ul id="result-unresolved"></ul>
+        </section>
+
+        <div class="notice">
+          <strong>Where MCP may enter — later.</strong> If the same capability
+          must be exposed across process or application boundaries, a
+          standardized protocol may become useful. A remote capability does not
+          automatically require MCP; a normal API and client may remain the
+          simpler answer. MCP is taught in Milestone 8.
+        </div>
+
+        <div class="stage-actions">
+          <button type="button" class="secondary" id="result-export">Export ASSESSMENT.md</button>
+          <button type="button" class="primary" id="result-complete">Mark result reviewed</button>
+        </div>
+      </section>
+
+      <!-- ================= Examples & reflection ================= -->
+      <section class="stage" id="stage-examples" hidden tabindex="-1" aria-labelledby="h-examples">
+        <p class="stage-kicker">Reflect</p>
+        <h1 id="h-examples">Worked examples and reflection</h1>
+        <p>
+          Four filled-in assessments, from "no model at all" to a bounded agent
+          runtime. Each is one defensible reading of its scenario, not an
+          answer key. The full documents live in the repository.
+        </p>
+        <ul class="example-list" id="example-list"></ul>
+        <h2>Reflection</h2>
+        <div class="card" id="reflection-questions"></div>
+        <div class="stage-actions">
+          <button type="button" class="primary" id="examples-complete">Mark reflection complete</button>
+        </div>
+      </section>
+    </main>
+
+    <aside class="progress-rail" aria-label="Current candidates and export">
+      <h2>Current candidates</h2>
+      <div class="progress-block">
+        <ul class="status-rail" id="status-rail" aria-live="polite"></ul>
+      </div>
+      <div class="rail-actions">
+        <button type="button" class="secondary" id="export-download">Export ASSESSMENT.md</button>
+        <button type="button" class="secondary" id="export-copy">Copy Markdown</button>
+        <button type="button" class="ghost" id="reset-progress">Reset this assessment</button>
+      </div>
+    </aside>
+  </div>
+
+  <script type="module" src="../js/readiness-app.js"></script>
+</body>
+</html>

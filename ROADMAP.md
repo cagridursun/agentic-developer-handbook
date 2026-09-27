@@ -193,14 +193,13 @@ Established:
 - [Capstone 01 — Build a Small Agentic System](capstones/01-agentic-system/README.md): composing already-taught concepts with a decisions-first exercise and a reference that deliberately excludes capabilities
 - [Capstone 01 interactive learning UI](site/README.md): a static, backend-free experience with local-only progress, architecture decisions, a decision-authority checkpoint, reflection, and an ungraded reference comparison
 - [LLM vs Decision Authority](docs/model-vs-decision-authority.md) as an explicit handbook concept, wired into the capstone decisions
+- [Agentic System Readiness Assessment](assessments/agentic-system-readiness/README.md): a reusable architecture decision framework that starts with deterministic software, derives candidate capabilities without scoring, and makes decision authority explicit — with four worked examples and an interactive version on the local site with its own local progress
 
 Planned:
 
 - Selectively retrofit Labs 01–04 where it materially improves learning
-- An Agentic System Readiness Assessment
 - An optional workshop path
-- Broader learning UI/site expansion beyond the capstone remains to be evaluated
-- Local progress beyond the current capstone, if justified
+- Broader learning UI/site expansion beyond the capstone and the assessment remains to be evaluated
 
 ## How to read this list
 
