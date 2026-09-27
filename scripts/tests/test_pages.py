@@ -218,5 +218,56 @@ class DeployWorkflowTest(unittest.TestCase):
         self.assertNotIn("contents: write", self.workflow)
 
 
+class LandingMediaTest(unittest.TestCase):
+    """The launch video and logo: present, quiet, and served from site/."""
+
+    def setUp(self):
+        self.landing = read(SITE / "index.html")
+        self.video = self.landing.split("<video")[1].split("</video>")[0]
+
+    def test_video_autoplays_silently_inline_and_loops(self):
+        for attribute in ["autoplay", "muted", "loop", "playsinline", "controls"]:
+            self.assertRegex(self.video, rf"\b{attribute}\b", attribute)
+
+    def test_video_sources_and_poster_exist_inside_site(self):
+        sources = re.findall(r'<source src="([^"]+)" type="(video/[a-z0-9]+)"', self.video)
+        self.assertEqual({"video/mp4", "video/webm"}, {kind for _, kind in sources})
+        poster = re.search(r'poster="([^"]+)"', self.video).group(1)
+        for relative in [poster, *[src for src, _ in sources]]:
+            self.assertFalse(relative.startswith(("/", "http")), relative)
+            self.assertTrue((SITE / relative).is_file(), relative)
+        # Keep the page light: each video file stays small.
+        for src, _ in sources:
+            self.assertLess((SITE / src).stat().st_size, 4_000_000, src)
+
+    def test_visitor_can_pause_and_reduced_motion_is_respected(self):
+        self.assertIn('id="video-toggle"', self.landing)
+        script = read(SITE / "js" / "landing.js")
+        self.assertIn("prefers-reduced-motion", script)
+        self.assertIn('removeAttribute("autoplay")', script)
+        self.assertIn('src="js/landing.js"', self.landing)
+
+    def test_logo_mark_and_favicon_on_every_page(self):
+        for page in site_pages():
+            prefix = "../" * (len(page.relative_to(SITE).parts) - 1)
+            text = read(page)
+            self.assertIn(f'src="{prefix}assets/images/logo-mark.png"', text, page.name)
+            self.assertIn(f'<link rel="icon" type="image/png" href="{prefix}assets/images/favicon.png">', text, page.name)
+        self.assertTrue((SITE / "assets" / "images" / "logo-mark.png").is_file())
+        self.assertTrue((SITE / "assets" / "images" / "favicon.png").is_file())
+
+    def test_palette_tokens_are_defined(self):
+        css = read(SITE / "styles" / "main.css")
+        for token, value in {
+            "--graphite": "#0A0B0D", "--panel": "#0F1115", "--panel-raised": "#14161B",
+            "--hairline": "#262A31", "--border": "#363B45", "--ink": "#ECEAE4",
+            "--ink-muted": "#7B818D", "--ink-subtle": "#555B67", "--electric": "#2F6BFF",
+            "--electric-soft": "#9DB8FF", "--signal": "#62E6F2", "--field": "#2B5CFF",
+            "--paper": "#ECEAE4", "--ink-black": "#0B0C0E", "--code-string": "#A7D9A0",
+            "--code-comment": "#5F6675",
+        }.items():
+            self.assertIn(f"{token}: {value};", css, token)
+
+
 if __name__ == "__main__":
     unittest.main()
