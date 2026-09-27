@@ -22,16 +22,36 @@ export function loadState() {
       return defaultState();
     }
     const parsed = JSON.parse(raw);
-    return { ...defaultState(), ...parsed };
+    const defaults = defaultState();
+    // Merge nested objects too, so a partially stored state (for example an
+    // authority object missing one answer) cannot break rendering.
+    return {
+      ...defaults,
+      ...parsed,
+      completed: { ...defaults.completed, ...(parsed.completed || {}) },
+      decisions: { ...defaults.decisions, ...(parsed.decisions || {}) },
+      authority: { ...defaults.authority, ...(parsed.authority || {}) },
+      reflection: { ...defaults.reflection, ...(parsed.reflection || {}) },
+    };
   } catch {
     return defaultState();
   }
 }
 
+// Storage can be unavailable (private browsing, disabled storage, quota).
+// The page keeps working for the current visit; progress just is not saved.
 export function saveState(state) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    // Intentionally ignored: local progress is a convenience, not a requirement.
+  }
 }
 
 export function resetState() {
-  localStorage.removeItem(STORAGE_KEY);
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // Nothing stored, nothing to clear.
+  }
 }

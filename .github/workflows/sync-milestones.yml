@@ -8,12 +8,26 @@ on:
       - scripts/sync-github-milestones.py
       - scripts/tests/**
       - .github/workflows/sync-milestones.yml
+      # The stdlib tests also check the site, the assessment, and the
+      # documents they mirror, so changes there must run them too.
+      - site/**
+      - assessments/**
+      - docs/**
+      - capstones/**/DECISIONS.md
+      - README.md
   pull_request:
     paths:
       - ROADMAP.md
       - scripts/sync-github-milestones.py
       - scripts/tests/**
       - .github/workflows/sync-milestones.yml
+      # The stdlib tests also check the site, the assessment, and the
+      # documents they mirror, so changes there must run them too.
+      - site/**
+      - assessments/**
+      - docs/**
+      - capstones/**/DECISIONS.md
+      - README.md
   workflow_dispatch:
 
 permissions:
@@ -21,7 +35,7 @@ permissions:
 
 jobs:
   validate:
-    name: Parser tests
+    name: Python tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,7 +46,7 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Run parser tests
+      - name: Run Python tests
         run: python -m unittest discover -s scripts/tests -v
 
   sync:

@@ -82,6 +82,12 @@ mvnw.cmd verify
 
 `verify` must pass before you open a pull request. It does not need an API key. If you add tests, keep the default CI path deterministic. Tests that call a paid model provider should be opt-in.
 
+If you change the roadmap, the interactive site, the assessments, or the documents they mirror, also run the standard-library Python checks (no packages, no network):
+
+```sh
+python -m unittest discover -s scripts/tests -v
+```
+
 ## Open a pull request
 
 Push your branch and open a pull request against `main`. The template asks:
