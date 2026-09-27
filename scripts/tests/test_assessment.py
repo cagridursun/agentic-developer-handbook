@@ -244,8 +244,10 @@ class SiteIntegrationTest(unittest.TestCase):
 
     def test_no_network_dependency(self):
         for html in [SITE / "index.html", SITE / "readiness-assessment" / "index.html"]:
-            head = read(html).split("<body")[0]
-            self.assertNotIn("https://", head)
+            for tag in re.findall(r"<(?:script|link)\b[^>]*>", read(html)):
+                if 'rel="canonical"' in tag:
+                    continue
+                self.assertNotIn("://", tag, "no external resources: " + tag)
             self.assertNotIn("cdn.", read(html))
         for script in SITE.glob("js/*.js"):
             text = read(script)

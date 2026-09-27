@@ -124,8 +124,10 @@ export const PRODUCTION_QUESTIONS = [
   { id: "trust", text: "What trust and security boundaries exist?" },
 ];
 
-// Summaries only — the canonical worked examples are Markdown in the repository.
-const EXAMPLES_BASE = "../../assessments/agentic-system-readiness/examples/";
+// Summaries only — the canonical worked examples are Markdown in the
+// repository. Link to GitHub: the published site contains only site/.
+const EXAMPLES_BASE =
+  "https://github.com/cagridursun/agentic-developer-handbook/blob/main/assessments/agentic-system-readiness/examples/";
 export const EXAMPLES = [
   {
     file: "deterministic-lookup.md",

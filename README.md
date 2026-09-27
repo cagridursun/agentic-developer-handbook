@@ -81,7 +81,7 @@ The handbook has three kinds of learning artifact:
 
 - **[Capstone 01 — Build a Small Agentic System](capstones/01-agentic-system/README.md).** After Lab 07: decide which capabilities a fictional incident investigation needs, build it, and compare with one reference design that deliberately leaves capabilities out.
 - **[Agentic System Readiness Assessment](assessments/agentic-system-readiness/README.md).** For your own use case: a fixed order of questions, starting with "could ordinary software do this?" It can conclude that you need no LLM at all, or an LLM but no agent.
-- **Optional local interactive learning experience.** A static, browser-only layer over both, with no backend and no build step. It runs locally; see [site/README.md](site/README.md).
+- **[Interactive site](https://cagridursun.github.io/agentic-developer-handbook/).** Browser-only versions of the assessment and Capstone 01, with no backend and no accounts. Start with the labs here for the canonical learning path; use the site for the interactive assessment and capstone. See [site/README.md](site/README.md).
 
 ## Mental model
 
@@ -142,7 +142,7 @@ agentic-developer-handbook/
 ├── assessments/
 │   ├── README.md
 │   └── agentic-system-readiness/
-├── site/                  # local interactive learning UI (static, no build)
+├── site/                  # interactive learning site (static, published to GitHub Pages)
 ├── scripts/               # roadmap sync and stdlib Python checks
 └── .github/
 ```
