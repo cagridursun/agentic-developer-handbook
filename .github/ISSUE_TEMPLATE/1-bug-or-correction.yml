@@ -1,0 +1,29 @@
+name: Bug or correction
+description: Something is wrong — a failing command or test, a defect in a lab, or an incorrect statement in the docs
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Do not include secrets or API keys. Security vulnerabilities go through the private form in SECURITY.md, not here.
+  - type: input
+    id: where
+    attributes:
+      label: Where?
+      description: Lab, document, or command — for example `labs/03-tool-calling`, `docs/glossary.md`, or `./mvnw verify`
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What is wrong?
+      description: What did you expect, and what happened or what does the text say instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How can we reproduce or check it?
+      description: The command you ran, your Java version and OS, or the source that shows the statement is incorrect.
+    validations:
+      required: false

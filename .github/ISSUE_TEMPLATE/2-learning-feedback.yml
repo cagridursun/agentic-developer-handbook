@@ -1,0 +1,40 @@
+name: Documentation or learning feedback
+description: A lab, the capstone, or the assessment was confusing, incomplete, or contradicted another page
+labels: ["documentation", "learning-experience"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Learning feedback is a real contribution. "I got lost here" is useful even without a proposed fix.
+  - type: input
+    id: page
+    attributes:
+      label: Which page or step?
+      description: Path or link, for example `labs/05-memory/README.md` or "Capstone 01, decisions stage"
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of problem?
+      options:
+        - Confusing explanation
+        - Missing step or prerequisite
+        - Two pages seem to contradict each other
+        - Transition between labs felt abrupt
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: What were you trying to understand or do, and where did it stop making sense?
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested change (optional)
+    validations:
+      required: false
