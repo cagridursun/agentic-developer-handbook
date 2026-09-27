@@ -2,15 +2,13 @@
 
 ## Reporting a vulnerability
 
-A private reporting channel is not configured yet.
+Report vulnerabilities privately through GitHub: open the repository's **Security** tab and choose **Report a vulnerability**, or go directly to <https://github.com/cagridursun/agentic-developer-handbook/security/advisories/new>. Only the maintainer can see the report.
 
-Before this repository is launched publicly, the maintainer must configure one and name it in this section. A GitHub private vulnerability report or a maintainer email address are the usual options. This file deliberately does not invent an email address.
-
-Until that channel exists, do not send vulnerability details to a public issue. A public issue can wait until a fix is available, or until the maintainer asks for one.
+Do not put vulnerability details in a public issue, pull request, or discussion. A public issue can wait until a fix is available, or until the maintainer asks for one.
 
 ## What a report should contain
 
-When a private channel exists, include:
+A report should include:
 
 - the component or document affected
 - the impact

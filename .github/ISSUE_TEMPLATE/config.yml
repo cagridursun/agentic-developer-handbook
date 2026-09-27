@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/cagridursun/agentic-developer-handbook/security/advisories/new
+    about: Report vulnerabilities privately. Do not open a public issue.
+  - name: Start here
+    url: https://github.com/cagridursun/agentic-developer-handbook#start-here
+    about: New to the handbook? The README explains where to begin.

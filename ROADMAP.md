@@ -109,17 +109,18 @@ Established:
 - Apache 2.0 licensing with NOTICE
 - Contribution guidelines, including the canonical-vs-community contribution model
 - Code of Conduct
-- Issue templates and a pull request template
+- A pull request template
 - Continuous integration without API keys
 - Architecture decision records
+- Private vulnerability reporting through GitHub (see [SECURITY.md](SECURITY.md))
+- A Code of Conduct enforcement contact
+- Issue templates for corrections, learning feedback, and proposals, and a README "Start here" path
 
 Remaining and evolving:
 
-- Configure a private vulnerability reporting channel (see [SECURITY.md](SECURITY.md))
-- Configure the Code of Conduct enforcement contact
 - Improve contributor onboarding
 - Define a community example proposal workflow
-- Repository metadata and discoverability
+- Repository description, topics, and a social preview image
 - Labels and an issue taxonomy when volume needs them
 - Maintainer guidance as the community grows
 
