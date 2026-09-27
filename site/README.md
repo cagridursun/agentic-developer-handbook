@@ -62,6 +62,8 @@ Reference data in `js/capstone.js` mirrors `capstones/01-agentic-system/referenc
 
 The assessment's rules live in `js/readiness-logic.js` and are printed in [the assessment README](../assessments/agentic-system-readiness/README.md#how-the-summary-is-derived). They produce candidates to consider — never a score, and never "the correct architecture".
 
-## Not configured
+## Configured and not configured
 
-A custom domain and a social preview image. The site has no analytics, no cookies, and no remote calls; answers never leave the browser.
+The landing page carries Open Graph and Twitter card metadata, with the launch poster (`assets/video/launch-poster.jpg`) as its social preview image.
+
+A custom domain is not configured. The site has no analytics, no cookies, and no remote calls, on purpose; answers never leave the browser.

@@ -323,6 +323,11 @@ function bindStaticControls() {
 
   bindCheckbox("build-done", "build");
   bindCheckbox("verify-done", "verify");
+  // Navigation only: the checkboxes above stay the completion signal.
+  document.getElementById("build-continue").addEventListener("click",
+      () => showStage("verify"));
+  document.getElementById("verify-continue").addEventListener("click",
+      () => showStage("reflection"));
 
   document.getElementById("reflection-complete").addEventListener("click", () => {
     state.completed.reflection = true;

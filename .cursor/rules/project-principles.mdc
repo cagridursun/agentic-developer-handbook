@@ -99,6 +99,13 @@ alwaysApply: true
 - Never log credentials or API keys.
 - Do not automatically execute arbitrary scripts bundled with third-party Skills.
 
+## Commit Authorship
+
+- Commit with the repository owner's configured Git identity only.
+- Never add Claude, Anthropic, Cursor, or any other AI tool as a commit author or co-author.
+- Never add AI `Co-Authored-By` trailers.
+- Never change `git config user.name` or `user.email` automatically.
+
 ## Scope Control
 
 Before implementing a non-trivial change:
