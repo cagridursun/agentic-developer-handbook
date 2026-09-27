@@ -1,0 +1,52 @@
+name: Proposal or community example
+description: Propose a community example, a skill example, or a change to the handbook — before writing code
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This project is a handbook, not an agent framework, a provider catalog, or a skill marketplace. The numbered labs are maintainer-curated: improving them is welcome, redefining or reordering the canonical path is not. Community examples extend concepts the labs **already teach**, and must teach an architectural decision — not only library syntax. See CONTRIBUTING.md.
+  - type: dropdown
+    id: type
+    attributes:
+      label: What are you proposing?
+      options:
+        - Community example for an already-taught concept
+        - Skill example
+        - Alternative inference provider example
+        - Improvement to an existing lab, capstone, or assessment
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does it solve?
+    validations:
+      required: true
+  - type: textarea
+    id: concepts
+    attributes:
+      label: Which handbook concepts does it use, and why are they needed?
+      description: Link the lab(s). Name the architectural decision the reader learns.
+    validations:
+      required: true
+  - type: textarea
+    id: not-used
+    attributes:
+      label: Which concepts are deliberately NOT used, and why would a simpler solution not be enough?
+    validations:
+      required: true
+  - type: textarea
+    id: verify
+    attributes:
+      label: How would it run and be tested?
+      description: Default tests must be deterministic and need no API key.
+    validations:
+      required: true
+  - type: textarea
+    id: security
+    attributes:
+      label: Security and production considerations (optional)
+    validations:
+      required: false
