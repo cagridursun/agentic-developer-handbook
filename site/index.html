@@ -3,58 +3,124 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Agentic Developer Handbook — Interactive Learning</title>
+  <title>Agentic Developer Handbook — learn agentic systems one concept at a time</title>
+  <meta name="description" content="A Java-first, open-source handbook for understanding and building agentic systems one concept at a time: model, structured output, tools, RAG, memory, skills, and a bounded agent runtime. You probably don't need all of these.">
+  <link rel="canonical" href="https://cagridursun.github.io/agentic-developer-handbook/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Agentic Developer Handbook">
+  <meta property="og:title" content="Agentic Developer Handbook">
+  <meta property="og:description" content="Java-first, open-source handbook for understanding and building agentic systems, one concept at a time. You probably don't need all of these.">
+  <meta property="og:url" content="https://cagridursun.github.io/agentic-developer-handbook/">
   <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
   <header class="site-header">
     <div class="inner">
       <a class="brand" href="index.html">Agentic Developer Handbook</a>
-      <span class="context">Interactive Learning</span>
+      <span class="context">Interactive learning</span>
+      <a class="header-link" href="https://github.com/cagridursun/agentic-developer-handbook">GitHub</a>
     </div>
   </header>
 
   <main class="landing">
-    <h1>Interactive Learning</h1>
+    <h1>Agentic Developer Handbook</h1>
     <p class="lede">
-      A local, browser-only layer over the handbook. The canonical content stays
-      in the repository — Markdown, runnable Java, and your own
-      <code>DECISIONS.md</code>. Progress lives only in this browser.
+      A Java-first, open-source handbook for understanding and building
+      agentic systems — one concept at a time, each with a small runnable Java
+      lab and an honest answer to "when should I <em>not</em> use this?"
+    </p>
+    <p>
+      It is not an agent framework, a library catalog, or a skill marketplace.
     </p>
 
-    <section class="experience-card">
-      <p class="stage-kicker">Build and compare</p>
-      <h2>Capstone 01 — Build a Small Agentic System</h2>
+    <ol class="path" aria-label="The learning path, Labs 01 to 07">
+      <li>Model</li>
+      <li>Structured Output</li>
+      <li>Tools</li>
+      <li>Knowledge / RAG</li>
+      <li>Memory</li>
+      <li>Skills</li>
+      <li>Agent Runtime</li>
+    </ol>
+
+    <p class="motto"><strong>You probably don't need all of these.</strong></p>
+    <p>
+      The path is for learning, not a mandatory architecture: stop when the
+      problem is solved. A single LLM call is not an agent, and a database
+      lookup does not become RAG because the application also calls a model.
+    </p>
+
+    <section class="experience-card" aria-labelledby="h-start">
+      <p class="stage-kicker">Start learning</p>
+      <h2 id="h-start">Labs 01–07 on GitHub</h2>
       <p>
-        Compose the concepts from Labs 01–07 around a fictional incident — and
-        justify what you leave out. Build your design, then compare it with one
-        reference architecture. You probably don't need all of these.
+        Seven runnable labs, from one model call to the first bounded agent
+        runtime. The labs, the Java code, and the documentation live in the
+        repository — that is the canonical learning path.
       </p>
       <p>
-        <a href="capstone-01/index.html"><strong>Start Capstone 01 →</strong></a>
+        <a href="https://github.com/cagridursun/agentic-developer-handbook/blob/main/labs/01-model-call/README.md"><strong>Start with Lab 01 →</strong></a>
+        <span class="muted"> · </span>
+        <a href="https://github.com/cagridursun/agentic-developer-handbook/blob/main/labs/README.md">All labs</a>
       </p>
     </section>
 
-    <section class="experience-card">
+    <section class="experience-card" aria-labelledby="h-assessment">
       <p class="stage-kicker">Decide what architecture the problem deserves</p>
-      <h2>Agentic System Readiness Assessment</h2>
+      <h2 id="h-assessment">Agentic System Readiness Assessment</h2>
       <p>
         Bring your own use case. A fixed order of questions, starting with
-        ordinary software, helps you find the smallest architecture it
-        actually needs — often no agent, and sometimes no model at all. Not a
-        score; a structured engineering conversation that exports an
-        <code>ASSESSMENT.md</code>.
+        "could ordinary software do this?", helps you find the smallest
+        architecture it needs — often no agent, and sometimes no model at
+        all. Not a score; it exports an <code>ASSESSMENT.md</code>.
       </p>
       <p>
-        <a href="readiness-assessment/index.html"><strong>Start the assessment →</strong></a>
+        <a href="readiness-assessment/index.html"><strong>Try the assessment →</strong></a>
       </p>
     </section>
 
-    <p class="muted">
-      Both experiences follow Labs 01–07; they are not numbered labs. The labs
-      remain Markdown and Java in <code>labs/</code>, and each experience keeps
-      its own local progress.
-    </p>
+    <section class="experience-card" aria-labelledby="h-capstone">
+      <p class="stage-kicker">Build and compare</p>
+      <h2 id="h-capstone">Capstone 01 — Build a Small Agentic System</h2>
+      <p>
+        After Lab 07: decide which capabilities a fictional incident
+        investigation needs, build it in the repository, and compare with one
+        reference design that deliberately leaves capabilities out.
+      </p>
+      <p>
+        <a href="capstone-01/index.html"><strong>Try Capstone 01 →</strong></a>
+      </p>
+    </section>
+
+    <section class="landing-notes" aria-labelledby="h-notes">
+      <h2 id="h-notes">Good to know</h2>
+      <ul>
+        <li>
+          <strong>Available today:</strong> Labs 01–07, Capstone 01, and the
+          readiness assessment. MCP, evaluation, observability, security, and
+          deployment are on the
+          <a href="https://github.com/cagridursun/agentic-developer-handbook/blob/main/ROADMAP.md">roadmap</a>
+          and not implemented yet.
+        </li>
+        <li>
+          <strong>Your answers stay in your browser.</strong> The interactive
+          pages have no backend, no accounts, no analytics, and no cookies;
+          progress is saved only in this browser's local storage.
+        </li>
+        <li>
+          <strong>Open source</strong> under the Apache License 2.0.
+          Corrections, learning feedback, and proposals are welcome —
+          <a href="https://github.com/cagridursun/agentic-developer-handbook/blob/main/CONTRIBUTING.md">see how to contribute</a>.
+        </li>
+      </ul>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <a href="https://github.com/cagridursun/agentic-developer-handbook">github.com/cagridursun/agentic-developer-handbook</a>
+      <span class="muted">Apache License 2.0</span>
+    </div>
+  </footer>
 </body>
 </html>

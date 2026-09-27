@@ -4,6 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Capstone 01 — Build a Small Agentic System</title>
+  <meta name="description" content="Compose model, tools, knowledge, skills, and a bounded agent runtime around a fictional incident — and justify what you leave out. Interactive, browser-only, from the Agentic Developer Handbook.">
+  <link rel="canonical" href="https://cagridursun.github.io/agentic-developer-handbook/capstone-01/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Agentic Developer Handbook">
+  <meta property="og:title" content="Capstone 01 — Build a Small Agentic System">
+  <meta property="og:description" content="Compose model, tools, knowledge, skills, and a bounded agent runtime around a fictional incident — and justify what you leave out. Interactive, browser-only, from the Agentic Developer Handbook.">
+  <meta property="og:url" content="https://cagridursun.github.io/agentic-developer-handbook/capstone-01/">
   <link rel="stylesheet" href="../styles/main.css">
 </head>
 <body>
@@ -11,6 +18,7 @@
     <div class="inner">
       <a class="brand" href="../index.html">Agentic Developer Handbook</a>
       <span class="context">Capstone 01 — Build a Small Agentic System</span>
+      <a class="header-link" href="https://github.com/cagridursun/agentic-developer-handbook">GitHub</a>
     </div>
   </header>
 
@@ -38,7 +46,7 @@
         </p>
         <p class="muted">
           Canonical version:
-          <a href="../../capstones/01-agentic-system/README.md">capstones/01-agentic-system/README.md</a>
+          <a href="https://github.com/cagridursun/agentic-developer-handbook/blob/main/capstones/01-agentic-system/README.md">capstones/01-agentic-system/README.md</a>
           — the repository stays the source of truth; this page is an
           interactive layer with local-only progress.
         </p>
@@ -138,7 +146,7 @@ execution</div>
 
         <p class="muted">
           The concept in full:
-          <a href="../../docs/model-vs-decision-authority.md">docs/model-vs-decision-authority.md</a>
+          <a href="https://github.com/cagridursun/agentic-developer-handbook/blob/main/docs/model-vs-decision-authority.md">docs/model-vs-decision-authority.md</a>
         </p>
 
         <div class="stage-actions">
@@ -152,16 +160,19 @@ execution</div>
         <h1 id="h-build">Build your design</h1>
         <p>
           The browser does not run Maven, and this page will not pretend
-          otherwise. Your work happens in the repository, in the starter
-          module:
+          otherwise. Your work happens in a clone of the
+          <a href="https://github.com/cagridursun/agentic-developer-handbook">repository</a>,
+          in the starter module (Java 21, no API key needed):
         </p>
-        <pre><code>./mvnw -pl capstones/01-agentic-system/starter compile exec:java</code></pre>
+        <pre><code>git clone https://github.com/cagridursun/agentic-developer-handbook.git
+cd agentic-developer-handbook
+./mvnw -pl capstones/01-agentic-system/starter compile exec:java</code></pre>
         <p>
           Wire your architecture in
-          <a href="../../capstones/01-agentic-system/starter/">starter/</a>
+          <a href="https://github.com/cagridursun/agentic-developer-handbook/tree/main/capstones/01-agentic-system/starter/">starter/</a>
           (the TODO in <code>StarterMain</code> marks the spot), and record
           your reasoning in
-          <a href="../../capstones/01-agentic-system/starter/DECISIONS.md">starter/DECISIONS.md</a>
+          <a href="https://github.com/cagridursun/agentic-developer-handbook/blob/main/capstones/01-agentic-system/starter/DECISIONS.md">starter/DECISIONS.md</a>
           — the export on this page can generate it from your answers here.
         </p>
         <div class="check-row">
@@ -196,7 +207,7 @@ execution</div>
         <p>
           Short answers are fine. The point is judgment, not essays — the full
           question list lives in the
-          <a href="../../capstones/01-agentic-system/README.md">capstone README</a>.
+          <a href="https://github.com/cagridursun/agentic-developer-handbook/blob/main/capstones/01-agentic-system/README.md">capstone README</a>.
         </p>
         <div class="card" id="reflection-questions"></div>
         <div class="stage-actions">
@@ -263,9 +274,9 @@ execution</div>
               </div>
             </div>
             <p class="muted">
-              This is <a href="../../docs/model-vs-decision-authority.md">LLM vs
+              This is <a href="https://github.com/cagridursun/agentic-developer-handbook/blob/main/docs/model-vs-decision-authority.md">LLM vs
               Decision Authority</a> connected to real code:
-              <a href="../../capstones/01-agentic-system/reference/">reference/</a>.
+              <a href="https://github.com/cagridursun/agentic-developer-handbook/tree/main/capstones/01-agentic-system/reference/">reference/</a>.
             </p>
           </section>
         </div>

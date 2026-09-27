@@ -1,6 +1,6 @@
 # Interactive learning site
 
-A static, local, backend-free learning layer over the handbook. It covers two experiences that follow Labs 01–07:
+A static, backend-free learning layer over the handbook, published at **<https://cagridursun.github.io/agentic-developer-handbook/>**. It covers two experiences that follow Labs 01–07:
 
 - **Capstone 01 — Build a Small Agentic System**: build and compare. Compose already-taught concepts, then compare with one reference architecture.
 - **Agentic System Readiness Assessment**: decide what architecture a problem deserves. Bring your own use case; a fixed order of questions, starting with ordinary software, derives candidate capabilities by transparent, deterministic rules — no model call, no score — and exports an `ASSESSMENT.md`.
@@ -10,6 +10,16 @@ Boundaries, on purpose:
 - No framework, no build step, no npm — semantic HTML, modern CSS, small ES modules
 - No backend, no accounts, no analytics — progress lives only in your browser's `localStorage`, one namespaced, versioned key per experience (`adh.learning.v1.capstone01`, `adh.learning.v1.readinessAssessment`). Resetting one never touches the other
 - The canonical content stays in the repository: Markdown, Java code, `DECISIONS.md`, and `assessments/`. The site is an interactive layer, not a fork of the handbook
+
+## Public site
+
+<https://cagridursun.github.io/agentic-developer-handbook/>
+
+The [Deploy site to GitHub Pages](../.github/workflows/deploy-pages.yml) workflow publishes the **contents** of `site/` on every push to `main` that changes `site/**` (or the workflow itself), and can be run manually. There is no build step and no `gh-pages` branch.
+
+The published site contains only `site/`. Links to canonical content — labs, docs, `DECISIONS.md`, the assessment Markdown — therefore point to the GitHub repository, never to `../../` paths, and links between pages stay relative so the site works both under `/agentic-developer-handbook/` and locally under `/site/`. `scripts/tests/test_pages.py` checks both rules.
+
+The repository's Markdown and Java remain canonical. The site is an interactive layer, not a second copy of the documentation.
 
 ## Preview locally
 
@@ -49,4 +59,4 @@ The assessment's rules live in `js/readiness-logic.js` and are printed in [the a
 
 ## Not configured
 
-Hosting. No GitHub Pages, no deployment workflow — publishing is a separate decision.
+A custom domain and a social preview image. The site has no analytics, no cookies, and no remote calls; answers never leave the browser.
