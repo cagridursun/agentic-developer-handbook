@@ -1,74 +1,87 @@
 # Agentic Developer Handbook
 
-A Java-first, open-source handbook and runnable reference implementation for understanding and building agentic systems. It is not another agent framework, and it is not a skill marketplace.
+[![Build](https://github.com/cagridursun/agentic-developer-handbook/actions/workflows/build.yml/badge.svg)](https://github.com/cagridursun/agentic-developer-handbook/actions/workflows/build.yml)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Java 21](https://img.shields.io/badge/Java-21-orange.svg)](docs/adr/0001-java-first.md)
 
-Start with a simple LLM call. Add one capability at a time. Learn what each piece solves, how it works, and when you actually need it.
+A Java-first, open-source handbook for understanding and building agentic systems, one concept at a time. Each concept comes with a small runnable Java lab — and an honest answer to "when should I *not* use this?"
+
+It is not an agent framework, a library catalog, or a skill marketplace.
 
 **You probably don't need all of these.**
 
-The diagram below is a learning path. It is not a mandatory architecture. Stop when the problem is solved.
-
 ```mermaid
-flowchart TD
-    llm["LLM Call"] --> structured["Structured Output"]
-    structured --> tools["Tools"]
-    tools --> knowledge["Knowledge / RAG"]
-    knowledge --> memory["Memory"]
-    memory --> skills["Skills"]
-    skills --> runtime["Agent Runtime"]
-    runtime --> mcp["MCP"]
-    mcp --> evaluation["Evaluation"]
-    evaluation --> observability["Observability"]
-    observability --> security["Security"]
-    security --> deployment["Deployment"]
+flowchart LR
+    model["Model"] --> structured["Structured Output"] --> tools["Tools"] --> knowledge["Knowledge / RAG"] --> memory["Memory"] --> skills["Skills"] --> runtime["Agent Runtime"]
 ```
 
-Multi-agent systems, A2A, and fine-tuning come later, and many applications never need them.
+This is a learning path, not a mandatory architecture. Stop when the problem is solved. A single LLM call is not an agent. A database lookup does not become RAG because the application also calls a model. A local Java method does not need MCP.
 
-Every chapter will say both when to use a concept and when not to. A single LLM call that answers a question is not an agent. A database lookup does not become RAG because the application also calls a model. A local Java method does not need MCP.
+> **Available today:** seven runnable labs that end in the first bounded agent runtime, a composition capstone, and an architecture readiness assessment.
+>
+> **Start with** [Lab 01 — Your first model call](labs/01-model-call/README.md). `./mvnw verify` builds and tests everything without an API key.
+>
+> **Not implemented yet:** MCP, evaluation, observability, security, and deployment — they are the [roadmap](ROADMAP.md), not features.
 
 ## Why this project exists
 
 Agent, tool calling, RAG, memory, skills, MCP, A2A, fine-tuning, and multi-agent systems are often used as if they were the same idea. They are not.
 
-This handbook builds a mental model of what each concept means, how it differs from the others, and where it sits in an ordinary software architecture. The explanation is paired with runnable Java code, added one concept at a time.
+This handbook builds a mental model of what each concept means, how it differs from the others, and where it sits in an ordinary software architecture. The explanation is paired with runnable Java code, added one concept at a time, and every lab says both when to use its concept and when not to.
 
-The canonical implementation is Java. The conceptual chapters stay readable without Java.
+The canonical implementation is Java 21. The conceptual chapters stay readable without Java.
 
-## What you will learn
+## Start here
 
-- How to tell a model call from an agent
-- What tools, knowledge, memory, and skills each contribute
-- When RAG, a vector database, MCP, or another agent is unnecessary
-- How to implement the concepts that you do need in Java
-- What changes when a small example has to survive production: evaluation, observability, security, and deployment
+**New to agentic systems?**
 
-The first seven labs are implemented and runnable: [labs/01-model-call](labs/01-model-call/README.md), [labs/02-structured-output](labs/02-structured-output/README.md), [labs/03-tool-calling](labs/03-tool-calling/README.md), [labs/04-rag](labs/04-rag/README.md), [labs/05-memory](labs/05-memory/README.md), [labs/06-skills](labs/06-skills/README.md), and [labs/07-agent-runtime](labs/07-agent-runtime/README.md). After Lab 07, two optional experiences put the concepts to work:
+1. Start with [Lab 01](labs/01-model-call/README.md): one model call, and why it is not an agent.
+2. Follow the labs in order through [Lab 07](labs/07-agent-runtime/README.md), the first bounded agent runtime. Each lab adds one capability to the last.
+3. After Lab 07, try [Capstone 01](capstones/01-agentic-system/README.md): compose what you learned around one realistic problem.
+4. Already have a use case? Use the [readiness assessment](assessments/agentic-system-readiness/README.md) to decide whether it needs an LLM, RAG, tools, memory, or an agent at all.
 
-- [Capstone 01](capstones/01-agentic-system/README.md) lets you compose the taught capabilities around one realistic problem — and justify the ones you leave out.
-- The [Agentic System Readiness Assessment](assessments/agentic-system-readiness/README.md) helps you decide which concepts your own use case actually deserves, starting from "could ordinary software do this?" It can conclude that you need no LLM at all, or an LLM but no agent.
-- A local, browser-only [interactive site](site/README.md) supports both, with no backend and no build step.
+**Experienced developer?** Jump to the [mental model](docs/mental-model.md) or to any lab — each lab README stands on its own.
 
-The rest of the list is the plan, not a catalog of finished features.
+You need Java 21. The build and every test run without an API key or network model calls; running a lab against the real Gemini API needs a key, and each lab README shows the exact commands.
+
+```sh
+git clone https://github.com/cagridursun/agentic-developer-handbook.git
+cd agentic-developer-handbook
+./mvnw verify            # Windows: mvnw.cmd verify
+```
 
 ## Learning path
 
-| Step | Question it answers |
-| --- | --- |
-| LLM call | How do I call a model, and why is that not an agent? |
-| Structured output | How do I get a response my code can trust? |
-| Tools | How does the application do something the model cannot do? |
-| Knowledge / RAG | What information has to be fetched into the prompt? |
-| Memory | What should persist across turns? |
-| Skills | How should the agent perform a particular task? |
-| Agent runtime | What owns the loop, the limits, and the decision to stop? |
-| MCP | How does the agent reach external capabilities through a standard protocol? |
-| Evaluation | How do I know the system does what I intended? |
-| Observability | How do I see what it did in production? |
-| Security | What has to be checked at each boundary? |
-| Deployment | What does it take to run it as a production system? |
+| # | Step | Question it answers | Status |
+| --- | --- | --- | --- |
+| 1 | Model | How do I call a model, and why is that not an agent? | [Lab 01](labs/01-model-call/README.md) |
+| 2 | Structured output | How do I get a response my code can trust? | [Lab 02](labs/02-structured-output/README.md) |
+| 3 | Tools | How does the application do something the model cannot do? | [Lab 03](labs/03-tool-calling/README.md) |
+| 4 | Knowledge / RAG | What information has to be fetched into the prompt? | [Lab 04](labs/04-rag/README.md) |
+| 5 | Memory | What should persist across turns? | [Lab 05](labs/05-memory/README.md) |
+| 6 | Skills | How should the agent perform a particular task? | [Lab 06](labs/06-skills/README.md) |
+| 7 | Agent runtime | What owns the loop, the limits, and the decision to stop? | [Lab 07](labs/07-agent-runtime/README.md) — the first lab this handbook calls an agent |
+| 8 | MCP | How does the agent reach external capabilities through a standard protocol? | Planned |
+| 9 | Evaluation | How do I know the system does what I intended? | Planned |
+| 10 | Observability | How do I see what it did in production? | Planned |
+| 11 | Security | What has to be checked at each boundary? | Planned |
+| 12 | Deployment | What does it take to run it as a production system? | Planned |
 
-The same path is described in [VISION.md](VISION.md) and tracked in [ROADMAP.md](ROADMAP.md). The numbered milestones there are this canonical learning path; the roadmap also tracks the project's community, ecosystem, reference-application, and advanced-topic work in separate tracks.
+Multi-agent systems, A2A, and fine-tuning come later, and many applications never need them. The numbered milestones are tracked in [ROADMAP.md](ROADMAP.md); the reasoning behind the path is in [VISION.md](VISION.md).
+
+## Beyond the labs
+
+The handbook has three kinds of learning artifact:
+
+| Artifact | Job |
+| --- | --- |
+| [Labs](labs/README.md) | Teach one concept. |
+| [Capstones](capstones/README.md) | Compose concepts already taught. |
+| [Assessments](assessments/README.md) | Help decide whether those concepts are needed at all. |
+
+- **[Capstone 01 — Build a Small Agentic System](capstones/01-agentic-system/README.md).** After Lab 07: decide which capabilities a fictional incident investigation needs, build it, and compare with one reference design that deliberately leaves capabilities out.
+- **[Agentic System Readiness Assessment](assessments/agentic-system-readiness/README.md).** For your own use case: a fixed order of questions, starting with "could ordinary software do this?" It can conclude that you need no LLM at all, or an LLM but no agent.
+- **Optional local interactive learning experience.** A static, browser-only layer over both, with no backend and no build step. It runs locally; see [site/README.md](site/README.md).
 
 ## Mental model
 
@@ -86,7 +99,12 @@ User → Agent Runtime ├──────── Knowledge
                     └──────── Skills
 ```
 
-The full model, including MCP, A2A, evaluation, observability, and security, is in [docs/mental-model.md](docs/mental-model.md). Short definitions are in [docs/glossary.md](docs/glossary.md).
+Key documents:
+
+- [Mental model](docs/mental-model.md) — how the pieces relate, including MCP, A2A, evaluation, observability, and security
+- [Glossary](docs/glossary.md) — short working definitions, and the pairs most often confused
+- [LLM vs Decision Authority](docs/model-vs-decision-authority.md) — the model may propose; the application decides what becomes executable
+- [Architecture](docs/architecture.md) and [ADRs](docs/adr/README.md) — the engineering principles and the decisions already made
 
 ## Repository structure
 
@@ -129,26 +147,36 @@ agentic-developer-handbook/
 └── .github/
 ```
 
-[docs/architecture.md](docs/architecture.md) records the engineering principles. [docs/adr/](docs/adr/README.md) records the decisions already made. [labs/README.md](labs/README.md) describes how labs are written and lists the seven runnable labs. [capstones/](capstones/README.md) compose taught concepts; [assessments/](assessments/README.md) help decide which of them a problem deserves.
+[labs/README.md](labs/README.md) describes how labs are written and lists the seven runnable labs.
 
 ## Current status
 
-Milestone 0, the foundation, is done: the handbook documents, the contribution model, the architecture decisions, and a Maven build that runs without API keys. Milestone 1 is done: [labs/01-model-call](labs/01-model-call/README.md) makes a real Gemini call and explains why that call is not an agent. Milestone 2 is done: [labs/02-structured-output](labs/02-structured-output/README.md) constrains the response with a schema and turns it into a typed Java record. Milestone 3 is done: [labs/03-tool-calling](labs/03-tool-calling/README.md) lets the model request one tool call that the application validates and executes. Milestone 4 is done: [labs/04-rag](labs/04-rag/README.md) retrieves local documentation into the prompt — without embeddings or a vector database, because RAG is a pattern, not a datastore. Milestone 5 is done: [labs/05-memory](labs/05-memory/README.md) shows why conversation history is not memory and builds explicit session memory with remember, update, and forget. Milestone 6 is done: [labs/06-skills](labs/06-skills/README.md) extracts a drifting copy-pasted procedure into one reviewable Agent Skills `SKILL.md` that the application selects and loads — a reusable procedure, not a capability. Milestone 7 is done: [labs/07-agent-runtime](labs/07-agent-runtime/README.md) builds the repository's first bounded agent runtime — the model suggests the next step, the application validates and executes it, and explicit stopping rules end the run. It is the first lab this handbook calls an agent. [LLM vs Decision Authority](docs/model-vs-decision-authority.md) states the boundary those labs draw as its own concept. Milestone 8 (MCP) and later milestones are not started.
+The first learning arc is complete: Labs 01–07 run end to end, from a single model call to a bounded, read-only agent runtime, and Capstone 01 and the readiness assessment build on it. MCP (Milestone 8) and the production concerns — evaluation, observability, security, and deployment — remain on the roadmap and are not implemented.
 
-Nothing here stores embeddings, and the only agent is the bounded, read-only runtime of Lab 07. Evaluation, observability, security, and deployment remain unfinished — this is a learning path, not a production platform.
+Nothing here stores embeddings, and the only agent is the bounded runtime of Lab 07. This is a learning path, not a production platform. Progress is tracked in [ROADMAP.md](ROADMAP.md) and mirrored to [GitHub milestones](https://github.com/cagridursun/agentic-developer-handbook/milestones).
 
 ## Contributing
 
-Issues and pull requests are welcome, and contributions are broader than typo fixes: documentation, tests, corrections, API compatibility updates, and implementation improvements to completed labs all help.
+Found a confusing explanation, a better example, or an architectural edge case? [Open an issue](https://github.com/cagridursun/agentic-developer-handbook/issues/new/choose) — there are templates for corrections, learning feedback, and proposals.
 
-The numbered labs are the canonical learning path and stay maintainer-curated. In the future, curated community examples will extend the concepts the handbook teaches — providers, integrations, use cases — without redefining that path. The details, including what makes an example acceptable, are in [CONTRIBUTING.md](CONTRIBUTING.md). The expected community standard is in [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+Useful contributions include:
+
+- corrections to concepts, code, or wording
+- documentation and diagram improvements
+- deterministic tests that need no API key
+- API compatibility updates when a provider SDK changes
+- implementation improvements to completed labs
+- feedback on the learning experience: where a lab, the capstone, or the assessment was confusing
+- curated community examples for concepts already taught — proposed first as an issue
+
+The numbered labs are maintainer-curated: improving them is welcome, but redefining or reordering the canonical path is not. An example has to teach an architectural decision, not only library syntax. [CONTRIBUTING.md](CONTRIBUTING.md) has the details and how to verify a change locally:
 
 ```sh
-./mvnw verify
-python -m unittest discover -s scripts/tests
+./mvnw verify                                   # every module and test, no API key
+python -m unittest discover -s scripts/tests    # stdlib checks: roadmap, site, assessment, links
 ```
 
-On Windows, use `mvnw.cmd verify`. This builds every module and runs the tests without calling Gemini, so it needs no API key. The Python checks use only the standard library and cover the roadmap sync, the site, and the assessment. Running a lab against the real Gemini API does need one; each lab README shows its commands, starting with [labs/01-model-call](labs/01-model-call/README.md).
+The expected community standard is in [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Security issues go through [SECURITY.md](SECURITY.md), not public issues.
 
 ## License
 
