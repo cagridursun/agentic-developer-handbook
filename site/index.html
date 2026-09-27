@@ -18,82 +18,100 @@
     <div class="inner">
       <a class="brand" href="index.html">Agentic Developer Handbook</a>
       <span class="context">Interactive learning</span>
-      <a class="header-link" href="https://github.com/cagridursun/agentic-developer-handbook">GitHub</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="readiness-assessment/index.html">Readiness assessment</a>
+        <a href="capstone-01/index.html">Capstone 01</a>
+        <a class="header-link" href="https://github.com/cagridursun/agentic-developer-handbook">GitHub</a>
+      </nav>
     </div>
   </header>
 
   <main class="landing">
-    <h1>Agentic Developer Handbook</h1>
-    <p class="lede">
-      A Java-first, open-source handbook for understanding and building
-      agentic systems — one concept at a time, each with a small runnable Java
-      lab and an honest answer to "when should I <em>not</em> use this?"
-    </p>
-    <p>
-      It is not an agent framework, a library catalog, or a skill marketplace.
-    </p>
-
-    <ol class="path" aria-label="The learning path, Labs 01 to 07">
-      <li>Model</li>
-      <li>Structured Output</li>
-      <li>Tools</li>
-      <li>Knowledge / RAG</li>
-      <li>Memory</li>
-      <li>Skills</li>
-      <li>Agent Runtime</li>
-    </ol>
-
-    <p class="motto"><strong>You probably don't need all of these.</strong></p>
-    <p>
-      The path is for learning, not a mandatory architecture: stop when the
-      problem is solved. A single LLM call is not an agent, and a database
-      lookup does not become RAG because the application also calls a model.
-    </p>
-
-    <section class="experience-card" aria-labelledby="h-start">
-      <p class="stage-kicker">Start learning</p>
-      <h2 id="h-start">Labs 01–07 on GitHub</h2>
-      <p>
-        Seven runnable labs, from one model call to the first bounded agent
-        runtime. The labs, the Java code, and the documentation live in the
-        repository — that is the canonical learning path.
+    <section class="hero" aria-labelledby="h-title">
+      <p class="eyebrow">Java-first · Open source · One concept at a time</p>
+      <h1 id="h-title">Agentic Developer Handbook</h1>
+      <p class="lede">
+        A Java-first, open-source handbook for understanding and building
+        agentic systems — one concept at a time, each with a small runnable Java
+        lab and an honest answer to "when should I <em>not</em> use this?"
       </p>
-      <p>
-        <a href="https://github.com/cagridursun/agentic-developer-handbook/blob/main/labs/01-model-call/README.md"><strong>Start with Lab 01 →</strong></a>
-        <span class="muted"> · </span>
-        <a href="https://github.com/cagridursun/agentic-developer-handbook/blob/main/labs/README.md">All labs</a>
+      <p class="muted">
+        It is not an agent framework, a library catalog, or a skill marketplace.
+      </p>
+      <p class="cta-row">
+        <a class="button primary" href="https://github.com/cagridursun/agentic-developer-handbook/blob/main/labs/01-model-call/README.md">Start with Lab 01 →</a>
+        <a class="button secondary" href="readiness-assessment/index.html">Try the readiness assessment</a>
       </p>
     </section>
 
-    <section class="experience-card" aria-labelledby="h-assessment">
-      <p class="stage-kicker">Decide what architecture the problem deserves</p>
-      <h2 id="h-assessment">Agentic System Readiness Assessment</h2>
+    <section aria-labelledby="h-path">
+      <h2 id="h-path" class="section-label">The learning path</h2>
+      <ol class="path" aria-label="The learning path, Labs 01 to 07">
+        <li>Model</li>
+        <li>Structured Output</li>
+        <li>Tools</li>
+        <li>Knowledge / RAG</li>
+        <li>Memory</li>
+        <li>Skills</li>
+        <li>Agent Runtime</li>
+      </ol>
+
+      <p class="motto"><strong>You probably don't need all of these.</strong></p>
       <p>
-        Bring your own use case. A fixed order of questions, starting with
-        "could ordinary software do this?", helps you find the smallest
-        architecture it needs — often no agent, and sometimes no model at
-        all. Not a score; it exports an <code>ASSESSMENT.md</code>.
-      </p>
-      <p>
-        <a href="readiness-assessment/index.html"><strong>Try the assessment →</strong></a>
+        The path is for learning, not a mandatory architecture: stop when the
+        problem is solved. A single LLM call is not an agent, and a database
+        lookup does not become RAG because the application also calls a model.
       </p>
     </section>
 
-    <section class="experience-card" aria-labelledby="h-capstone">
-      <p class="stage-kicker">Build and compare</p>
-      <h2 id="h-capstone">Capstone 01 — Build a Small Agentic System</h2>
-      <p>
-        After Lab 07: decide which capabilities a fictional incident
-        investigation needs, build it in the repository, and compare with one
-        reference design that deliberately leaves capabilities out.
-      </p>
-      <p>
-        <a href="capstone-01/index.html"><strong>Try Capstone 01 →</strong></a>
-      </p>
+    <section aria-labelledby="h-start-here">
+      <h2 id="h-start-here" class="section-label">Start here</h2>
+      <div class="card-grid">
+        <section class="experience-card" aria-labelledby="h-start">
+          <p class="stage-kicker"><span class="step">1</span> Start learning</p>
+          <h3 id="h-start">Labs 01–07 on GitHub</h3>
+          <p>
+            Seven runnable labs, from one model call to the first bounded agent
+            runtime. The labs, the Java code, and the documentation live in the
+            repository — that is the canonical learning path.
+          </p>
+          <p class="card-actions">
+            <a class="button primary" href="https://github.com/cagridursun/agentic-developer-handbook/blob/main/labs/01-model-call/README.md">Start with Lab 01 →</a>
+            <a href="https://github.com/cagridursun/agentic-developer-handbook/blob/main/labs/README.md">All labs</a>
+          </p>
+        </section>
+
+        <section class="experience-card" aria-labelledby="h-assessment">
+          <p class="stage-kicker"><span class="step">2</span> Decide what architecture the problem deserves</p>
+          <h3 id="h-assessment">Agentic System Readiness Assessment</h3>
+          <p>
+            Bring your own use case. A fixed order of questions, starting with
+            "could ordinary software do this?", helps you find the smallest
+            architecture it needs — often no agent, and sometimes no model at
+            all. Not a score; it exports an <code>ASSESSMENT.md</code>.
+          </p>
+          <p class="card-actions">
+            <a class="button secondary" href="readiness-assessment/index.html">Try the assessment →</a>
+          </p>
+        </section>
+
+        <section class="experience-card" aria-labelledby="h-capstone">
+          <p class="stage-kicker"><span class="step">3</span> Build and compare</p>
+          <h3 id="h-capstone">Capstone 01 — Build a Small Agentic System</h3>
+          <p>
+            After Lab 07: decide which capabilities a fictional incident
+            investigation needs, build it in the repository, and compare with one
+            reference design that deliberately leaves capabilities out.
+          </p>
+          <p class="card-actions">
+            <a class="button secondary" href="capstone-01/index.html">Try Capstone 01 →</a>
+          </p>
+        </section>
+      </div>
     </section>
 
     <section class="landing-notes" aria-labelledby="h-notes">
-      <h2 id="h-notes">Good to know</h2>
+      <h2 id="h-notes" class="section-label">Good to know</h2>
       <ul>
         <li>
           <strong>Available today:</strong> Labs 01–07, Capstone 01, and the
