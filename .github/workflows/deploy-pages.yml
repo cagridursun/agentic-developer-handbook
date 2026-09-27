@@ -1,0 +1,50 @@
+name: Deploy site to GitHub Pages
+
+# Publishes the static learning site in site/ to
+# https://cagridursun.github.io/agentic-developer-handbook/
+# The artifact root is the CONTENTS of site/, so site/index.html is the site
+# root. No build step, no gh-pages branch, nothing written back to the repo.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - site/**
+      - .github/workflows/deploy-pages.yml
+  workflow_dispatch:
+
+# Only what Pages needs: read the repository, write the Pages deployment,
+# and mint the OIDC token deploy-pages uses to verify the deployment.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One Pages deployment at a time. A newer run replaces any run still queued,
+# but an in-progress production deployment is allowed to finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload site/ as the Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

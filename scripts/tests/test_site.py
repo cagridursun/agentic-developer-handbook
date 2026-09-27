@@ -59,10 +59,14 @@ class SiteStructureTest(unittest.TestCase):
             self.assertTrue((REPO_ROOT / target).exists(), target)
 
     def test_no_network_dependencies(self):
-        # The site is local: no CDN scripts, no external stylesheets, no fonts.
+        # No CDN scripts, external stylesheets, or fonts: every loaded resource
+        # is relative. Canonical and Open Graph URLs are metadata, not loads.
         for html in [read(SITE / "index.html"), read(SITE / "capstone-01" / "index.html")]:
-            self.assertNotIn("https://", html.split("<body")[0].replace(
-                "content=", ""), "no external resources in <head>")
+            for tag in re.findall(r"<(?:script|link)\b[^>]*>", html):
+                if 'rel="canonical"' in tag:
+                    continue
+                self.assertNotIn("https://", tag, "no external resources: " + tag)
+                self.assertNotIn("http://", tag, "no external resources: " + tag)
             self.assertNotIn("cdn.", html)
 
 

@@ -101,6 +101,11 @@ textarea:focus-visible {
   font-size: 0.95rem;
 }
 
+.site-header .header-link {
+  margin-left: auto;
+  font-size: 0.95rem;
+}
+
 /* ---------- Landing ---------- */
 
 .landing {
@@ -119,6 +124,64 @@ textarea:focus-visible {
   border-radius: var(--radius);
   padding: 1.25rem 1.4rem;
   margin-top: 1.5rem;
+}
+
+.experience-card h2 {
+  margin-top: 0.1rem;
+}
+
+.path {
+  list-style: none;
+  margin: 1.5rem 0 0.5rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0;
+  font-weight: 600;
+}
+
+.path li {
+  display: flex;
+  align-items: center;
+}
+
+.path li + li::before {
+  content: "→";
+  color: var(--muted);
+  font-weight: 400;
+  margin: 0 0.45rem;
+}
+
+.motto {
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+.landing-notes {
+  margin-top: 2rem;
+}
+
+.landing-notes ul {
+  padding-left: 1.1rem;
+}
+
+.landing-notes li {
+  margin-bottom: 0.5rem;
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.site-footer .inner {
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  font-size: 0.9rem;
 }
 
 /* ---------- Three-column app layout ---------- */
