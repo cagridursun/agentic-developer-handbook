@@ -126,8 +126,26 @@ class ProjectPagesPathTest(unittest.TestCase):
             self.assertIn(f'<meta property="og:url" content="{url}">', head)
             for prop in ["og:title", "og:description", "og:type"]:
                 self.assertIn(f'property="{prop}"', head, f"{page.name}: {prop}")
-            # No invented social image until an approved one exists.
-            self.assertNotIn("og:image", head)
+
+    def test_landing_social_preview_uses_the_launch_poster(self):
+        head = read(SITE / "index.html").split("<body")[0]
+        image = PAGES_URL + "assets/video/launch-poster.jpg"
+        self.assertTrue((SITE / "assets" / "video" / "launch-poster.jpg").is_file())
+        for tag in [
+            f'<meta property="og:image" content="{image}">',
+            '<meta property="og:image:alt" content="Agentic Developer Handbook launch preview">',
+            '<meta name="twitter:card" content="summary_large_image">',
+            '<meta name="twitter:title" content="Agentic Developer Handbook">',
+            f'<meta name="twitter:image" content="{image}">',
+            '<meta name="twitter:image:alt" content="Agentic Developer Handbook launch preview">',
+        ]:
+            self.assertIn(tag, head, tag)
+        description = re.search(r'<meta property="og:description" content="([^"]+)">', head).group(1)
+        self.assertIn(f'<meta name="twitter:description" content="{description}">', head)
+        # The image URL must map onto a file the Pages artifact actually contains.
+        for url in re.findall(r'content="(https://[^"]+\.(?:jpg|png))"', head):
+            self.assertTrue(url.startswith(PAGES_URL), url)
+            self.assertTrue((SITE / url[len(PAGES_URL):]).is_file(), url)
 
 
 class PublicPresentationTest(unittest.TestCase):
