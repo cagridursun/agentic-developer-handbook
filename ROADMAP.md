@@ -193,6 +193,7 @@ Established:
 - "Do I actually need this?" decision checkpoints reinforcing that not every capability is needed
 - [Capstone 01 — Build a Small Agentic System](capstones/01-agentic-system/README.md): composing already-taught concepts with a decisions-first exercise and a reference that deliberately excludes capabilities
 - [Capstone 01 interactive learning UI](site/README.md): a static, backend-free experience with local-only progress, architecture decisions, a decision-authority checkpoint, reflection, and an ungraded reference comparison
+- The interactive site published through GitHub Pages at <https://cagridursun.github.io/agentic-developer-handbook/>, deployed from `site/`; answers still stay in the browser
 - [LLM vs Decision Authority](docs/model-vs-decision-authority.md) as an explicit handbook concept, wired into the capstone decisions
 - [Agentic System Readiness Assessment](assessments/agentic-system-readiness/README.md): a reusable architecture decision framework that starts with deterministic software, derives candidate capabilities without scoring, and makes decision authority explicit — with four worked examples and an interactive version on the local site with its own local progress
 
