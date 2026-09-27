@@ -130,6 +130,46 @@ class ProjectPagesPathTest(unittest.TestCase):
             self.assertNotIn("og:image", head)
 
 
+class PublicPresentationTest(unittest.TestCase):
+    """Catches pages that load but render unstyled or disconnected."""
+
+    STYLESHEET = re.compile(r'<link rel="stylesheet" href="([^"]+)">')
+    # Classes that are semantic hooks only; their look comes from another class.
+    UNSTYLED_HOOKS = {"status-table"}
+
+    def test_every_page_loads_the_shared_stylesheet_relative_to_its_depth(self):
+        for page in site_pages():
+            hrefs = self.STYLESHEET.findall(read(page))
+            self.assertEqual(1, len(hrefs), f"{page.relative_to(REPO_ROOT)}: stylesheet links {hrefs}")
+            depth = len(page.relative_to(SITE).parts) - 1
+            self.assertEqual("../" * depth + "styles/main.css", hrefs[0], page.relative_to(REPO_ROOT))
+
+    def test_every_page_has_the_shared_site_navigation(self):
+        for page in site_pages():
+            text = read(page)
+            prefix = "../" * (len(page.relative_to(SITE).parts) - 1)
+            nav = text.split('<nav class="site-nav"')[1].split("</nav>")[0]
+            self.assertIn(f'class="brand" href="{prefix}index.html"', text, page.name)
+            self.assertIn(f'href="{prefix}readiness-assessment/index.html"', nav, page.name)
+            self.assertIn(f'href="{prefix}capstone-01/index.html"', nav, page.name)
+            self.assertIn(f'href="{REPOSITORY_URL}"', nav, page.name)
+
+    def test_html_classes_are_defined_in_the_stylesheet(self):
+        # A class the CSS does not know renders as plain, unstyled markup.
+        defined = set(re.findall(r"\.([A-Za-z][\w-]*)", read(SITE / "styles" / "main.css")))
+        for page in site_pages():
+            used = {name for attr in re.findall(r'class="([^"]+)"', read(page)) for name in attr.split()}
+            self.assertEqual(set(), used - defined - self.UNSTYLED_HOOKS, page.relative_to(REPO_ROOT))
+
+    def test_landing_has_visible_calls_to_action(self):
+        landing = read(SITE / "index.html")
+        self.assertIn('class="hero"', landing)
+        self.assertIn('class="button primary"', landing)
+        self.assertIn("Start here", landing)
+        for target in ["readiness-assessment/index.html", "capstone-01/index.html"]:
+            self.assertRegex(landing, r'class="button [a-z]+" href="' + re.escape(target) + '"')
+
+
 class PrivacyAndDependencyTest(unittest.TestCase):
 
     def test_no_remote_runtime_dependency(self):
