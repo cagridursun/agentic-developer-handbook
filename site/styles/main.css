@@ -91,9 +91,20 @@ textarea:focus-visible {
 }
 
 .site-header .brand {
-  font-weight: 650;
+  font-weight: 700;
   text-decoration: none;
   color: var(--ink);
+}
+
+.site-header .brand::before {
+  content: "";
+  display: inline-block;
+  inline-size: 0.6rem;
+  block-size: 0.6rem;
+  margin-right: 0.5rem;
+  border-radius: 2px;
+  background: var(--accent);
+  vertical-align: 0.05em;
 }
 
 .site-header .context {
@@ -101,21 +112,84 @@ textarea:focus-visible {
   font-size: 0.95rem;
 }
 
-.site-header .header-link {
+.site-nav {
   margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.1rem;
   font-size: 0.95rem;
+}
+
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.site-nav .header-link {
+  color: var(--accent);
+  font-weight: 600;
 }
 
 /* ---------- Landing ---------- */
 
 .landing {
-  max-width: var(--content-width);
+  max-width: 64rem;
   margin: 0 auto;
-  padding: 3rem 1.25rem 4rem;
+  padding: 3.5rem 1.25rem 4rem;
+}
+
+.landing > section + section {
+  margin-top: 3rem;
+}
+
+.landing p {
+  max-width: 44rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.9rem;
+}
+
+.eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin: 0 0 0.6rem;
 }
 
 .landing .lede {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.section-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1rem;
 }
 
 .experience-card {
@@ -123,42 +197,88 @@ textarea:focus-visible {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.25rem 1.4rem;
-  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.experience-card h2 {
+.experience-card:hover {
+  border-color: var(--accent);
+}
+
+.experience-card h3 {
+  font-size: 1.15rem;
   margin-top: 0.1rem;
+}
+
+.experience-card .card-actions {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  margin-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+.step {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 1.4rem;
+  block-size: 1.4rem;
+  margin-right: 0.35rem;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 .path {
   list-style: none;
-  margin: 1.5rem 0 0.5rem;
+  margin: 0 0 0.5rem;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 0;
+  gap: 0.5rem 0;
   font-weight: 600;
+  counter-reset: lab;
 }
 
+/* Flex order: arrow, lab number, concept name. */
 .path li {
   display: flex;
   align-items: center;
+  white-space: nowrap;
+  counter-increment: lab;
+}
+
+.path li::after {
+  content: counter(lab, decimal-leading-zero);
+  order: -1;
+  margin-right: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
 }
 
 .path li + li::before {
   content: "→";
+  order: -2;
   color: var(--muted);
   font-weight: 400;
-  margin: 0 0.45rem;
+  margin: 0 0.6rem;
 }
 
 .motto {
-  font-size: 1.1rem;
-  margin-top: 1rem;
+  font-size: 1.15rem;
+  margin-top: 1.5rem;
 }
 
 .landing-notes {
-  margin-top: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.4rem 0.5rem;
 }
 
 .landing-notes ul {
@@ -327,12 +447,35 @@ textarea:focus-visible {
 
 button.primary,
 button.secondary,
-button.ghost {
+button.ghost,
+a.button {
   font: inherit;
   border-radius: 6px;
   padding: 0.5rem 1rem;
   cursor: pointer;
 }
+
+a.button {
+  display: inline-block;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.65rem 1.2rem;
+}
+
+a.button.primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border: 1px solid var(--accent);
+}
+
+a.button.secondary {
+  background: var(--surface);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+a.button:hover { filter: brightness(1.08); }
+a.button.secondary:hover { background: var(--accent-soft); filter: none; }
 
 button.primary {
   background: var(--accent);
@@ -690,6 +833,38 @@ dl.answers dd {
     margin-top: 0;
   }
 
+  .progress-rail {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .progress-rail > h2 {
+    display: none;
+  }
+
+  .progress-rail .progress-block {
+    flex: 1 1 14rem;
+    margin-bottom: 0;
+  }
+
+  .rail-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    flex: 1 1 100%;
+  }
+
+  .rail-actions button {
+    width: auto;
+    margin-top: 0;
+    padding: 0.35rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
   .summary-list {
     grid-template-columns: 1fr;
   }
@@ -706,5 +881,10 @@ dl.answers dd {
 
   .progress-rail .progress-block:has(.status-rail) {
     display: block;
+    flex-basis: 100%;
+  }
+
+  .site-header .context {
+    display: none;
   }
 }
