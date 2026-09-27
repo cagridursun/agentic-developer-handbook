@@ -41,7 +41,7 @@ The example output: a `DevelopmentTask` record with a title, a summary, a `TaskT
 
 ## Run it
 
-You need Java 21 and a Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey).
+You need Java 27 and a Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey).
 
 Linux/macOS:
 

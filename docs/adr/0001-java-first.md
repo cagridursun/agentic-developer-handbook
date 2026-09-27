@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Accepted. Superseded in part by [ADR 0005](0005-upgrade-canonical-java-to-27.md) for the Java version: the canonical implementation now targets Java 27. The Java-first decision itself remains accepted.
 
 ## Context
 

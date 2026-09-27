@@ -40,7 +40,7 @@ The tool implementation is a deterministic in-memory catalog of four services â€
 
 ## Run it
 
-You need Java 21 and a Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey).
+You need Java 27 and a Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey).
 
 Linux/macOS:
 

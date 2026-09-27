@@ -77,7 +77,7 @@ Keep the diff focused on one issue. If the change affects behavior or a document
 
 ## Validate
 
-From the repository root:
+You need JDK 27, the canonical Java version ([ADR 0005](docs/adr/0005-upgrade-canonical-java-to-27.md)). From the repository root:
 
 ```sh
 ./mvnw verify

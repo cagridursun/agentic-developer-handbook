@@ -1,8 +1,16 @@
-# Agentic Developer Handbook
+<p align="center">
+  <img src="site/assets/images/logo-mark.png" alt="Agentic Developer Handbook logo" width="112" height="112">
+</p>
+
+<h1 align="center">Agentic Developer Handbook</h1>
+
+<p align="center">
 
 [![Build](https://github.com/cagridursun/agentic-developer-handbook/actions/workflows/build.yml/badge.svg)](https://github.com/cagridursun/agentic-developer-handbook/actions/workflows/build.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Java 21](https://img.shields.io/badge/Java-21-orange.svg)](docs/adr/0001-java-first.md)
+[![Java 27](https://img.shields.io/badge/Java-27-orange.svg)](docs/adr/0005-upgrade-canonical-java-to-27.md)
+
+</p>
 
 A Java-first, open-source handbook for understanding and building agentic systems, one concept at a time. Each concept comes with a small runnable Java lab — and an honest answer to "when should I *not* use this?"
 
@@ -29,7 +37,7 @@ Agent, tool calling, RAG, memory, skills, MCP, A2A, fine-tuning, and multi-agent
 
 This handbook builds a mental model of what each concept means, how it differs from the others, and where it sits in an ordinary software architecture. The explanation is paired with runnable Java code, added one concept at a time, and every lab says both when to use its concept and when not to.
 
-The canonical implementation is Java 21. The conceptual chapters stay readable without Java.
+The canonical implementation is Java 27, the current feature release; the handbook intentionally follows the current Java platform. The conceptual chapters stay readable without Java.
 
 ## Start here
 
@@ -42,7 +50,7 @@ The canonical implementation is Java 21. The conceptual chapters stay readable w
 
 **Experienced developer?** Jump to the [mental model](docs/mental-model.md) or to any lab — each lab README stands on its own.
 
-You need Java 21. The build and every test run without an API key or network model calls; running a lab against the real Gemini API needs a key, and each lab README shows the exact commands.
+You need Java 27. The build and every test run without an API key or network model calls; running a lab against the real Gemini API needs a key, and each lab README shows the exact commands.
 
 ```sh
 git clone https://github.com/cagridursun/agentic-developer-handbook.git

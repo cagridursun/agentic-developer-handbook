@@ -36,7 +36,7 @@ The application investigates the fictional incident and produces a concise hando
 
 ## Constraints
 
-- Plain Java 21 — no agent framework, no Spring AI, no LangChain4j
+- Plain Java 27 — no agent framework, no Spring AI, no LangChain4j
 - No external database, no MCP
 - No network and no API key in the deterministic path (`./mvnw verify` stays self-contained)
 - Read-only tools only

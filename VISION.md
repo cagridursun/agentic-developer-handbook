@@ -24,7 +24,7 @@ One concept at a time, on one architectural journey.
 
 Each step starts from the system as it stood before and adds one meaningful capability. Readers should be able to point at the diff and say what new problem that diff solves.
 
-The canonical code is Java 21. The conceptual chapters stay language-independent where the idea does not depend on Java. See [ADR 0001](docs/adr/0001-java-first.md) and [ADR 0003](docs/adr/0003-progressive-learning-model.md).
+The canonical code is Java 27. The conceptual chapters stay language-independent where the idea does not depend on Java. See [ADR 0001](docs/adr/0001-java-first.md), [ADR 0005](docs/adr/0005-upgrade-canonical-java-to-27.md), and [ADR 0003](docs/adr/0003-progressive-learning-model.md).
 
 ## What we will cover
 
