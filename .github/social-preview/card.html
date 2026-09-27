@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Social preview card</title>
+<!-- Source of social-preview.png, the repository's GitHub social preview
+     (Settings > General > Social preview). 1280x640, content inside the
+     80px (40pt) safe border. Palette from site/styles/main.css (dark theme).
+     Regenerate: see README.md in this folder. -->
+<style>
+  html,body{margin:0;width:1280px;height:640px;overflow:hidden}
+  body{
+    background:
+      radial-gradient(ellipse 620px 360px at 50% 30%, rgba(47,107,255,.20), transparent 70%),
+      radial-gradient(ellipse 900px 300px at 50% 115%, rgba(98,230,242,.07), transparent 70%),
+      #0A0B0D;
+    color:#ECEAE4;
+    font-family:"Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;
+    display:flex;align-items:center;justify-content:center;
+  }
+  /* everything lives inside the 80px (40pt) safe area */
+  .safe{width:1120px;height:480px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  img{width:168px;height:168px;margin-bottom:10px;-webkit-mask-image:radial-gradient(closest-side at 50% 46%,#000 66%,transparent 92%);mask-image:radial-gradient(closest-side at 50% 46%,#000 66%,transparent 92%)}
+  h1{margin:0;font-size:72px;font-weight:700;letter-spacing:-1.5px;line-height:1.05}
+  .tag{margin:22px 0 0;font-size:32px;color:#C9CCD3;font-weight:400}
+  .meta{margin:26px 0 0;font-family:"Cascadia Code",Consolas,monospace;font-size:21px;color:#9DB8FF;letter-spacing:.5px}
+  .meta span{color:#555B67;padding:0 12px}
+</style></head><body>
+  <div class="safe">
+    <img src="../../site/assets/images/logo-mark.png" alt="">
+    <h1>Agentic Developer Handbook</h1>
+    <p class="tag">Understand agentic systems by building them.</p>
+    <p class="meta">Java-first<span>·</span>Open source<span>·</span>One concept at a time</p>
+  </div>
+</body></html>
