@@ -43,7 +43,13 @@ The canonical implementation is Java. The conceptual chapters stay readable with
 - How to implement the concepts that you do need in Java
 - What changes when a small example has to survive production: evaluation, observability, security, and deployment
 
-The first seven labs are implemented and runnable: [labs/01-model-call](labs/01-model-call/README.md), [labs/02-structured-output](labs/02-structured-output/README.md), [labs/03-tool-calling](labs/03-tool-calling/README.md), [labs/04-rag](labs/04-rag/README.md), [labs/05-memory](labs/05-memory/README.md), [labs/06-skills](labs/06-skills/README.md), and [labs/07-agent-runtime](labs/07-agent-runtime/README.md). After Lab 07, [Capstone 01](capstones/01-agentic-system/README.md) is a composition exercise: decide which of the taught capabilities a realistic problem actually needs — and which it doesn't. The capstone also has an optional local interactive learning UI with browser-only progress; see [site/README.md](site/README.md). The rest of the list is the plan, not a catalog of finished features.
+The first seven labs are implemented and runnable: [labs/01-model-call](labs/01-model-call/README.md), [labs/02-structured-output](labs/02-structured-output/README.md), [labs/03-tool-calling](labs/03-tool-calling/README.md), [labs/04-rag](labs/04-rag/README.md), [labs/05-memory](labs/05-memory/README.md), [labs/06-skills](labs/06-skills/README.md), and [labs/07-agent-runtime](labs/07-agent-runtime/README.md). After Lab 07, two optional experiences put the concepts to work:
+
+- [Capstone 01](capstones/01-agentic-system/README.md) lets you compose the taught capabilities around one realistic problem — and justify the ones you leave out.
+- The [Agentic System Readiness Assessment](assessments/agentic-system-readiness/README.md) helps you decide which concepts your own use case actually deserves, starting from "could ordinary software do this?" It can conclude that you need no LLM at all, or an LLM but no agent.
+- A local, browser-only [interactive site](site/README.md) supports both, with no backend and no build step.
+
+The rest of the list is the plan, not a catalog of finished features.
 
 ## Learning path
 
@@ -101,6 +107,7 @@ agentic-developer-handbook/
 │   ├── mental-model.md
 │   ├── glossary.md
 │   ├── architecture.md
+│   ├── model-vs-decision-authority.md
 │   └── adr/
 ├── labs/
 │   ├── README.md
@@ -112,17 +119,21 @@ agentic-developer-handbook/
 │   ├── 06-skills/
 │   └── 07-agent-runtime/
 ├── capstones/
+│   ├── README.md
 │   └── 01-agentic-system/
+├── assessments/
+│   ├── README.md
+│   └── agentic-system-readiness/
+├── site/                  # local interactive learning UI (static, no build)
+├── scripts/               # roadmap sync and stdlib Python checks
 └── .github/
 ```
 
-[docs/architecture.md](docs/architecture.md) records the engineering principles. [docs/adr/](docs/adr/README.md) records the decisions already made. [labs/README.md](labs/README.md) describes how labs are written and lists the seven runnable labs.
+[docs/architecture.md](docs/architecture.md) records the engineering principles. [docs/adr/](docs/adr/README.md) records the decisions already made. [labs/README.md](labs/README.md) describes how labs are written and lists the seven runnable labs. [capstones/](capstones/README.md) compose taught concepts; [assessments/](assessments/README.md) help decide which of them a problem deserves.
 
 ## Current status
 
-This repository is at the beginning.
-
-Milestone 0, the foundation, is done: the handbook documents, the contribution model, the architecture decisions, and a Maven build that runs without API keys. Milestone 1 is done: [labs/01-model-call](labs/01-model-call/README.md) makes a real Gemini call and explains why that call is not an agent. Milestone 2 is done: [labs/02-structured-output](labs/02-structured-output/README.md) constrains the response with a schema and turns it into a typed Java record. Milestone 3 is done: [labs/03-tool-calling](labs/03-tool-calling/README.md) lets the model request one tool call that the application validates and executes. Milestone 4 is done: [labs/04-rag](labs/04-rag/README.md) retrieves local documentation into the prompt — without embeddings or a vector database, because RAG is a pattern, not a datastore. Milestone 5 is done: [labs/05-memory](labs/05-memory/README.md) shows why conversation history is not memory and builds explicit session memory with remember, update, and forget. Milestone 6 is done: [labs/06-skills](labs/06-skills/README.md) extracts a drifting copy-pasted procedure into one reviewable Agent Skills `SKILL.md` that the application selects and loads — a reusable procedure, not a capability. Milestone 7 is done: [labs/07-agent-runtime](labs/07-agent-runtime/README.md) builds the repository's first bounded agent runtime — the model suggests the next step, the application validates and executes it, and explicit stopping rules end the run. It is the first lab this handbook calls an agent. Later milestones are not started.
+Milestone 0, the foundation, is done: the handbook documents, the contribution model, the architecture decisions, and a Maven build that runs without API keys. Milestone 1 is done: [labs/01-model-call](labs/01-model-call/README.md) makes a real Gemini call and explains why that call is not an agent. Milestone 2 is done: [labs/02-structured-output](labs/02-structured-output/README.md) constrains the response with a schema and turns it into a typed Java record. Milestone 3 is done: [labs/03-tool-calling](labs/03-tool-calling/README.md) lets the model request one tool call that the application validates and executes. Milestone 4 is done: [labs/04-rag](labs/04-rag/README.md) retrieves local documentation into the prompt — without embeddings or a vector database, because RAG is a pattern, not a datastore. Milestone 5 is done: [labs/05-memory](labs/05-memory/README.md) shows why conversation history is not memory and builds explicit session memory with remember, update, and forget. Milestone 6 is done: [labs/06-skills](labs/06-skills/README.md) extracts a drifting copy-pasted procedure into one reviewable Agent Skills `SKILL.md` that the application selects and loads — a reusable procedure, not a capability. Milestone 7 is done: [labs/07-agent-runtime](labs/07-agent-runtime/README.md) builds the repository's first bounded agent runtime — the model suggests the next step, the application validates and executes it, and explicit stopping rules end the run. It is the first lab this handbook calls an agent. [LLM vs Decision Authority](docs/model-vs-decision-authority.md) states the boundary those labs draw as its own concept. Milestone 8 (MCP) and later milestones are not started.
 
 Nothing here stores embeddings, and the only agent is the bounded, read-only runtime of Lab 07. Evaluation, observability, security, and deployment remain unfinished — this is a learning path, not a production platform.
 
@@ -134,9 +145,10 @@ The numbered labs are the canonical learning path and stay maintainer-curated. I
 
 ```sh
 ./mvnw verify
+python -m unittest discover -s scripts/tests
 ```
 
-On Windows, use `mvnw.cmd verify`. This builds every module and runs the tests without calling Gemini, so it needs no API key. Running a lab against the real Gemini API does need one; each lab README shows its commands, starting with [labs/01-model-call](labs/01-model-call/README.md).
+On Windows, use `mvnw.cmd verify`. This builds every module and runs the tests without calling Gemini, so it needs no API key. The Python checks use only the standard library and cover the roadmap sync, the site, and the assessment. Running a lab against the real Gemini API does need one; each lab README shows its commands, starting with [labs/01-model-call](labs/01-model-call/README.md).
 
 ## License
 

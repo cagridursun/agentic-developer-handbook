@@ -338,9 +338,15 @@ function bindStaticControls() {
   document.getElementById("export-download").addEventListener("click",
       () => downloadMarkdown(buildDecisionsMarkdown(state)));
   document.getElementById("export-copy").addEventListener("click", async (event) => {
-    await copyMarkdown(buildDecisionsMarkdown(state));
-    event.target.textContent = "Copied";
-    setTimeout(() => { event.target.textContent = "Copy Markdown"; }, 1500);
+    const button = event.currentTarget;
+    try {
+      await copyMarkdown(buildDecisionsMarkdown(state));
+      button.textContent = "Copied";
+    } catch {
+      // Clipboard access can be refused; the download export still works.
+      button.textContent = "Copy failed — use Export";
+    }
+    setTimeout(() => { button.textContent = "Copy Markdown"; }, 1500);
   });
 
   document.getElementById("reset-progress").addEventListener("click", () => {
