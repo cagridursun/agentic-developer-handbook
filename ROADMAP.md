@@ -115,12 +115,13 @@ Established:
 - Private vulnerability reporting through GitHub (see [SECURITY.md](SECURITY.md))
 - A Code of Conduct enforcement contact
 - Issue templates for corrections, learning feedback, and proposals, and a README "Start here" path
+- Repository description, homepage, and GitHub topics
+- Social preview metadata and image for the public site
 
 Remaining and evolving:
 
 - Improve contributor onboarding
 - Define a community example proposal workflow
-- Repository description, topics, and a social preview image
 - Labels and an issue taxonomy when volume needs them
 - Maintainer guidance as the community grows
 
