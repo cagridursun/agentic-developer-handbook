@@ -6,7 +6,7 @@ Short working definitions for this handbook. Where two terms are often mixed up,
 
 **LLM.** A model trained to continue text. In this handbook, an LLM call means one inference request and its response.
 
-**Model.** The component that performs inference. It does not choose tools, store memory, or decide when the application should stop.
+**Model.** The component that performs inference. It can propose a tool call or a next step, but it does not execute tools, store memory, or decide when the application should stop.
 
 **Foundation model.** A model trained broadly enough to be used for many tasks. A hosted chat model is usually a foundation model, sometimes with extra training or a vendor-specific system prompt.
 
