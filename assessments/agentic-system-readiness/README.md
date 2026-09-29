@@ -35,33 +35,34 @@ Each question can be answered **yes**, **no**, or **unsure**. The order is the p
 | 5 | Must information created by earlier interactions survive into later interactions? | Memory: CONSIDER. | Memory: NOT JUSTIFIED. |
 | 6 | Is there a reusable, model-performed procedure that should be reviewed and reused independently of individual prompts? | Skills: CONSIDER. | Skills: NOT JUSTIFIED. |
 | 7 | Is the next useful action genuinely unknown in advance, and dependent on model interpretation of observations? | Agent Runtime: CONSIDER. | **Prefer a fixed workflow.** Agent Runtime: NOT JUSTIFIED. |
-| 8 | Are capabilities outside the process, or shared across hosts or systems? | A protocol boundary: FUTURE CONSIDERATION. | Protocol boundary: NOT JUSTIFIED. |
+| 8 | Does the system need a standardized boundary for externally owned capabilities, one that compatible clients can discover and invoke, where an explicit API integration is not enough? | MCP: CONSIDER. | MCP: NOT JUSTIFIED — ordinary code, or an explicit API client. |
 
 Question 3 is about authority, not convenience: status, balances, permissions, deployments, orders — facts that must come from the system that owns them, never from model recall. Question 4 is about documents: manuals, runbooks, policies — text the model should read, not facts the system owns. A database lookup does not become RAG because the application also calls a model.
 
 Question 7 is the one most often answered "yes" too quickly. If you can write the sequence of steps down in advance — "look up the status, then the deployment, then summarize" — the answer is **no**, and a fixed workflow is simpler, cheaper, and easier to test than an agent runtime. The answer is yes only when *which* step comes next depends on what the previous step observed, and the application cannot reasonably enumerate the branches itself.
 
+Question 8 is answered "yes" for the wrong reason almost as often. A capability being remote is not enough: a method in the same process never needs MCP, and one stable service used by one application is usually served best by an ordinary API client. The answer is yes only when a *standardized* boundary — capabilities that compatible clients can discover and invoke — solves an integration problem that explicit clients do not. An application containing an LLM is not such a problem.
+
 ## Status vocabulary
 
-The assessment never grades. Every capability gets one of four neutral statuses:
+The assessment never grades. Every capability gets one of three neutral statuses:
 
 | Status | Meaning |
 | --- | --- |
 | **CONSIDER** | An answer above gives this capability a reason to exist. It is a candidate, not a mandate — you may still reject it for a simpler design. |
 | **NOT JUSTIFIED** | Nothing in the answers requires it. Leaving it out is a decision, and it belongs in "Rejected complexity". |
 | **UNDECIDED** | The question is unanswered or answered "unsure". Resolve it before building. |
-| **FUTURE CONSIDERATION** | Only for the protocol boundary (MCP): worth evaluating later, never an automatic recommendation. |
 
 ## How the summary is derived
 
 The interactive version derives a capability summary from your answers with these rules — simple, deterministic, and printed here so you can check them:
 
 1. **Model** is NOT JUSTIFIED if question 0 is *yes* or question 1 is *no*; CONSIDER if question 0 is *no* and question 1 is *yes*; otherwise UNDECIDED.
-2. **Structured Output, Tools, Knowledge / RAG, Memory, Skills, Agent Runtime** each follow their own question: *yes* → CONSIDER, *no* → NOT JUSTIFIED, *unsure* or unanswered → UNDECIDED. Then:
-   - if Model is NOT JUSTIFIED, they are all NOT JUSTIFIED (none of them means anything without a model);
+2. **Structured Output, Tools, Knowledge / RAG, Memory, Skills, Agent Runtime, MCP** each follow their own question: *yes* → CONSIDER, *no* → NOT JUSTIFIED, *unsure* or unanswered → UNDECIDED. Then:
+   - if Model is NOT JUSTIFIED, they are all NOT JUSTIFIED (none of them means anything without a model; behind ordinary software, a remote capability is just an API call);
    - if Model is UNDECIDED, a CONSIDER becomes UNDECIDED.
 3. **Agent Runtime** is additionally UNDECIDED when question 7 is *yes* but Tools is not CONSIDER: a runtime chooses among allowed actions, and without actions there is nothing to choose.
-4. **Protocol boundary (MCP)** is NOT JUSTIFIED when Model is NOT JUSTIFIED (a remote capability behind ordinary software is just an API call) or question 8 is *no*; FUTURE CONSIDERATION when question 8 is *yes*; otherwise UNDECIDED. It is never CONSIDER.
+4. **MCP** is additionally UNDECIDED when question 8 is *yes* but Tools is not CONSIDER: an external capability boundary needs capabilities for the model to reach. MCP is never a candidate just because the application contains an LLM.
 
 No model is called to perform the assessment. The rules produce candidates; the architecture is still your decision, and the result never claims to be "the correct architecture".
 
@@ -92,13 +93,23 @@ The concept behind these questions is [LLM vs Decision Authority](../../docs/mod
 
 The examples are one defensible reading of each scenario. A different, well-argued conclusion is a valid outcome of the assessment.
 
-## Where MCP enters — later
+## Where MCP enters
 
-Question 8 prepares a question this assessment deliberately does not answer yet.
+[Lab 08](../../labs/08-mcp/README.md) teaches MCP, and question 8 is where it enters the assessment. The question behind it: does this architecture genuinely need a standardized external capability boundary?
 
-If the same capability must be exposed across process or application boundaries — shared by several hosts, owned by another team, reached from more than one application — a standardized protocol may become useful. That is where MCP may enter an architecture.
+```
+Is the capability local?
+├── Yes → ordinary application code. MCP: NOT JUSTIFIED.
+└── No  → Is one explicit API integration sufficient?
+          ├── Yes → a normal client may be simpler. MCP: NOT JUSTIFIED.
+          └── No  → Do compatible clients benefit from a standardized
+                    boundary they can discover and invoke?
+                    ├── No     → keep the explicit integration. MCP: NOT JUSTIFIED.
+                    ├── Unsure → MCP: UNDECIDED.
+                    └── Yes    → MCP: CONSIDER.
+```
 
-But a remote capability does not automatically require MCP. A normal API and a small client may remain the simpler answer, and a local Java method never needs it. MCP is taught in Milestone 8; until then, this assessment records a protocol boundary only as a **future consideration** to evaluate, never as a recommendation.
+A remote capability does not automatically require MCP, and MCP does not replace REST, gRPC, or an SDK client; an MCP server can even sit in front of one. If MCP is a candidate, the decision-authority questions still apply in full: a server announcing a tool does not make it executable. The application keeps the allowlist — discovery is not permission — and another autonomous agent is not an MCP question at all (A2A and multi-agent systems come later).
 
 ## Production questions, asked early
 

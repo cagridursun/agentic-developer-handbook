@@ -44,6 +44,24 @@ flowchart LR
 
 MCP connects an agent to external tools and data. A2A connects independent agents to each other. Calling a method in the same Java process does not require either protocol.
 
+MCP sits below the runtime's tool boundary, not above the runtime. The model does not speak MCP; it proposes a tool, and the application decides where that tool runs:
+
+```
+Model
+  ↓ proposes ToolRequest
+Agent Runtime
+  ↓ validates
+Application Tool Boundary
+  ├── Local Java Tool
+  └── MCP Client
+          ↓
+       MCP Server
+          ↓
+    External Capability
+```
+
+MCP does not create the agent, and it does not decide what the agent may do. A server announcing a tool in `tools/list` is information; the application's allowlist is the permission. [Lab 08](../labs/08-mcp/README.md) takes the Lab 07 agent and moves one of its two tools behind an MCP server in a separate process — same agent, same loop, one capability now remote.
+
 ## Around the runtime
 
 Evaluation and observability surround the runtime. They are not steps inside the prompt.
@@ -90,7 +108,7 @@ Add a piece when it solves a problem the current design cannot solve.
 - Do not add a vector database because the application uses a model. Add one when similarity search is the retrieval problem you have.
 - Do not introduce multiple agents when one agent with tools is enough.
 - Do not use fine-tuning to store information that changes often. Put that information in knowledge or memory and retrieve it.
-- Do not introduce MCP just to call a local Java function.
+- Do not introduce MCP just to call a local Java function. For one remote service used by one application, an ordinary API client is often simpler.
 - Do not call something an agent when it is a single LLM request.
 
 Definitions of the terms used here are in [glossary.md](glossary.md). How the repository will implement the path is in [architecture.md](architecture.md).

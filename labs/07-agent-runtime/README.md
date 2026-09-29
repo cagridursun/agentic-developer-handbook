@@ -221,9 +221,9 @@ Discussed, not implemented: token/cost budgets, wall-clock deadlines, tool-call 
 
 ## What limitation remains?
 
-The runtime can use local application capabilities. But every *external* capability still requires custom application integration — new client code per system, per protocol, per vendor. That leads to **Milestone 8 — MCP**, which standardizes how a runtime reaches external capabilities and resources.
+The runtime can use local application capabilities. But every *external* capability still requires custom application integration — new client code per system, per protocol, per vendor. That leads to **Milestone 8 — MCP** ([Lab 08](../08-mcp/README.md)), which standardizes how a runtime reaches external capabilities and resources.
 
-To be precise about the order of concepts: MCP does not create the agent. The agent already exists, right here, with two local Java methods. MCP will change how far its tools can reach — not what it is. Not implemented here.
+To be precise about the order of concepts: MCP does not create the agent. The agent already exists, right here, with two local Java methods. MCP changes how far its tools can reach — not what it is. Not implemented here; Lab 08 moves `getRecentDeployment` behind an MCP server and keeps this runtime.
 
 ## Sources consulted
 

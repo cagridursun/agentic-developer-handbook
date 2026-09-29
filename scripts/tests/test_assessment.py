@@ -158,24 +158,61 @@ class ExamplesTest(unittest.TestCase):
 
 
 class McpBoundaryTest(unittest.TestCase):
+    """MCP is taught (Lab 08), so it is an actual candidate capability — earned
+    only by question 8, never by the mere presence of an LLM."""
 
-    def test_mcp_is_only_a_future_consideration(self):
-        logic = read(SITE / "js" / "readiness-logic.js")
-        block = logic.split("// Rule 4")[1].split("return result;")[0]
-        self.assertNotIn("STATUS.consider", block)
-        self.assertIn("STATUS.future", block)
-        for path in [ASSESSMENT_DIR / "README.md", ASSESSMENT_DIR / "ASSESSMENT.md"]:
-            text = normalized(read(path))
-            self.assertIn("Milestone 8", text)
-            self.assertIn("does not automatically require MCP", text)
+    def setUp(self):
+        self.logic = read(SITE / "js" / "readiness-logic.js")
+        self.data = read(SITE / "js" / "readiness.js")
 
-    def test_mcp_is_not_implemented(self):
-        self.assertFalse((REPO_ROOT / "labs" / "08-mcp").exists())
-        roadmap = read(REPO_ROOT / "ROADMAP.md")
-        milestone = roadmap.split("### Milestone 8 — MCP")[1].split("###")[0]
-        self.assertIn("Not started.", milestone)
-        for pom in REPO_ROOT.rglob("pom.xml"):
-            self.assertNotIn("mcp", read(pom).lower(), pom)
+    def test_mcp_is_a_real_candidate_earned_by_question_8(self):
+        # MCP follows its own question like the other capabilities...
+        self.assertIn('mcp: "protocolBoundary"', self.logic)
+        self.assertRegex(self.data, r'id: "protocolBoundary", number: 8, stage: "capabilities", capability: "mcp"')
+        # ...and rule 4 can still hold it back when there is nothing to carry.
+        rule = self.logic.split("// Rule 4")[1].split("return result;")[0]
+        self.assertIn("STATUS.consider", rule)
+        self.assertIn("STATUS.undecided", rule)
+        self.assertIn("result.tools.status !== STATUS.consider", rule)
+
+    def test_future_consideration_status_is_gone(self):
+        for path in [ASSESSMENT_DIR / "README.md", ASSESSMENT_DIR / "ASSESSMENT.md",
+                     *(ASSESSMENT_DIR / "examples").glob("*.md"),
+                     SITE / "readiness-assessment" / "index.html",
+                     *SITE.glob("js/readiness*.js")]:
+            text = read(path)
+            self.assertNotIn("FUTURE CONSIDERATION", text, path.name)
+            self.assertNotIn("STATUS.future", text, path.name)
+            self.assertNotIn("Milestone 8", text, path.name)
+
+    def test_mcp_needs_a_reason_beyond_being_remote_or_using_an_llm(self):
+        readme = normalized(read(ASSESSMENT_DIR / "README.md"))
+        self.assertIn("never a candidate just because the application contains an LLM", readme)
+        self.assertIn("does not automatically require MCP", readme)
+        self.assertIn("Is one explicit API integration sufficient?", readme)
+        self.assertIn("labs/08-mcp/README.md", readme)
+        for path in [ASSESSMENT_DIR / "README.md", ASSESSMENT_DIR / "ASSESSMENT.md",
+                     SITE / "js" / "readiness-export.js"]:
+            self.assertIn("iscovery is not permission", normalized(read(path)), path.name)
+
+    def test_old_boundary_answers_are_not_reinterpreted(self):
+        # The question was reworded, so it has a new id; the storage key and
+        # the rest of the state shape are unchanged.
+        self.assertNotIn('id: "boundary"', self.data)
+        self.assertNotIn("answers.boundary", self.logic)
+        storage = read(SITE / "js" / "readiness-storage.js")
+        self.assertIn('STORAGE_KEY = "adh.learning.v1.readinessAssessment"', storage)
+
+    def test_worked_examples_resolve_mcp(self):
+        for name in EXAMPLES:
+            text = self.example(name)
+            self.assertIn("| MCP (protocol boundary) | NOT JUSTIFIED |", text, name)
+        # The remote-capability example says why remote is still not MCP.
+        investigator = normalized(self.example("incident-investigator.md"))
+        self.assertIn("remote does not mean MCP", investigator)
+
+    def example(self, name):
+        return read(ASSESSMENT_DIR / "examples" / name)
 
 
 class NoScoringTest(unittest.TestCase):

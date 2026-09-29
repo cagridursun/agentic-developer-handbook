@@ -12,7 +12,7 @@ with equally honest justification can be as good or better.
 | Memory | NO | One bounded investigation run; nothing from an earlier interaction affects this request, and nothing must survive it. | Not applicable — there is no later turn to remember anything for. |
 | Skills | YES | The incident-handoff procedure is reusable across incidents and must be reviewable; one SKILL.md beats copies drifting through prompts. | Inlining the procedure in the prompt — acceptable once, wrong the second time it is needed. |
 | Agent Runtime | YES | The next diagnostic action depends on the previous observation: a healthy status would end the investigation without a deployment lookup. | See the fixed-workflow discussion below. |
-| MCP | NOT YET APPLICABLE | Every capability is local Java in the same process; a protocol boundary would add cost and no value. MCP is also not taught until Milestone 8. | Direct method calls — which is exactly what the reference does. |
+| MCP | NO | Taught in Lab 08, and deliberately excluded here: every capability is local Java in the same process. A protocol boundary would add a second process, a protocol, and new failure modes, and solve no problem. | Direct method calls — which is exactly what the reference does. |
 
 ## The simpler design we considered seriously
 

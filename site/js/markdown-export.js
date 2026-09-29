@@ -24,8 +24,9 @@ export function buildDecisionsMarkdown(state) {
     lines.push(`| ${capability.name} | ${use} | ${cell(decision.why)} | ${cell(decision.alternative)} |`);
   }
   lines.push("");
-  lines.push("MCP is not in the table: it has not been taught yet (Milestone 8), and");
-  lines.push("every capability in this capstone is local Java.");
+  lines.push("MCP is not in the table. It is taught in Lab 08, but it is deliberately");
+  lines.push("excluded here: every capability in this capstone is local Java, and adding a");
+  lines.push("protocol boundary would solve no problem.");
   lines.push("");
   lines.push("## Decision authority");
   lines.push("");

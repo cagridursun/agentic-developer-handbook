@@ -51,7 +51,7 @@ from several passages is language understanding and generation.
 | 5 | Must information from earlier interactions survive into later ones? | No — each question stands alone. |
 | 6 | Is there a reusable model-performed procedure worth reviewing independently? | No — "answer from the passages, cite them" is one line of prompt. |
 | 7 | Is the next useful action unknown in advance and dependent on observations? | No — retrieve, then answer. |
-| 8 | Are capabilities outside the process or shared across systems? | No. |
+| 8 | Does the system need a standardized boundary for externally owned capabilities, one that compatible clients can discover and invoke, where an explicit API integration is not enough? | No. |
 
 | Capability | Consider? | Why / why not? | Simpler alternative |
 | --- | --- | --- | --- |

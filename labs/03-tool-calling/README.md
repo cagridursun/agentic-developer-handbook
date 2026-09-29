@@ -139,7 +139,7 @@ This lab connects a model to a local Java method:
 Model → tool declaration → local Java method
 ```
 
-No protocol is needed for that, so no MCP is used. MCP earns its place when capabilities or resources must be exposed or consumed across a standardized protocol boundary — a separate server offering tools to many clients, or an application consuming tools it doesn't own. Introducing MCP to call a method in the same JVM is exactly the kind of unnecessary complexity this handbook warns against. Milestone 8 covers MCP properly.
+No protocol is needed for that, so no MCP is used. MCP earns its place when capabilities or resources must be exposed or consumed across a standardized protocol boundary — a separate server offering tools to many clients, or an application consuming tools it doesn't own. Introducing MCP to call a method in the same JVM is exactly the kind of unnecessary complexity this handbook warns against. [Lab 08](../08-mcp/README.md) covers MCP properly.
 
 ## What we STILL do not have
 

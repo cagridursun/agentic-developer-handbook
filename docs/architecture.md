@@ -24,7 +24,7 @@ A new abstraction has to earn its place by teaching something or by protecting a
 
 When a framework or a provider SDK appears, its types should not spread through the whole codebase. Application code that expresses the handbook's concepts should talk to those libraries at a small edge. That keeps a lab readable if the library changes, and it keeps provider SDK types out of the project's own APIs.
 
-This is a constraint for later milestones. There is no framework edge to draw yet.
+The labs draw these edges explicitly. In Lab 07, Gemini types stay inside `GeminiAgentModel`; the runtime sees only its own decision records. In Lab 08, MCP SDK types stay inside the application's MCP client and the server class; the runtime receives the same plain observation from a remote tool as from a local method.
 
 ## Examples stay runnable
 
@@ -42,4 +42,4 @@ A concept appears first in the smallest form that still teaches it. Structured o
 
 ## What is intentionally absent
 
-There is still no Spring Boot, no Spring AI, no provider abstraction, and no database, broker, or container runtime. Lab 01 uses one provider SDK directly, without a wrapper, because one implementation does not justify an abstraction. Infrastructure arrives with the milestone that needs it.
+There is still no Spring Boot, no Spring AI, no provider abstraction, and no database, broker, or container runtime. Lab 01 uses one provider SDK directly, without a wrapper, because one implementation does not justify an abstraction. Lab 08 uses the official MCP Java SDK the same way — directly, over STDIO, with no framework integration and no generic tool-plugin layer. Infrastructure arrives with the milestone that needs it.

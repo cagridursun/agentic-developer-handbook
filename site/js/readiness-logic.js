@@ -16,6 +16,7 @@ const QUESTION_FOR = {
   memory: "retained",
   skills: "procedure",
   agentRuntime: "nextStep",
+  mcp: "protocolBoundary",
 };
 
 function fromAnswer(answer) {
@@ -61,7 +62,9 @@ export function deriveStatuses(answers) {
         status: STATUS.notJustified,
         reason: capability === "tools"
           ? "No model, so no model tools. Reading authoritative data is ordinary deterministic application logic."
-          : "No model is justified, so this capability has nothing to serve.",
+          : capability === "mcp"
+            ? "Behind ordinary software, a remote capability is just an API call."
+            : "No model is justified, so this capability has nothing to serve.",
       };
     } else if (model === STATUS.undecided && own === STATUS.consider) {
       result[capability] = {
@@ -92,26 +95,23 @@ export function deriveStatuses(answers) {
     };
   }
 
-  // Rule 4: protocol boundary — never an automatic recommendation.
-  if (model === STATUS.notJustified) {
-    result.mcp = {
-      status: STATUS.notJustified,
-      reason: "Behind ordinary software, a remote capability is just an API call.",
-    };
-  } else if (answers.boundary === "yes") {
-    result.mcp = {
-      status: STATUS.future,
-      reason: "Capabilities cross a process or system boundary. Evaluate a protocol later (Milestone 8); a normal API and client may still be simpler.",
-    };
-  } else if (answers.boundary === "no") {
-    result.mcp = {
-      status: STATUS.notJustified,
-      reason: "Everything is reachable in-process or through existing APIs.",
-    };
-  } else {
+  // Rule 4: an external capability boundary needs capabilities to carry. MCP
+  // is never recommended because the application contains an LLM — only
+  // because question 8 said a standardized boundary solves a real problem.
+  if (result.mcp.status === STATUS.consider && result.tools.status !== STATUS.consider) {
     result.mcp = {
       status: STATUS.undecided,
-      reason: "Question 8 is unanswered or answered unsure.",
+      reason: "A standardized boundary is wanted, but no tools are a candidate: there is no capability for the model to reach through it. Revisit question 3.",
+    };
+  } else if (result.mcp.status === STATUS.consider) {
+    result.mcp = {
+      status: STATUS.consider,
+      reason: "Standardized discovery and invocation of externally owned capabilities solves an integration problem. Keep the allowlist in the application: discovery is not permission.",
+    };
+  } else if (answers.protocolBoundary === "no" && model !== STATUS.notJustified) {
+    result.mcp = {
+      status: STATUS.notJustified,
+      reason: "Capabilities are local, or an explicit API integration is enough.",
     };
   }
   return result;
@@ -169,6 +169,7 @@ export function likelyShape(answers, statuses) {
     ? "Bounded agent runtime (model proposes the next step; the runtime validates and executes)"
     : "Fixed workflow");
   if (is("tools")) lines.push("→ authoritative tools (application-executed)");
+  if (is("mcp")) lines.push("→ MCP client for externally owned tools (application allowlist)");
   if (is("knowledge")) lines.push("→ retrieved knowledge");
   if (is("memory")) lines.push("→ scoped memory from earlier interactions");
   if (is("skills")) lines.push("→ reusable skill");
@@ -197,7 +198,6 @@ export function summarize(state) {
     consider: byStatus(STATUS.consider),
     notJustified: byStatus(STATUS.notJustified),
     undecided: byStatus(STATUS.undecided),
-    future: byStatus(STATUS.future),
     shape: likelyShape(answers, statuses),
     unresolved,
   };

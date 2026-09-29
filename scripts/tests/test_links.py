@@ -67,7 +67,7 @@ class RelativeLinksTest(unittest.TestCase):
         for row in readme.splitlines():
             if row.startswith("|") and row.rstrip().endswith("| Planned |"):
                 self.assertNotIn("](", row, row)
-        for future in ["labs/08-mcp", "labs/09-evaluation", "labs/10-observability",
+        for future in ["labs/09-evaluation", "labs/10-observability",
                        "labs/11-security", "labs/12-production"]:
             self.assertFalse((REPO_ROOT / future).exists(), future)
             for relative in LAUNCH_FACING:

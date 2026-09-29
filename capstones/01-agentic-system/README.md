@@ -24,7 +24,7 @@ You **may** use: structured output, tools, knowledge / RAG, memory, skills, an a
 - **Runbooks** (a Knowledge decision): `notifications.md`, `deployment.md`, `incident-response.md`
 - **One skill** (a Skills decision): `skills/incident-handoff/SKILL.md`
 
-Available does not mean required. MCP is not available: it has not been taught yet (Milestone 8) — and notice that you will not miss it, because every capability here is local Java.
+Available does not mean required. MCP is taught in [Lab 08](../../labs/08-mcp/README.md), but it is deliberately not a decision here: every capability in this scenario is local Java, and adding a protocol boundary would solve no problem. It is a good example of "you probably don't need all of these".
 
 ## Your first task: decide before coding
 
@@ -37,7 +37,7 @@ The application investigates the fictional incident and produces a concise hando
 ## Constraints
 
 - Plain Java 27 — no agent framework, no Spring AI, no LangChain4j
-- No external database, no MCP
+- No external database, no MCP (every capability is local)
 - No network and no API key in the deterministic path (`./mvnw verify` stays self-contained)
 - Read-only tools only
 - If you build an agent runtime, it must be bounded with explicit stopping rules
