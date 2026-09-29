@@ -127,10 +127,13 @@ export function buildAssessmentMarkdown(state) {
   }
   push("");
 
-  push("## Protocol boundary — a note for later", "");
-  push(`Question 8 (${cell(question("boundary").text)}): ${answerLabel(answers.boundary)}.`,
-    "A remote capability does not automatically require MCP; a normal API and",
-    "client may remain the simpler answer. MCP is taught in Milestone 8.", "");
+  push("## Protocol boundary (MCP)", "");
+  push(`Question 8 (${cell(question("protocolBoundary").text)}): ${answerLabel(answers.protocolBoundary)}.`, "");
+  push("A local capability never needs MCP, and a remote capability does not",
+    "automatically require it: one explicit API integration is often simpler. MCP",
+    "may be justified when compatible clients need standardized discovery and",
+    "invocation. Discovery is not permission — the allowlist stays in the",
+    "application. See Lab 08.", "");
 
   return lines.join("\n");
 }

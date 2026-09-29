@@ -15,8 +15,9 @@ problem.
 | Skills | | | |
 | Agent Runtime | | | |
 
-MCP is not in the table: it has not been taught yet (Milestone 8), and every
-capability in this capstone is local Java.
+MCP is not in the table. It is taught in Lab 08, but it is deliberately
+excluded here: every capability in this capstone is local Java, and adding a
+protocol boundary would solve no problem.
 
 ## Questions to answer before implementing
 

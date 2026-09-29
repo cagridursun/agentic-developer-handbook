@@ -52,7 +52,7 @@ audience while preserving meaning. That is what a model is for.
 | 5 | Must information from earlier interactions survive into later ones? | No — each release is independent. |
 | 6 | Is there a reusable model-performed procedure worth reviewing independently? | Unsure — the style rules repeat every release. |
 | 7 | Is the next useful action unknown in advance and dependent on observations? | No — the sequence is one rewrite. |
-| 8 | Are capabilities outside the process or shared across systems? | No. |
+| 8 | Does the system need a standardized boundary for externally owned capabilities, one that compatible clients can discover and invoke, where an explicit API integration is not enough? | No. |
 
 | Capability | Consider? | Why / why not? | Simpler alternative |
 | --- | --- | --- | --- |

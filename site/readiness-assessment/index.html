@@ -248,11 +248,13 @@ execution</div>
         </section>
 
         <div class="notice">
-          <strong>Where MCP may enter — later.</strong> If the same capability
-          must be exposed across process or application boundaries, a
-          standardized protocol may become useful. A remote capability does not
-          automatically require MCP; a normal API and client may remain the
-          simpler answer. MCP is taught in Milestone 8.
+          <strong>Where MCP enters.</strong> A local capability never needs
+          MCP, and a remote capability does not automatically require it: one
+          explicit API integration is often the simpler answer. MCP may be
+          justified when compatible clients need standardized discovery and
+          invocation of capabilities owned elsewhere — and discovery is still
+          not permission. See
+          <a href="https://github.com/cagridursun/agentic-developer-handbook/blob/main/labs/08-mcp/README.md">Lab 08 — MCP</a>.
         </div>
 
         <div class="stage-actions">

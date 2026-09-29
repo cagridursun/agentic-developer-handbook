@@ -5,7 +5,7 @@ A fillable template. Copy it next to your design notes and replace every
 "_Answer…_" line. Work top to bottom: the order is deliberate, and an early
 answer can make the rest of the document short.
 
-Statuses: CONSIDER · NOT JUSTIFIED · UNDECIDED · FUTURE CONSIDERATION (MCP only).
+Statuses: CONSIDER · NOT JUSTIFIED · UNDECIDED.
 This is not a score. See README.md in this directory for the decision order
 and the rules the interactive version uses to derive a summary.
 -->
@@ -56,7 +56,7 @@ Answer the decision questions in order:
 | 5 | Must information created by earlier interactions survive into later interactions? | _yes / no / unsure_ |
 | 6 | Is there a reusable, model-performed procedure that should be reviewed and reused independently of individual prompts? | _yes / no / unsure_ |
 | 7 | Is the next useful action genuinely unknown in advance, and dependent on model interpretation of observations? | _yes / no / unsure_ |
-| 8 | Are capabilities outside the process, or shared across hosts or systems? | _yes / no / unsure_ |
+| 8 | Does the system need a standardized boundary for externally owned capabilities, one that compatible clients can discover and invoke, where an explicit API integration is not enough? | _yes / no / unsure_ |
 
 Then record each capability:
 
@@ -71,9 +71,9 @@ Then record each capability:
 | Agent Runtime | | | |
 | MCP (protocol boundary) | | | |
 
-Use **CONSIDER**, **NOT JUSTIFIED**, or **UNDECIDED**. MCP is only ever
-**NOT JUSTIFIED**, **UNDECIDED**, or **FUTURE CONSIDERATION**: it is taught in
-Milestone 8, and a remote capability does not automatically need it.
+Use **CONSIDER**, **NOT JUSTIFIED**, or **UNDECIDED** for every capability,
+MCP included. A remote capability does not automatically need MCP, and an
+application containing an LLM is not a reason for it.
 
 ## Decision authority
 
@@ -168,9 +168,10 @@ _Answer: every capability intentionally NOT used, and the one-line reason._
 
 _Answer: every UNDECIDED capability and every open authority question._
 
-## Protocol boundary — a note for later
+## Protocol boundary (MCP)
 
-If the same capability must be exposed across process or application
-boundaries, a standardized protocol such as MCP may become useful. A remote
-capability does not automatically require MCP; a normal API and client may
-remain the simpler answer. MCP is taught in Milestone 8.
+A local capability never needs MCP, and a remote capability does not
+automatically require it: one explicit API integration is often simpler. MCP
+may be justified when compatible clients need standardized discovery and
+invocation. Discovery is not permission — the allowlist stays in the
+application. See [Lab 08](../../labs/08-mcp/README.md).

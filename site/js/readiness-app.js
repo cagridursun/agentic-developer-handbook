@@ -124,7 +124,6 @@ function statusClass(status) {
     [STATUS.consider]: "is-consider",
     [STATUS.notJustified]: "is-not-justified",
     [STATUS.undecided]: "is-undecided",
-    [STATUS.future]: "is-future",
   }[status] || "is-undecided";
 }
 
@@ -403,8 +402,7 @@ function renderResult() {
       filled(state.simplest.existingAlternative)
         ? state.simplest.existingAlternative.trim() : "(none recorded yet)";
 
-  fillList("result-consider", [...summary.consider, ...summary.future.map((name) => name + " — future consideration")],
-      "nothing — which may be exactly right");
+  fillList("result-consider", summary.consider, "nothing — which may be exactly right");
   fillList("result-not-justified", summary.notJustified, "nothing ruled out yet");
 
   const rows = document.getElementById("result-rows");

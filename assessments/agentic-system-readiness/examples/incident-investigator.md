@@ -62,7 +62,7 @@ generation.
 | 5 | Must information from earlier interactions survive into later ones? | No — each investigation is one bounded run. |
 | 6 | Is there a reusable model-performed procedure worth reviewing independently? | **Yes** — the handoff procedure is shared by every investigation. |
 | 7 | Is the next useful action unknown in advance and dependent on observations? | **Yes** — a healthy checkout with a degraded dependency leads somewhere different from a checkout that deployed ten minutes ago. |
-| 8 | Are capabilities outside the process or shared across systems? | Unsure — the status APIs belong to other teams; see the protocol note below. |
+| 8 | Does the system need a standardized boundary for externally owned capabilities, one that compatible clients can discover and invoke, where an explicit API integration is not enough? | No — the capabilities are remote, but three explicit HTTP clients are enough; see the protocol note below. |
 
 | Capability | Consider? | Why / why not? | Simpler alternative |
 | --- | --- | --- | --- |
@@ -73,7 +73,7 @@ generation.
 | Memory | NOT JUSTIFIED | Nothing from a previous investigation should shape this one; "last time it was the database" is exactly the bias the handoff must avoid. | — |
 | Skills | CONSIDER | The handoff procedure (facts vs hypotheses vs unknowns, no unproven root cause) is reused by every run and must be reviewable in one place. | Inlining it in the prompt — fine once, drifts the second time. |
 | Agent Runtime | CONSIDER | Which check comes next depends on the last observation. A bounded runtime lets the model propose the next read-only check from an allowlist. | A fixed workflow that checks everything every time — **seriously considered**; see below. |
-| MCP (protocol boundary) | UNDECIDED | The status APIs live in other services; see the protocol note. | Ordinary HTTP clients. |
+| MCP (protocol boundary) | NOT JUSTIFIED | The status APIs live in other teams' services, but one application needs them and each is one explicit HTTP call. Remote does not mean MCP; see the protocol note. | Three small HTTP clients. |
 
 ### The fixed workflow, taken seriously
 
@@ -154,15 +154,26 @@ Page
 ## Rejected complexity
 
 Structured Output (no program consumes the handoff), Memory (would import
-bias), any write-capable tool (needs approval and its own assessment), and a
-multi-agent design (one runtime with read-only tools is enough).
+bias), MCP (see below), any write-capable tool (needs approval and its own
+assessment), and a multi-agent design (one runtime with read-only tools is
+enough).
+
+## Protocol boundary (MCP)
+
+The status, deployment, and dependency APIs are owned by other teams and are
+already reachable over HTTP. That makes the capabilities remote — and remote
+does not mean MCP. One application consumes them, each is one explicit call,
+and three small HTTP clients inside the runtime's tool boundary are simpler
+than three MCP servers.
+
+The answer would change if several different assistants, IDEs, and runtimes
+all needed the same checks, and each was writing its own glue. Then a
+standardized boundary that every compatible client can discover and invoke
+starts to pay for itself: the owning teams could each run an MCP server,
+possibly in front of the same HTTP APIs. Each client would still keep its own
+allowlist — discovery is not permission. That is the situation
+[Lab 08](../../../labs/08-mcp/README.md) builds, with one capability.
 
 ## Unresolved questions
 
-- **Protocol boundary (question 8).** The status, deployment, and dependency
-  APIs are owned by other teams and are already reachable over HTTP. If
-  several different assistants and hosts needed the same capabilities, a
-  standardized protocol could become worth evaluating — that is where MCP may
-  enter. Today, three small HTTP clients are simpler. Revisit after
-  Milestone 8.
 - Whether the fixed workflow is good enough; decide by trying it first.

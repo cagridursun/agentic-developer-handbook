@@ -17,8 +17,8 @@ export const STAGES = [
 ];
 
 // The seven decidable capabilities, mirroring starter/DECISIONS.md.
-// MCP is deliberately NOT a decision here: it has not been taught yet, and
-// every capability in this capstone is local Java.
+// MCP is deliberately NOT a decision here. It is taught in Lab 08, but every
+// capability in this capstone is local Java: a protocol boundary solves nothing.
 export const CAPABILITIES = [
   { id: "model", name: "Model", hint: "Lab 01" },
   { id: "structuredOutput", name: "Structured Output", hint: "Lab 02" },

@@ -42,7 +42,13 @@ Short working definitions for this handbook. Where two terms are often mixed up,
 
 **Skill.** Instructions for how the agent should perform a kind of task. A skill changes procedure. It does not by itself add a new tool or a new fact. In this handbook, skills are one building block, not the product. See [ADR 0004](adr/0004-skills-are-a-building-block.md).
 
-**MCP.** Model Context Protocol. A standard way for an application to use tools and resources exposed by an external server.
+**MCP.** Model Context Protocol. A standardized, application-facing protocol through which an application discovers and uses tools, resources, and prompts exposed by a separate server. It changes how the application reaches a capability; it does not create an agent and does not decide what the agent may do. See [Lab 08](../labs/08-mcp/README.md).
+
+**MCP server.** A process or service that exposes capabilities over MCP, such as a tool with a published input schema. It has no goal and no loop; it is not an agent.
+
+**MCP client.** The component inside an application that holds one connection to one MCP server: it negotiates the protocol, lists what the server offers, and sends calls. It is not the agent runtime. The MCP specification calls the application that creates clients the *host*.
+
+**Tool discovery.** Asking a server which tools it offers (`tools/list` in MCP). Discovery is information, not permission: the application's allowlist decides which discovered tools a runtime may use.
 
 **A2A.** Agent-to-agent protocol. A way for independent agents to communicate with each other.
 
@@ -73,6 +79,18 @@ A tool is what the agent can do: `getOrder`, `sendEmail`, `queryAccount`. A skil
 ## Knowledge vs memory
 
 Knowledge is information the application looks up, such as documentation or records that exist whether or not this conversation happened. Memory is information the application keeps because this user, session, or task produced it. A help article is knowledge. "The customer already gave the order id" is memory.
+
+## Tool vs MCP
+
+A tool is a capability the application executes when the model asks. MCP is one way to reach a tool that someone else owns. Tool calling works the same whether the tool is a local method or a call through an MCP client; the model cannot tell the difference and does not need to. A local method never needs MCP.
+
+## MCP vs agent
+
+An MCP server answers requests about capabilities it owns. An MCP client forwards calls to it. Neither has a goal, a loop, or a stop condition. An agent is the runtime that owns those, and it may or may not use MCP to reach some of its tools.
+
+## MCP vs REST
+
+REST, gRPC, and SDK clients are general-purpose integration mechanisms. MCP standardizes how model-adjacent capabilities are described, discovered, and invoked by compatible clients. An MCP server can sit in front of a REST service. For one stable service used by one application, a normal API client is often the simpler choice; MCP does not replace REST.
 
 ## MCP vs A2A
 

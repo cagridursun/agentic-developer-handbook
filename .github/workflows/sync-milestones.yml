@@ -8,12 +8,15 @@ on:
       - scripts/sync-github-milestones.py
       - scripts/tests/**
       - .github/workflows/sync-milestones.yml
-      # The stdlib tests also check the site, the assessment, and the
-      # documents they mirror, so changes there must run them too.
+      # The stdlib tests also check the site, the assessment, the labs'
+      # documents, and the documents they mirror, so changes there must run
+      # them too.
       - site/**
       - assessments/**
       - docs/**
       - capstones/**/DECISIONS.md
+      - labs/**
+      - pom.xml
       - README.md
   pull_request:
     paths:
@@ -21,12 +24,15 @@ on:
       - scripts/sync-github-milestones.py
       - scripts/tests/**
       - .github/workflows/sync-milestones.yml
-      # The stdlib tests also check the site, the assessment, and the
-      # documents they mirror, so changes there must run them too.
+      # The stdlib tests also check the site, the assessment, the labs'
+      # documents, and the documents they mirror, so changes there must run
+      # them too.
       - site/**
       - assessments/**
       - docs/**
       - capstones/**/DECISIONS.md
+      - labs/**
+      - pom.xml
       - README.md
   workflow_dispatch:
 

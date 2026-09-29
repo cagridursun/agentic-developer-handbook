@@ -54,8 +54,23 @@ A low-risk system may intentionally let a model proposal pass through automatica
 | Recommend a €500 refund | Recommend | Business policy / human / application |
 | Suggest a production deployment | Recommend / propose | Deployment authorization + approval |
 | User says "I am an admin" | Context only | Identity / authorization system |
+| An MCP server announces a new tool | None — it is not exposed to the model | Application allowlist |
 
 The worked automatic-acceptance example, from Lab 07: the model selects one of two read-only diagnostic tools, and the runtime executes it automatically — but only if the tool is allowlisted, the arguments validate, the step budget remains, and nothing in application policy forbids it. Every one of those conditions is deterministic application code. The model influenced *which* allowed action ran; it never gained the ability to run a disallowed one.
+
+## Discovery is not permission
+
+When a capability lives behind a protocol such as MCP ([Lab 08](../labs/08-mcp/README.md)), a new party joins the picture, and it is easy to mistake what it offers for what is allowed. Each party makes a different statement:
+
+| Party | Says |
+| --- | --- |
+| MCP server | "I provide capability X." |
+| MCP client | "I can communicate with that server." |
+| Application | "I allow capability X for this runtime." |
+| Model | "I propose using capability X." |
+| Runtime | "I validate and decide whether the proposal becomes execution." |
+
+A server announcing a tool does not make it executable by the model, and connecting to a server does not approve everything it offers. The allowlist is application code; nothing a server announces can add to it. The MCP specification puts the same responsibility with the host application: it controls connection permissions and enforces security policy.
 
 ## Model choice vs system decision
 
@@ -107,4 +122,4 @@ Read-only, reversible, validated, budget-bounded decisions are good delegation c
 - **Application / runtime:** constrain, validate, authorize, execute, stop.
 - **Human or business policy:** retains final authority where the risk requires it.
 
-This is the same boundary [Lab 03](../labs/03-tool-calling/README.md) draws for one tool round and [Lab 07](../labs/07-agent-runtime/README.md) draws for the loop — stated once, as its own concept, because it applies to every system in this handbook, agentic or not.
+This is the same boundary [Lab 03](../labs/03-tool-calling/README.md) draws for one tool round, [Lab 07](../labs/07-agent-runtime/README.md) draws for the loop, and [Lab 08](../labs/08-mcp/README.md) keeps when a tool moves behind a protocol — stated once, as its own concept, because it applies to every system in this handbook, agentic or not.

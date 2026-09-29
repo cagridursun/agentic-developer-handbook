@@ -8,7 +8,7 @@ The learning path is a teaching sequence, not an architecture every application 
 
 ## Track A — Canonical Learning Path
 
-The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 7 are done. Later milestones are planned work and are not implemented.
+The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 8 are done. Later milestones are planned work and are not implemented.
 
 ### Milestone 0 — Foundation
 
@@ -68,7 +68,7 @@ An execution loop that can call a model, use tools, and stop. This is the first 
 
 ### Milestone 8 — MCP
 
-Not started.
+Done. The lab is [labs/08-mcp](labs/08-mcp/README.md).
 
 Connect the runtime to external capabilities through the Model Context Protocol. Show why a local Java call is not a reason to introduce MCP.
 
@@ -148,6 +148,8 @@ Curated contribution areas, each opened only after the canonical path has taught
 
 Standing constraints: this must not become an uncurated example dump, a provider catalog, or a skill marketplace. An example must teach an architectural decision, not only library syntax. The acceptance questions are in [CONTRIBUTING.md](CONTRIBUTING.md).
 
+Future candidate, recorded rather than scheduled — to consider only after Milestone 9 (Evaluation), and not part of the canonical learning path: a comparative decision-model example that puts three approaches side by side on the same decision problem — deterministic rules, a general LLM with structured output, and Jev as a specialized probabilistic decision model. Its purpose would be to teach that not every probabilistic decision needs a general generative model, that a typed probabilistic decision is not an agent, and that model influence is not decision authority, with evaluation comparing behavior, uncertainty, and — where reproducible — latency and cost. It would make no vendor or performance claims.
+
 ## Track D — Reference Application
 
 The labs intentionally isolate concepts. Once enough concepts are mature, a composed reference application should show how justified capabilities fit together in a real system.
@@ -189,7 +191,7 @@ In progress.
 
 Established:
 
-- The experience-first format validated in Labs 05, 06, and 07: limitation → naive approach → failure → design → reflection → decision
+- The experience-first format validated in Labs 05, 06, 07, and 08: limitation → naive approach → failure → design → reflection → decision
 - Reflection sections in each experience-first lab
 - "Do I actually need this?" decision checkpoints reinforcing that not every capability is needed
 - [Capstone 01 — Build a Small Agentic System](capstones/01-agentic-system/README.md): composing already-taught concepts with a decisions-first exercise and a reference that deliberately excludes capabilities

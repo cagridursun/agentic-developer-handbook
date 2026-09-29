@@ -2,7 +2,7 @@
 
 Labs are the runnable half of the handbook. Each one adds a single concept to the previous lab and leaves a build that still works.
 
-Seven labs are available: [01-model-call](01-model-call/README.md), [02-structured-output](02-structured-output/README.md), [03-tool-calling](03-tool-calling/README.md), [04-rag](04-rag/README.md), [05-memory](05-memory/README.md), [06-skills](06-skills/README.md), and [07-agent-runtime](07-agent-runtime/README.md) — the first lab this handbook calls an agent. Later labs will be added with their milestones. Empty lab directories are not created in advance.
+Eight labs are available: [01-model-call](01-model-call/README.md), [02-structured-output](02-structured-output/README.md), [03-tool-calling](03-tool-calling/README.md), [04-rag](04-rag/README.md), [05-memory](05-memory/README.md), [06-skills](06-skills/README.md), [07-agent-runtime](07-agent-runtime/README.md) — the first lab this handbook calls an agent — and [08-mcp](08-mcp/README.md), where one of that agent's capabilities moves outside the process. Later labs will be added with their milestones. Empty lab directories are not created in advance.
 
 ## What every lab answers
 
@@ -28,13 +28,17 @@ Where it fits the concept, new labs follow an experience-first sequence rather t
 6. Reflect on the trade-offs
 7. Decide whether the capability is actually needed
 
-This is a pedagogical guideline, not a rigid template — natural technical headings beat mechanical ones. [05-memory](05-memory/README.md), [06-skills](06-skills/README.md), and [07-agent-runtime](07-agent-runtime/README.md) are written this way.
+This is a pedagogical guideline, not a rigid template — natural technical headings beat mechanical ones. [05-memory](05-memory/README.md), [06-skills](06-skills/README.md), [07-agent-runtime](07-agent-runtime/README.md), and [08-mcp](08-mcp/README.md) are written this way.
 
 ## After Lab 07
 
 With the agent runtime built, the first composition exercise is available: [Capstone 01 — Build a Small Agentic System](../capstones/01-agentic-system/README.md). Capstones combine concepts the labs have already taught — they never introduce a canonical concept, and they are not numbered labs. The centerpiece is a decisions-first exercise: justify which capabilities the problem needs, and which it deliberately does not.
 
-Beside it, the [Agentic System Readiness Assessment](../assessments/agentic-system-readiness/README.md) turns the same judgment toward your own use case: a fixed order of questions, starting with ordinary software, that helps decide which of these concepts a problem deserves. Neither is a numbered lab; the canonical path continues with Milestone 8 (MCP).
+Beside it, the [Agentic System Readiness Assessment](../assessments/agentic-system-readiness/README.md) turns the same judgment toward your own use case: a fixed order of questions, starting with ordinary software, that helps decide which of these concepts a problem deserves. Neither is a numbered lab; the canonical path continues with [Lab 08 — MCP](08-mcp/README.md), and then Milestone 9 (Evaluation).
+
+## After Lab 08
+
+Lab 08 keeps the Lab 07 agent and moves one capability behind an MCP server in a separate process. It adds no new agent: MCP standardizes how the application reaches a capability it does not own, and the application's allowlist — not the server's `tools/list` — decides what the runtime may use. Capstone 01 deliberately does not use MCP, because every capability in its scenario is local; the readiness assessment asks when a standardized external capability boundary is genuinely needed.
 
 ## How the sequence fits together
 
@@ -55,7 +59,7 @@ The concepts those labs depend on are defined in [docs/mental-model.md](../docs/
 | [`05-memory`](05-memory/README.md) | 5 — Memory |
 | [`06-skills`](06-skills/README.md) | 6 — Skills |
 | [`07-agent-runtime`](07-agent-runtime/README.md) | 7 — Agent Runtime |
-| `08-mcp` | 8 — MCP |
+| [`08-mcp`](08-mcp/README.md) | 8 — MCP |
 | `09-evaluation` | 9 — Evaluation |
 | `10-observability` | 10 — Observability |
 | `11-security` | 11 — Security |

@@ -57,12 +57,17 @@ class SiteEntryTest(unittest.TestCase):
         self.assertIn(REPOSITORY_URL + "/blob/main/labs/01-model-call/README.md", landing)
         self.assertIn("You probably don't need all of these.", landing)
 
-    def test_later_milestones_are_not_presented_as_implemented(self):
+    def test_mcp_is_on_the_path_and_later_milestones_stay_planned(self):
         landing = re.sub(r"\s+", " ", read(SITE / "index.html"))
         self.assertIn("not implemented yet", landing)
         path = landing.split('class="path"')[1].split("</ol>")[0]
-        for planned in ["MCP", "Evaluation", "Observability", "Deployment"]:
-            self.assertNotIn(planned, path)
+        self.assertIn(f'href="{REPOSITORY_URL}/blob/main/labs/08-mcp/README.md">MCP</a>', path)
+        self.assertEqual(8, path.count("<li>"))
+        planned = landing.split('class="roadmap-note"')[1].split("</p>")[0]
+        for milestone in ["Evaluation", "Observability", "Security", "Deployment"]:
+            self.assertNotIn(milestone, path)
+            self.assertIn(milestone, planned)
+        self.assertNotIn("MCP", planned)
 
 
 class ProjectPagesPathTest(unittest.TestCase):

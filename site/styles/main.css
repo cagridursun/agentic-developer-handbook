@@ -398,7 +398,7 @@ textarea:focus-visible {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-columns: repeat(8, minmax(0, 1fr));
   gap: 0.5rem;
   counter-reset: lab;
 }
@@ -1169,7 +1169,6 @@ details.why summary {
 .status-badge.is-consider { background: var(--accent-soft); border-color: var(--accent); }
 .status-badge.is-not-justified { background: var(--paper); color: var(--muted); }
 .status-badge.is-undecided { background: var(--warn-soft); border-color: var(--warn-line); }
-.status-badge.is-future { border-style: dashed; }
 
 .status-rail {
   list-style: none;

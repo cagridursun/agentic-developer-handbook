@@ -82,12 +82,19 @@ class CapstoneDataTest(unittest.TestCase):
             self.assertIn(f'id: "{capability_id}"', self.data, capability_id)
 
     def test_mcp_is_not_a_decision_capability(self):
+        # MCP is taught (Lab 08) and still deliberately excluded: every
+        # capability in this capstone is local.
         self.assertNotIn('id: "mcp"', self.data)
         # The page explains the absence instead. Normalize whitespace because
         # the prose wraps across source lines.
         page = re.sub(r"\s+", " ", read(SITE / "capstone-01" / "index.html"))
         self.assertIn("MCP", page)
-        self.assertIn("has not been taught yet", page)
+        self.assertIn("taught in Lab 08", page)
+        self.assertIn("deliberately not a decision", page)
+        self.assertNotIn("not been taught", page)
+        export = read(SITE / "js" / "markdown-export.js")
+        self.assertIn("taught in Lab 08", export)
+        self.assertNotIn("not been taught", export)
 
     def test_reference_choices_match_reference_decisions_md(self):
         # Parse the REFERENCE_DECISIONS block of capstone.js.

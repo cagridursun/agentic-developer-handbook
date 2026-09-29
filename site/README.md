@@ -1,6 +1,6 @@
 # Interactive learning site
 
-A static, backend-free learning layer over the handbook, published at **<https://cagridursun.github.io/agentic-developer-handbook/>**. It covers two experiences that follow Labs 01–07:
+A static, backend-free learning layer over the handbook, published at **<https://cagridursun.github.io/agentic-developer-handbook/>**. It covers two experiences that build on the labs:
 
 - **Capstone 01 — Build a Small Agentic System**: build and compare. Compose already-taught concepts, then compare with one reference architecture.
 - **Agentic System Readiness Assessment**: decide what architecture a problem deserves. Bring your own use case; a fixed order of questions, starting with ordinary software, derives candidate capabilities by transparent, deterministic rules — no model call, no score — and exports an `ASSESSMENT.md`.

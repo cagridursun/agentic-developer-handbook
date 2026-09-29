@@ -66,14 +66,17 @@ export const QUESTIONS = [
     text: "Is the next useful action genuinely unknown in advance, and dependent on model interpretation of observations?",
     help: "If you can write the sequence of steps down in advance, the answer is no — prefer a fixed workflow.",
   },
+  // Question 8 was reworded when MCP was taught (Lab 08). It has a new id so an
+  // answer stored for the old, broader question — "is anything outside the
+  // process?" — is never silently read as "a standardized boundary is needed".
   {
-    id: "boundary", number: 8, stage: "capabilities", capability: "mcp",
-    text: "Are capabilities outside the process, or shared across hosts or systems?",
-    help: "At most a future consideration. A remote capability does not automatically need MCP; a normal API and client may be simpler. MCP is taught in Milestone 8.",
+    id: "protocolBoundary", number: 8, stage: "capabilities", capability: "mcp",
+    text: "Does the system need a standardized boundary for externally owned capabilities, one that compatible clients can discover and invoke, where an explicit API integration is not enough?",
+    help: "Local code never needs MCP, and one stable service used by one application is usually a normal API client. Yes only when standardized discovery and invocation solve a real integration problem. Discovery is not permission: the allowlist stays in the application.",
   },
 ];
 
-// The seven taught capabilities, plus the protocol boundary as a future candidate.
+// The eight taught capabilities. Each one has to be earned by an answer above.
 export const CAPABILITIES = [
   { id: "model", name: "Model", hint: "Lab 01" },
   { id: "structuredOutput", name: "Structured Output", hint: "Lab 02" },
@@ -82,14 +85,13 @@ export const CAPABILITIES = [
   { id: "memory", name: "Memory", hint: "Lab 05" },
   { id: "skills", name: "Skills", hint: "Lab 06" },
   { id: "agentRuntime", name: "Agent Runtime", hint: "Lab 07" },
-  { id: "mcp", name: "MCP (protocol boundary)", hint: "Milestone 8 — not yet taught", future: true },
+  { id: "mcp", name: "MCP (protocol boundary)", hint: "Lab 08" },
 ];
 
 export const STATUS = {
   consider: "CONSIDER",
   notJustified: "NOT JUSTIFIED",
   undecided: "UNDECIDED",
-  future: "FUTURE CONSIDERATION",
 };
 
 // source: docs/model-vs-decision-authority.md, applied as assessment questions.
