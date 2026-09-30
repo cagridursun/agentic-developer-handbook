@@ -142,7 +142,7 @@ Before: every task prompt = task input + a *copied* procedure, one copy per call
 
 After: task input + a *selected* reusable skill, loaded from one canonical file that can be reviewed, diffed, and improved centrally. Git history is the version history — no registry, no version server.
 
-The proof of this lab is deterministic: it's the difference between the prompts the application builds, not the difference between model outputs. Whether the skill *improves the model's answers* is an evaluation question, and Evaluation is Milestone 9.
+The proof of this lab is deterministic: it's the difference between the prompts the application builds, not the difference between model outputs. Whether the skill *improves the model's answers* is an evaluation question; [Lab 09 — Evaluation](../09-evaluation/README.md) shows how behavior is checked across cases.
 
 ## Skill vs Tool
 

@@ -116,10 +116,16 @@ The architectural questions for any delegation:
 
 Read-only, reversible, validated, budget-bounded decisions are good delegation candidates. Side-effecting, irreversible, authorization-adjacent decisions want deterministic policy or a human — and the model's output becomes an *input* to that authority, not a replacement for it.
 
+## Evaluating a delegation
+
+Delegating a decision to a model is a design choice; checking that the delegation behaves is a separate job. [Lab 09](../labs/09-evaluation/README.md) does not move authority toward the model — evaluation transfers none. It asks whether the influence the application delegated is behaving acceptably *inside* the envelope.
+
+The model may propose "check the recent deployment". The application still decides whether that tool is allowed, whether the arguments are valid, and whether it executes. The evaluation asks a different question about the same delegation: across our cases, does the model propose what we intended? A healthy service that gets a deployment lookup is an allowed, valid, harmless call — and still a regression the evaluation should catch. The envelope stops a bad proposal from executing; the evaluation tells you how often the model makes proposals you would not want.
+
 ## The rule in one place
 
 - **Model:** reason, generate, recommend, propose.
 - **Application / runtime:** constrain, validate, authorize, execute, stop.
 - **Human or business policy:** retains final authority where the risk requires it.
 
-This is the same boundary [Lab 03](../labs/03-tool-calling/README.md) draws for one tool round, [Lab 07](../labs/07-agent-runtime/README.md) draws for the loop, and [Lab 08](../labs/08-mcp/README.md) keeps when a tool moves behind a protocol — stated once, as its own concept, because it applies to every system in this handbook, agentic or not.
+This is the same boundary [Lab 03](../labs/03-tool-calling/README.md) draws for one tool round, [Lab 07](../labs/07-agent-runtime/README.md) draws for the loop, [Lab 08](../labs/08-mcp/README.md) keeps when a tool moves behind a protocol, and [Lab 09](../labs/09-evaluation/README.md) evaluates without changing — stated once, as its own concept, because it applies to every system in this handbook, agentic or not.

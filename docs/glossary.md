@@ -58,7 +58,13 @@ Short working definitions for this handbook. Where two terms are often mixed up,
 
 **Fine-tuning.** Further training that changes model weights. It teaches a relatively stable behavior. It is a poor place to store facts that change every day.
 
-**Evaluation.** A check that the system does what was intended: tests, fixed examples, and human review. A single impressive demo is not an evaluation.
+**Evaluation.** Evidence that the system behaves as intended across representative cases: a fixed set of cases, checks on the outcome and on how the run got there, and human review where a rule cannot judge. A single impressive demo is not an evaluation, and a passing test suite is not one either. See [Lab 09](../labs/09-evaluation/README.md).
+
+**Evaluation set.** A small, versioned, reviewable collection of cases: an input, why the case exists, and the behavior expected of the system, stated as properties rather than as one correct answer. It should hold more than happy paths.
+
+**Trajectory.** What an agent run did on the way to its result: which tools were requested, with which arguments, in what order, after how many model decisions, and why it stopped. Evaluating an agent means evaluating the trajectory as well as the final answer.
+
+**Model judge (LLM-as-a-judge).** A model prompted to grade another output. It can assess qualities a rule cannot, but it is another probabilistic system with its own variance and biases, so it needs calibration against human judgment and is not ground truth.
 
 **Observability.** Evidence from a running system: logs, metrics, and traces for model calls, tool calls, latency, and failures.
 
@@ -95,6 +101,14 @@ REST, gRPC, and SDK clients are general-purpose integration mechanisms. MCP stan
 ## MCP vs A2A
 
 MCP is how one agent reaches tools and data outside its process. A2A is how one agent talks to another agent. Use MCP when the missing piece is a capability. Use A2A when the missing piece is another agent with its own runtime. A method call inside the same application is neither.
+
+## Test vs evaluation
+
+A test asks whether a deterministic component obeys its contract, and it should pass every time. An evaluation asks whether the system, across representative cases, exhibits the behavior we want — in its answer and in its trajectory — and it reports per case and per check. A model-backed system can pass every test and still get worse. Both are needed.
+
+## Evaluation vs observability
+
+Evaluation is controlled evidence about quality: cases you chose, checked before you rely on a version. Observability is runtime evidence about what actually happened: which model and tool ran, how long it took, and where it failed on a real request. Neither replaces the other, and neither is monitoring or security testing.
 
 ## RAG vs fine-tuning
 

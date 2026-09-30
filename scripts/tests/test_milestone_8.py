@@ -3,8 +3,8 @@
 Standard-library unittest only — no Maven, no network. The Java tests in
 labs/08-mcp prove the lab works; these checks keep the rest of the repository
 telling the same story: MCP is taught and available, it is not the headline,
-Capstone 01 still deliberately leaves it out, and nothing after Milestone 8 is
-presented as done.
+Capstone 01 still deliberately leaves it out, and nothing after Milestone 9 is
+presented as done (Milestone 9's own facts live in test_milestone_9.py).
 
 Run from the repository root:
 
@@ -71,30 +71,30 @@ class LabEightExistsTest(unittest.TestCase):
 
 class StatusTest(unittest.TestCase):
 
-    def test_roadmap_marks_eight_done_and_nine_not_started(self):
+    def test_roadmap_marks_eight_done_and_ten_onward_not_started(self):
         eight = milestone(8)
         self.assertTrue(eight.strip().startswith("Done. The lab is [labs/08-mcp](labs/08-mcp/README.md)."),
                         eight[:120])
-        for number in range(9, 13):
+        for number in range(10, 13):
             self.assertTrue(milestone(number).strip().startswith("Not started."), number)
 
-    def test_readme_marks_mcp_implemented_and_evaluation_next(self):
+    def test_readme_marks_mcp_implemented_and_observability_next(self):
         readme = read(REPO_ROOT / "README.md")
         rows = {row.split("|")[1].strip(): row for row in readme.splitlines()
                 if re.match(r"^\| \d+ \|", row)}
         self.assertIn("[Lab 08](labs/08-mcp/README.md)", rows["8"])
-        for number in ["9", "10", "11", "12"]:
+        for number in ["10", "11", "12"]:
             self.assertTrue(rows[number].rstrip().endswith("| Planned |"), rows[number])
         not_yet = next(line for line in readme.splitlines() if "**Not implemented yet:**" in line)
         self.assertNotIn("MCP", not_yet)
-        self.assertIn("evaluation", not_yet)
-        self.assertIn("│   └── 08-mcp/", readme)
-        self.assertIn("evaluation (Milestone 9, next)", normalized(readme))
+        self.assertIn("observability", not_yet)
+        self.assertIn("│   ├── 08-mcp/", readme)
+        self.assertIn("observability (Milestone 10, next)", normalized(readme))
 
-    def test_labs_index_links_lab_eight_only(self):
+    def test_labs_index_links_lab_eight_and_no_later_placeholder(self):
         index = read(REPO_ROOT / "labs" / "README.md")
         self.assertIn("| [`08-mcp`](08-mcp/README.md) | 8 — MCP |", index)
-        self.assertIn("| `09-evaluation` | 9 — Evaluation |", index)
+        self.assertIn("| `10-observability` | 10 — Observability |", index)
 
     def test_mcp_is_not_the_headline(self):
         readme = read(REPO_ROOT / "README.md")
@@ -142,7 +142,7 @@ class ScopeTest(unittest.TestCase):
                               if "jev" in p.name.lower() and ".git" not in p.parts])
 
     def test_no_future_milestone_lab_exists(self):
-        for name in ["09-evaluation", "10-observability", "11-security", "12-production"]:
+        for name in ["10-observability", "11-security", "12-production"]:
             self.assertFalse((REPO_ROOT / "labs" / name).exists(), name)
 
 

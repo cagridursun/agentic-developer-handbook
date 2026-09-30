@@ -199,7 +199,7 @@ RAG does not guarantee correctness. Three things can independently go wrong:
 2. **Context failure** — the source itself is incomplete, stale, or wrong; the model faithfully grounds an answer in bad data.
 3. **Generation failure** — the model misreads or ignores the retrieved content.
 
-Retrieved context is not guaranteed truth, and RAG does not eliminate hallucination — it narrows the space. Measuring this properly is the Evaluation milestone.
+Retrieved context is not guaranteed truth, and RAG does not eliminate hallucination — it narrows the space. Measuring this properly is an evaluation question; [Lab 09](../09-evaluation/README.md) shows how behavior is checked across cases.
 
 ## Production considerations
 

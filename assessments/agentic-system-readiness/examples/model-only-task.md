@@ -95,10 +95,21 @@ The sequence is fixed and short: sanitize → one model call → human edit →
 publish. Nothing in it depends on an observation the application cannot
 anticipate.
 
+## Evaluation plan
+
+- **Representative cases:** a handful of past releases, including one with only
+  internal changes and one with a security fix that must not be published
+  verbatim.
+- **Success:** the draft says what changed for customers, and no internal
+  identifier or customer name appears in it.
+- **Checked deterministically:** ticket ids and hostnames are absent from the
+  draft; the facts the notes require are present.
+- **Needs human judgment:** tone, clarity, and whether the editor would publish
+  it — the human edit stays in the design.
+- **Re-evaluate when:** the style prompt or the model changes.
+
 ## Production questions for later
 
-- **Evaluation:** a handful of past releases with human-approved rewrites as
-  fixed examples; check that no internal identifier leaks into the draft.
 - **Observable:** input size, token cost, how much the editor changes the draft.
 - **Trust boundaries:** the internal notes may contain customer names or
   security fixes that must not be published verbatim — sanitize before the

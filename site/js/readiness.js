@@ -120,8 +120,19 @@ export const RUNTIME_QUESTIONS = {
   ],
 };
 
+// Evaluation is a plan, not a capability: it is asked after the design, never
+// selected like Model or Tools. The old single "evaluation" question was
+// replaced by these five with new ids, so answers stored for it are not
+// reinterpreted; the storage key and state shape are unchanged.
+export const EVALUATION_QUESTIONS = [
+  { id: "evalCases", text: "What representative cases will you use?" },
+  { id: "evalSuccess", text: "What behavior counts as success?" },
+  { id: "evalDeterministic", text: "Which failures can be checked deterministically?" },
+  { id: "evalHuman", text: "Which behaviors require human judgment?" },
+  { id: "evalTriggers", text: "What change would trigger re-evaluation?" },
+];
+
 export const PRODUCTION_QUESTIONS = [
-  { id: "evaluation", text: "How will behavior eventually be evaluated?" },
   { id: "observability", text: "What must be observable?" },
   { id: "trust", text: "What trust and security boundaries exist?" },
 ];

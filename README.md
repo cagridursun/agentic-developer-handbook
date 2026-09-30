@@ -20,16 +20,16 @@ It is not an agent framework, a library catalog, or a skill marketplace.
 
 ```mermaid
 flowchart LR
-    model["Model"] --> structured["Structured Output"] --> tools["Tools"] --> knowledge["Knowledge / RAG"] --> memory["Memory"] --> skills["Skills"] --> runtime["Agent Runtime"] --> mcp["MCP"]
+    model["Model"] --> structured["Structured Output"] --> tools["Tools"] --> knowledge["Knowledge / RAG"] --> memory["Memory"] --> skills["Skills"] --> runtime["Agent Runtime"] --> mcp["MCP"] --> evaluation["Evaluation"]
 ```
 
 This is a learning path, not a mandatory architecture. Stop when the problem is solved. A single LLM call is not an agent. A database lookup does not become RAG because the application also calls a model. A local Java method does not need MCP.
 
-> **Available today:** eight runnable labs — from a single model call to a bounded agent runtime that reaches one capability through MCP — a composition capstone, and an architecture readiness assessment.
+> **Available today:** nine runnable labs — from a single model call to a bounded agent runtime that reaches one capability through MCP, and then a small evaluation of that agent's behavior — a composition capstone, and an architecture readiness assessment.
 >
 > **Start with** [Lab 01 — Your first model call](labs/01-model-call/README.md). `./mvnw verify` builds and tests everything without an API key.
 >
-> **Not implemented yet:** evaluation, observability, security, and deployment — they are the [roadmap](ROADMAP.md), not features.
+> **Not implemented yet:** observability, security, and deployment — they are the [roadmap](ROADMAP.md), not features.
 
 ## Why this project exists
 
@@ -44,7 +44,7 @@ The canonical implementation is Java 27, the current feature release; the handbo
 **New to agentic systems?**
 
 1. Start with [Lab 01](labs/01-model-call/README.md): one model call, and why it is not an agent.
-2. Follow the labs in order through [Lab 07](labs/07-agent-runtime/README.md), the first bounded agent runtime, and [Lab 08](labs/08-mcp/README.md), where one of its capabilities moves outside the process behind MCP. Each lab adds one capability to the last.
+2. Follow the labs in order through [Lab 07](labs/07-agent-runtime/README.md), the first bounded agent runtime, [Lab 08](labs/08-mcp/README.md), where one of its capabilities moves outside the process behind MCP, and [Lab 09](labs/09-evaluation/README.md), where you learn to check that agent's behavior across cases instead of trusting a demo. Each lab adds one concept to the last.
 3. After Lab 07, try [Capstone 01](capstones/01-agentic-system/README.md): compose what you learned around one realistic problem.
 4. Already have a use case? Use the [readiness assessment](assessments/agentic-system-readiness/README.md) to decide whether it needs an LLM, RAG, tools, memory, or an agent at all.
 
@@ -70,7 +70,7 @@ cd agentic-developer-handbook
 | 6 | Skills | How should the agent perform a particular task? | [Lab 06](labs/06-skills/README.md) |
 | 7 | Agent runtime | What owns the loop, the limits, and the decision to stop? | [Lab 07](labs/07-agent-runtime/README.md) — the first lab this handbook calls an agent |
 | 8 | MCP | What changes when a capability lives outside the application? | [Lab 08](labs/08-mcp/README.md) |
-| 9 | Evaluation | How do I know the system does what I intended? | Planned |
+| 9 | Evaluation | How do I know the system does what I intended? | [Lab 09](labs/09-evaluation/README.md) |
 | 10 | Observability | How do I see what it did in production? | Planned |
 | 11 | Security | What has to be checked at each boundary? | Planned |
 | 12 | Deployment | What does it take to run it as a production system? | Planned |
@@ -144,7 +144,8 @@ agentic-developer-handbook/
 │   ├── 05-memory/
 │   ├── 06-skills/
 │   ├── 07-agent-runtime/
-│   └── 08-mcp/
+│   ├── 08-mcp/
+│   └── 09-evaluation/
 ├── capstones/
 │   ├── README.md
 │   └── 01-agentic-system/
@@ -156,13 +157,13 @@ agentic-developer-handbook/
 └── .github/
 ```
 
-[labs/README.md](labs/README.md) describes how labs are written and lists the eight runnable labs.
+[labs/README.md](labs/README.md) describes how labs are written and lists the nine runnable labs.
 
 ## Current status
 
-Labs 01–08 run end to end: from a single model call to a bounded, read-only agent runtime (Lab 07), and then the same runtime reaching one capability that lives in another process through MCP (Lab 08). Capstone 01 and the readiness assessment build on them. The production concerns — evaluation (Milestone 9, next), observability, security, and deployment — remain on the roadmap and are not implemented.
+Labs 01–09 run end to end: from a single model call to a bounded, read-only agent runtime (Lab 07), the same runtime reaching one capability that lives in another process through MCP (Lab 08), and then an evaluation set and a small harness that check that agent's behavior — the final answer and the trajectory — and catch a deliberate regression (Lab 09). Capstone 01 and the readiness assessment build on them. The remaining production concerns — observability (Milestone 10, next), security, and deployment — are on the roadmap and are not implemented.
 
-Nothing here stores embeddings, and the only agent is the bounded runtime introduced in Lab 07; Lab 08 reuses it rather than adding another. This is a learning path, not a production platform. Progress is tracked in [ROADMAP.md](ROADMAP.md) and mirrored to [GitHub milestones](https://github.com/cagridursun/agentic-developer-handbook/milestones).
+Nothing here stores embeddings, and the only agent is the bounded runtime introduced in Lab 07; Labs 08 and 09 reuse it rather than adding another. This is a learning path, not a production platform. Progress is tracked in [ROADMAP.md](ROADMAP.md) and mirrored to [GitHub milestones](https://github.com/cagridursun/agentic-developer-handbook/milestones).
 
 ## Contributing
 

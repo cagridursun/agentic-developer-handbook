@@ -66,8 +66,8 @@ MCP does not create the agent, and it does not decide what the agent may do. A s
 
 Evaluation and observability surround the runtime. They are not steps inside the prompt.
 
-- Evaluation asks whether the system did what we intended, before and after a change.
-- Observability shows what a running system did: which model was called, which tool ran, how long it took, and where it failed.
+- Evaluation asks whether the system behaves as intended across representative cases, before and after a change — in its final answer and in the trajectory that produced it. A test checks that a component obeys its contract; an evaluation checks behavior, and a model-backed system can pass every test while its behavior gets worse. [Lab 09](../labs/09-evaluation/README.md) builds the smallest version of this around the Lab 07 agent.
+- Observability shows what a running system did: which model was called, which tool ran, how long it took, and where it failed. Evaluation gives controlled evidence about quality; observability gives runtime evidence about what actually happened.
 
 Security applies at every boundary, not as a final layer painted on at deployment:
 

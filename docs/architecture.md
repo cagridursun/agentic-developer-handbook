@@ -36,10 +36,14 @@ GitHub Actions runs `./mvnw verify` on pull requests and on pushes to `main`. Th
 
 External model-provider integration tests, when they exist, will be opt-in and will stay out of the default verify path.
 
+## Evaluation is deterministic by default
+
+Evaluation sits around the system, not inside it. [Lab 09](../labs/09-evaluation/README.md) runs the Lab 07 runtime against a small versioned set of cases and checks the trajectory and the final answer with deterministic code. The default run needs no key and makes no model call; scripted behaviors make the harness inspectable, and a live model is an opt-in system version evaluated by the same cases and checks. An evaluation trace is captured for a controlled run and judged against expected behavior. It is not an observability trace: telemetry from a running system is a later milestone.
+
 ## Simplest useful form first
 
 A concept appears first in the smallest form that still teaches it. Structured output begins as "validate a response against a schema", not as a survey of every provider's JSON mode. RAG begins only when a lookup problem actually needs retrieval. The production concerns — evaluation, observability, security, deployment — are later milestones because they are about operating the system, not about defining the first call.
 
 ## What is intentionally absent
 
-There is still no Spring Boot, no Spring AI, no provider abstraction, and no database, broker, or container runtime. Lab 01 uses one provider SDK directly, without a wrapper, because one implementation does not justify an abstraction. Lab 08 uses the official MCP Java SDK the same way — directly, over STDIO, with no framework integration and no generic tool-plugin layer. Infrastructure arrives with the milestone that needs it.
+There is still no Spring Boot, no Spring AI, no provider abstraction, and no database, broker, or container runtime. Lab 01 uses one provider SDK directly, without a wrapper, because one implementation does not justify an abstraction. Lab 08 uses the official MCP Java SDK the same way — directly, over STDIO, with no framework integration and no generic tool-plugin layer. Lab 09 evaluates with a plain-Java harness — no evaluation framework, no dataset format, no judge model, and no stored history. Infrastructure arrives with the milestone that needs it.
