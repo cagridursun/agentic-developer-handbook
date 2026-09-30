@@ -145,6 +145,15 @@ class StatusTest(unittest.TestCase):
         for name in ["Observability", "Security", "Deployment"]:
             self.assertIn(name, planned)
 
+    def test_the_landing_page_counts_the_same_number_of_labs_everywhere(self):
+        landing = normalized(read(SITE / "index.html"))
+        path = landing.split('class="path"')[1].split("</ol>")[0]
+        labs = path.count("<li>")
+        self.assertEqual(9, labs)
+        self.assertIn("Nine runnable Java labs", landing)
+        self.assertIn(f"{labs} runnable Java labs</h3>", landing)
+        self.assertIn("Labs 01 to 09", landing)
+
     def test_no_future_milestone_lab_exists(self):
         for name in ["10-observability", "11-security", "12-production"]:
             self.assertFalse((REPO_ROOT / "labs" / name).exists(), name)
