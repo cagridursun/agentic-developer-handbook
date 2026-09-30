@@ -65,16 +65,22 @@ public final class ReportPrinter {
                 candidate.checksPassed() + " / " + candidate.checksTotal()));
         Map<Dimension, EvaluationReport.Tally> before = baseline.byDimension();
         Map<Dimension, EvaluationReport.Tally> after = candidate.byDimension();
-        for (Dimension dimension : before.keySet()) {
-            EvaluationReport.Tally b = before.get(dimension);
-            EvaluationReport.Tally c = after.getOrDefault(dimension, new EvaluationReport.Tally(0, 0));
+        // Every dimension either version has checks for, so a failure that exists only
+        // for the candidate (say, the baseline never produced an answer) is not hidden.
+        java.util.Set<Dimension> dimensions = java.util.EnumSet.noneOf(Dimension.class);
+        dimensions.addAll(before.keySet());
+        dimensions.addAll(after.keySet());
+        for (Dimension dimension : dimensions) {
+            EvaluationReport.Tally none = new EvaluationReport.Tally(0, 0);
+            EvaluationReport.Tally b = before.getOrDefault(dimension, none);
+            EvaluationReport.Tally c = after.getOrDefault(dimension, none);
             out.println(row(dimension.label(),
                     b.passed() + " / " + b.total(), c.passed() + " / " + c.total()));
         }
 
         List<Comparison.Regression> regressions = comparison.regressions();
         out.println();
-        out.println("Passed for the baseline, fails for the candidate:");
+        out.println("Fails for the candidate, did not fail for the baseline:");
         if (regressions.isEmpty()) {
             out.println("  (none)");
         }

@@ -201,7 +201,7 @@ Bounded execution          12 / 12      12 / 12
 Final outcome              18 / 18      18 / 18
 Evidence discipline        14 / 14      12 / 14
 
-Passed for the baseline, fails for the candidate:
+Fails for the candidate, did not fail for the baseline:
   degraded-after-deployment -> [Evidence discipline] no unsupported root-cause claim
   healthy-service -> [Tool restraint] did not request [getRecentDeployment]
   planned-maintenance -> [Tool restraint] did not request [getRecentDeployment]

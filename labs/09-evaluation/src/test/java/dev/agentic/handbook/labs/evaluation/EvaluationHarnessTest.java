@@ -187,6 +187,52 @@ class EvaluationHarnessTest {
         }
     }
 
+    private static SystemVersion crashing() {
+        return new SystemVersion("crashing", "throws on the first decision", () -> new AgentModel() {
+            @Override
+            public ModelDecision start(String goal) {
+                throw new IllegalStateException("provider unavailable");
+            }
+
+            @Override
+            public ModelDecision observe(ToolExchange exchange) {
+                throw new IllegalStateException("provider unavailable");
+            }
+        });
+    }
+
+    @Test
+    void aCandidateThatCrashesIsReportedAsRegressionsNotJustCountedAsRegressedCases() {
+        EvaluationReport crashed = EvaluationRunner.run(HelioIncidentsV1.NAME, CASES, crashing());
+        Comparison comparison = new Comparison(BASELINE, crashed);
+
+        assertEquals(CASES.size(), comparison.regressedCaseIds().size());
+        Set<String> reported = comparison.regressions().stream()
+                .map(Comparison.Regression::caseId).collect(Collectors.toSet());
+        assertEquals(Set.copyOf(comparison.regressedCaseIds()), reported,
+                "every regressed case has at least one listed regression");
+        assertTrue(comparison.regressions().stream().allMatch(r -> r.checkName().equals("the run completed")));
+        String text = printed(out -> ReportPrinter.printComparison(out, comparison));
+        assertTrue(text.contains("REGRESSIONS FOUND: " + CASES.size() + " check(s) in " + CASES.size() + " case(s)"));
+    }
+
+    @Test
+    void aCheckThatAlreadyFailedForTheBaselineIsNotARegression() {
+        EvaluationReport crashed = EvaluationRunner.run(HelioIncidentsV1.NAME, CASES, crashing());
+        Comparison comparison = new Comparison(crashed, crashed);
+        assertTrue(comparison.regressions().isEmpty());
+        assertTrue(comparison.regressedCaseIds().isEmpty());
+    }
+
+    @Test
+    void theComparisonTableShowsADimensionThatOnlyTheCandidateHasChecksFor() {
+        // The crashed baseline only has bounded-execution checks; the candidate has all five dimensions.
+        EvaluationReport crashed = EvaluationRunner.run(HelioIncidentsV1.NAME, CASES, crashing());
+        String text = printed(out -> ReportPrinter.printComparison(out, new Comparison(crashed, CANDIDATE)));
+        assertTrue(text.contains("Evidence discipline"), text);
+        assertTrue(text.contains("Tool restraint"), text);
+    }
+
     @Test
     void aModelGetsAFreshInstancePerCase() {
         int[] created = {0};
