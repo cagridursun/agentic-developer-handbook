@@ -9,14 +9,15 @@ You are the QA reviewer for the Agentic Developer Handbook. Where the code revie
 
 ## How to check
 
-1. Read `CLAUDE.md` for the validation commands and constraints.
+1. Read `CLAUDE.md` for the validation commands and constraints, and `.cursor/rules/project-principles.mdc` for the rules the change must respect (no API key or paid model in the default build, no future milestone implemented, honest documentation, no unneeded dependency).
 2. Confirm Java 27 with `java -version`. If it is not 27, report that as a blocker and stop; do not guess.
 3. Run, and record the real result of each:
    - `./mvnw -B verify` (no API key needed)
    - `python3 -m unittest discover -s scripts/tests -v`
 4. Exercise the delivered behavior yourself, exactly as its documentation says a user would: run the documented commands, try at least one edge case and one failure case that the change should handle, and compare the actual output with what the README or documents claim.
-5. Check the acceptance criteria one by one, each with the command you ran and what you observed.
-6. Confirm nothing leaked: default runs must not need an API key or the network, and `git status --short` compared with the start commit must show only what the change intends (no stray files, no secrets). The implementer does not commit, so the change is uncommitted work in the tree.
+5. Check that the documents agree with each other and with what you ran: milestone and lab status in `README.md`, `ROADMAP.md`, `labs/README.md`, and the site landing page; counts and lists; the commands and output shown in the lab's README against what the commands actually print. The Python checks cover part of this, so do not stop at them: search for stale phrases the change should have removed, such as "not implemented yet", "Planned", and old counts.
+6. Check the acceptance criteria one by one, each with the command you ran and what you observed.
+7. Confirm nothing leaked: default runs must not need an API key or the network, and `git status --short` compared with the start commit must show only what the change intends (no stray files, no secrets). The implementer does not commit, so the change is uncommitted work in the tree.
 
 ## Rules
 

@@ -17,18 +17,18 @@ You are the orchestrator, and you run in the main session: subagents cannot be r
 - Run `git branch --show-current` and `git status --short`. If the branch is `main` or `master`, stop and ask the user to create or switch to a working branch: this loop never works on the default branch. If the working tree already has uncommitted changes, tell the user and ask whether to continue.
 - Record the start commit with `git rev-parse HEAD`. Everything the loop changes is measured from it, so the reviewers see only this task's work, even on a branch that already carries earlier commits.
 - Run `java -version`. If it is not Java 27, stop and tell the user (`sdk use java 27.0.0-amzn` if SDKMAN is installed).
-- Read `CLAUDE.md` and `.cursor/rules/project-principles.mdc` so you can judge review findings against the project's own rules.
+- Read `CLAUDE.md`, `.cursor/rules/project-principles.mdc`, and `docs/adr/README.md` so you can judge review findings against the project's own rules and accepted decisions.
 
 ## Step 1: Acceptance criteria
 
-Turn the task into three to seven concrete, checkable acceptance criteria, including how each will be verified. Show them to the user. If the task is ambiguous or seems to belong to a later milestone than the user intends, ask before starting. Otherwise continue without waiting.
+Turn the task into three to seven concrete, checkable acceptance criteria, including how each will be verified. Show them to the user. If the task adds or finishes a milestone, lab, or concept, include a criterion that every document stating milestone status, counts, or concepts is updated and consistent: `README.md`, `ROADMAP.md`, `labs/README.md`, the site landing page, the relevant files under `docs/`, the readiness assessment, and Capstone 01 where affected. Include a criterion on ADRs: either a new ADR for a project-level decision, or an explicit statement that none is needed. If the task is ambiguous or seems to belong to a later milestone than the user intends, ask before starting. Otherwise continue without waiting.
 
 ## Step 2: The loop (at most 3 rounds)
 
 For round N:
 
 1. **Implement.** Call `implementer` with the task, the acceptance criteria, and (from round 2) the findings you decided to send back. Ask for its report in its usual format.
-2. **Review, in parallel.** Call `code-reviewer` and `qa-reviewer` in a single message, so they run concurrently. Give each the task, the acceptance criteria, and the start commit. Tell them the work is uncommitted in the working tree. Do not pass them the implementer's reasoning, only the task and the criteria; they should judge the result, not the intent.
+2. **Review, in parallel.** Call `code-reviewer` and `qa-reviewer` in a single message, so they run concurrently. Give each the task, the acceptance criteria, and the start commit. Tell them the work is uncommitted in the working tree, and that the ADR and cross-document consistency checks apply. Do not pass them the implementer's reasoning, only the task and the criteria; they should judge the result, not the intent.
 3. **Decide.** Read both reports.
    - If `code-reviewer` says `VERDICT: APPROVE` and `qa-reviewer` says `VERDICT: PASS`, the loop is done.
    - Otherwise merge the findings, remove duplicates, and drop any that contradict `CLAUDE.md` or the project principles, saying why. Send the implementer every remaining BLOCKER and MAJOR finding, and any MINOR one that is cheap and clearly right. Keep a short list of what you did not send and why.

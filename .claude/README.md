@@ -27,5 +27,6 @@ The loop shows its acceptance criteria, runs the roles, and stops when both revi
 - Changes are measured from the commit the loop started at, and the implementer does not commit. The reviewers therefore read the working tree, and the loop also works on a branch that already carries earlier commits.
 - Reviewers cannot edit. They report, and the implementer fixes.
 - The orchestration runs in the main session, because it is the one place that can start subagents.
+- The agents read the project's rules at run time instead of copying them: `CLAUDE.md`, `.cursor/rules/project-principles.mdc`, the ADRs under `docs/adr/`, and the handbook documents under `docs/`. Editing those files changes the agents' behavior without touching `.claude/`. Reviewers also check that documents stay consistent with each other, because a milestone changes many of them at once.
 - The agents follow `CLAUDE.md` and `.cursor/rules/project-principles.mdc`, including the rule that no AI tool is ever a commit author or co-author.
 - Local, personal settings belong in `.claude/settings.local.json`, which should not be committed.
