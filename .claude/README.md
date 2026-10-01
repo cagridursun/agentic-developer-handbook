@@ -19,7 +19,7 @@ These files configure an optional **implement, code review, QA review** loop for
    /implement-loop <what you want implemented>
    ```
 
-The loop shows its acceptance criteria, runs the roles, and stops when both reviewers approve or after three rounds. It never commits, pushes, or opens a pull request; you decide that after reading its report.
+The loop shows its acceptance criteria, runs the roles, and stops when both reviewers approve or after three rounds. When both approve, the implementer commits the task's files, pushes the branch, and opens a pull request against the default branch; the loop never merges, so you decide that after reading the pull request. If the loop stops without approval, nothing is committed. Shipping needs the GitHub CLI (`gh`) to be installed and authenticated.
 
 ## Design notes
 
