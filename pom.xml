@@ -22,6 +22,7 @@
     <module>labs/06-skills</module>
     <module>labs/07-agent-runtime</module>
     <module>labs/08-mcp</module>
+    <module>labs/09-evaluation</module>
     <module>capstones/01-agentic-system/starter</module>
     <module>capstones/01-agentic-system/reference</module>
   </modules>

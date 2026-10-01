@@ -94,10 +94,21 @@ A fixed number of retrieved passages per question keeps each call bounded.
 
 Retrieve → one model call. Both steps are known before the question arrives.
 
+## Evaluation plan
+
+- **Representative cases:** a fixed set of real engineer questions with the
+  sections that answer them, including one the manuals cannot answer.
+- **Success:** the answer comes from the retrieved passages and cites them; when
+  the manuals are silent, it says so instead of guessing.
+- **Checked deterministically:** retrieval returns the section that answers the
+  question, and every cited section was actually retrieved.
+- **Needs human judgment:** whether the answer is correct and usable, and
+  whether an unanswerable question was declined.
+- **Re-evaluate when:** the manuals, the retrieval method, the prompt, or the
+  model changes.
+
 ## Production questions for later
 
-- **Evaluation:** a fixed set of real engineer questions with the sections that
-  answer them; check retrieval hits the right section and the answer cites it.
 - **Observable:** the retrieved sections per question, "no answer found" rate,
   latency, token cost.
 - **Trust boundaries:** retrieved manual text is input to the prompt and should

@@ -132,13 +132,33 @@ _Answer._
 _Answer: why is a fixed workflow, a single model call, or ordinary software
 sufficient? Write down the known sequence of steps._
 
-## Production questions for later
+## Evaluation plan
 
-Ask these now; answer them in Milestones 9–11. Do not implement them here.
+If a model influences any decision, plan how its behavior will be evaluated *before* relying on it. This is not a capability to select and not a framework to choose: it is how you find out whether the architecture above is doing its job. [Lab 09](../../labs/09-evaluation/README.md) teaches the concepts. If no model influences a decision, write "No model-influenced decisions" and stop.
 
-### How will behavior eventually be evaluated?
+### What representative cases will you use?
+
+_Answer: more than the happy path — an ordinary case, a case where the right behavior is to do less, an awkward or ambiguous case, and a failure case._
+
+### What behavior counts as success?
+
+_Answer: properties, not one correct answer — for the final result and, for an agent, for the trajectory that produced it._
+
+### Which failures can be checked deterministically?
 
 _Answer._
+
+### Which behaviors require human judgment?
+
+_Answer._
+
+### What change would trigger re-evaluation?
+
+_Answer: a new prompt, model, tool, skill, retrieved source, or runtime rule._
+
+## Production questions for later
+
+Ask these now; answer them in Milestones 10 and 11. Do not implement them here.
 
 ### What must be observable?
 

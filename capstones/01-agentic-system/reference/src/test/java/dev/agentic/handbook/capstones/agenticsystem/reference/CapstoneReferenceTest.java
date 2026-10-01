@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
  * Deterministic tests for the composed reference: retrieval, skill loading,
  * context construction, and the bounded runtime. These prove application
  * behavior — they do NOT prove the agent is good. Systematic behavioral
- * evaluation is Milestone 9.
+ * evaluation is taught in Lab 09.
  */
 class CapstoneReferenceTest {
 

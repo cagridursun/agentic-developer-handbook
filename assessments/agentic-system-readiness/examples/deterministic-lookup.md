@@ -89,11 +89,15 @@ The normal request latency budget of the order page. No tokens.
 A single request handler is the whole design: validate id → authorize → read
 → render.
 
+## Evaluation plan
+
+No model-influenced decisions. Ordinary API tests for each status cover the
+component contracts; there is no model behavior to evaluate.
+
 ## Production questions for later
 
-Ordinary software answers: API tests for each status, request metrics and error
-rates, and the existing authorization checks. No model-specific evaluation is
-needed because no model exists.
+Ordinary software answers: request metrics and error rates, and the existing
+authorization checks.
 
 ## Final architecture shape
 

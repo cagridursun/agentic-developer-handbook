@@ -8,7 +8,7 @@ The learning path is a teaching sequence, not an architecture every application 
 
 ## Track A — Canonical Learning Path
 
-The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 8 are done. Later milestones are planned work and are not implemented.
+The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 9 are done. Later milestones are planned work and are not implemented.
 
 ### Milestone 0 — Foundation
 
@@ -74,9 +74,9 @@ Connect the runtime to external capabilities through the Model Context Protocol.
 
 ### Milestone 9 — Evaluation
 
-Not started.
+Done. The lab is [labs/09-evaluation](labs/09-evaluation/README.md).
 
-Check behavior with tests and reviewable examples. Paid provider calls stay opt-in so normal CI does not need API keys.
+Check behavior, not only components: a small versioned evaluation set, checks on both the final answer and the trajectory, and a baseline-versus-candidate comparison that makes a regression visible. Paid provider calls stay opt-in so normal CI does not need API keys.
 
 ### Milestone 10 — Observability
 
@@ -148,7 +148,7 @@ Curated contribution areas, each opened only after the canonical path has taught
 
 Standing constraints: this must not become an uncurated example dump, a provider catalog, or a skill marketplace. An example must teach an architectural decision, not only library syntax. The acceptance questions are in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Future candidate, recorded rather than scheduled — to consider only after Milestone 9 (Evaluation), and not part of the canonical learning path: a comparative decision-model example that puts three approaches side by side on the same decision problem — deterministic rules, a general LLM with structured output, and Jev as a specialized probabilistic decision model. Its purpose would be to teach that not every probabilistic decision needs a general generative model, that a typed probabilistic decision is not an agent, and that model influence is not decision authority, with evaluation comparing behavior, uncertainty, and — where reproducible — latency and cost. It would make no vendor or performance claims.
+Future candidate, recorded rather than scheduled — Milestone 9 (Evaluation) is now done, so the prerequisite is met; it is still not scheduled, not started, and not part of the canonical learning path: a comparative decision-model example that puts three approaches side by side on the same decision problem — deterministic rules, a general LLM with structured output, and Jev as a specialized probabilistic decision model. Its purpose would be to teach that not every probabilistic decision needs a general generative model, that a typed probabilistic decision is not an agent, and that model influence is not decision authority, with evaluation comparing behavior, uncertainty, and — where reproducible — latency and cost. It would make no vendor or performance claims.
 
 ## Track D — Reference Application
 
@@ -191,7 +191,7 @@ In progress.
 
 Established:
 
-- The experience-first format validated in Labs 05, 06, 07, and 08: limitation → naive approach → failure → design → reflection → decision
+- The experience-first format validated in Labs 05, 06, 07, 08, and 09: limitation → naive approach → failure → design → reflection → decision
 - Reflection sections in each experience-first lab
 - "Do I actually need this?" decision checkpoints reinforcing that not every capability is needed
 - [Capstone 01 — Build a Small Agentic System](capstones/01-agentic-system/README.md): composing already-taught concepts with a decisions-first exercise and a reference that deliberately excludes capabilities

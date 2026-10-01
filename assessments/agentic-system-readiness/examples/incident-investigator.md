@@ -131,10 +131,25 @@ minutes; the handoff says so when the budget ended the run early.
   exception the model can retry forever; the handoff lists what could not be
   checked as an unknown.
 
+## Evaluation plan
+
+- **Representative cases:** replay past incidents with recorded tool results — a
+  degraded service after a deployment, a healthy service, a degraded service
+  with no deployment, and an unknown service.
+- **Success:** for the trajectory, it inspects what each case justifies and
+  nothing more, stays inside its step budget, and stops for the intended
+  reason; for the handoff, it states no root cause the observations do not
+  support.
+- **Checked deterministically:** required and forbidden tool requests, their
+  arguments, the budget, the stop reason, and unsupported causal claims — the
+  checks [Lab 09](../../../labs/09-evaluation/README.md) builds.
+- **Needs human judgment:** whether the handoff is what the on-call engineer
+  would want.
+- **Re-evaluate when:** the prompt, the model, a tool, a runbook, or a runtime
+  limit changes.
+
 ## Production questions for later
 
-- **Evaluation:** replay past incidents with recorded tool results; check the
-  handoff never states a root cause the observations do not support.
 - **Observable:** every proposed step, every rejection, every tool call with
   its arguments, token cost and duration per run.
 - **Trust boundaries:** tool results and runbooks are data, not instructions;

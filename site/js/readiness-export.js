@@ -5,7 +5,7 @@
 
 import {
   QUESTIONS, CAPABILITIES, AUTHORITY_QUESTIONS, RUNTIME_QUESTIONS,
-  PRODUCTION_QUESTIONS, STATUS,
+  EVALUATION_QUESTIONS, PRODUCTION_QUESTIONS, STATUS,
 } from "./readiness.js";
 import { summarize } from "./readiness-logic.js";
 
@@ -90,8 +90,14 @@ export function buildAssessmentMarkdown(state) {
     push("### If not using one", "", text(state.runtime.workflowWhy), "");
   }
 
+  push("## Evaluation plan", "");
+  push("Not a capability: how behavior will be checked before it is relied on. Lab 09 teaches the concepts.", "");
+  for (const item of EVALUATION_QUESTIONS) {
+    push(`### ${item.text}`, "", text(state.production[item.id]), "");
+  }
+
   push("## Production questions for later", "");
-  push("Asked now, answered in Milestones 9–11. Not implemented here.", "");
+  push("Asked now, answered in Milestones 10 and 11. Not implemented here.", "");
   for (const item of PRODUCTION_QUESTIONS) {
     push(`### ${item.text}`, "", text(state.production[item.id]), "");
   }

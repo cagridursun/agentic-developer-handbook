@@ -113,4 +113,8 @@ A remote capability does not automatically require MCP, and MCP does not replace
 
 ## Production questions, asked early
 
-The template ends with questions for later milestones — how behavior will be evaluated, what must be observable, which trust and security boundaries exist. The assessment asks them so the design leaves room for the answers. It does not implement evaluation, observability, or security; those are Milestones 9–11.
+## Evaluation plan, and production questions asked early
+
+If a model influences any decision, the template asks for an evaluation plan before the design is relied on: which representative cases, what behavior counts as success, which failures can be checked deterministically, which need human judgment, and what change would trigger re-evaluation. Evaluation is not another row in the capability table. It is not a runtime capability you add; it is how you find out whether the capabilities you chose are behaving. The assessment does not recommend an evaluation framework and does not evaluate anything — [Lab 09](../../labs/09-evaluation/README.md) teaches the concepts.
+
+The template still ends with two questions for later milestones — what must be observable, and which trust and security boundaries exist. The assessment asks them so the design leaves room for the answers. It does not implement observability or security; those are Milestones 10 and 11.

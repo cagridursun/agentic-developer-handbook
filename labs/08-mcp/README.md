@@ -397,7 +397,7 @@ But "every test passes" is not the same as "the system behaves correctly". Does 
 
 > Does this system actually behave correctly?
 
-That is **Milestone 9 — Evaluation**. Not implemented here.
+That is **Milestone 9 — Evaluation**, taught in [Lab 09](../09-evaluation/README.md). Not implemented here.
 
 ## Sources consulted
 
