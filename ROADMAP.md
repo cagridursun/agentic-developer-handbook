@@ -8,7 +8,7 @@ The learning path is a teaching sequence, not an architecture every application 
 
 ## Track A — Canonical Learning Path
 
-The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 9 are done. Later milestones are planned work and are not implemented.
+The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 10 are done. Later milestones are planned work and are not implemented.
 
 ### Milestone 0 — Foundation
 
@@ -80,9 +80,9 @@ Check behavior, not only components: a small versioned evaluation set, checks on
 
 ### Milestone 10 — Observability
 
-Not started.
+Done. The lab is [labs/10-observability](labs/10-observability/README.md).
 
-Logs, metrics, and traces for model calls and tool execution. OpenTelemetry is the intended direction when this milestone starts. It is not a dependency yet.
+Reconstruct what one real run did: a trace id shared by every span, nested model-call, decision, validation, and tool spans, a few structured log lines, a handful of in-memory metrics, and a diagnosis of a realistic failure from the trace. The lab teaches logs, metrics, and traces with a small plain-Java model and explains OpenTelemetry as the production ecosystem; it adds no OpenTelemetry dependency, no backend, and no collector. What may be recorded, and who may read it, is Milestone 11.
 
 ### Milestone 11 — Security
 
@@ -191,7 +191,7 @@ In progress.
 
 Established:
 
-- The experience-first format validated in Labs 05, 06, 07, 08, and 09: limitation → naive approach → failure → design → reflection → decision
+- The experience-first format validated in Labs 05, 06, 07, 08, 09, and 10: limitation → naive approach → failure → design → reflection → decision
 - Reflection sections in each experience-first lab
 - "Do I actually need this?" decision checkpoints reinforcing that not every capability is needed
 - [Capstone 01 — Build a Small Agentic System](capstones/01-agentic-system/README.md): composing already-taught concepts with a decisions-first exercise and a reference that deliberately excludes capabilities

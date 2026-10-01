@@ -94,10 +94,14 @@ A single request handler is the whole design: validate id → authorize → read
 No model-influenced decisions. Ordinary API tests for each status cover the
 component contracts; there is no model behavior to evaluate.
 
+## Observability plan
+
+No model-influenced decisions. Ordinary software observability is enough:
+request metrics and error rates, and a request id in the logs.
+
 ## Production questions for later
 
-Ordinary software answers: request metrics and error rates, and the existing
-authorization checks.
+The existing authorization checks.
 
 ## Final architecture shape
 

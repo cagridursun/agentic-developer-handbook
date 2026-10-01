@@ -4,8 +4,8 @@ Standard-library unittest only — no Maven, no network. The Java tests in
 labs/09-evaluation prove the harness works; these checks keep the rest of the
 repository telling the same story: evaluation is taught and available, it is
 not another runtime capability, the capstone does not depend on it, no
-evaluation or observability platform crept in, and nothing after Milestone 9
-is presented as done.
+evaluation or observability platform crept in, and nothing after Milestone 10
+is presented as done (Milestone 10's own facts live in test_milestone_10.py).
 
 Run from the repository root:
 
@@ -111,30 +111,30 @@ class LabNineExistsTest(unittest.TestCase):
 
 class StatusTest(unittest.TestCase):
 
-    def test_roadmap_marks_nine_done_and_ten_onward_not_started(self):
+    def test_roadmap_marks_nine_done_and_eleven_onward_not_started(self):
         nine = milestone(9)
         self.assertTrue(nine.strip().startswith(
             "Done. The lab is [labs/09-evaluation](labs/09-evaluation/README.md)."), nine[:120])
-        for number in range(10, 13):
+        for number in range(11, 13):
             self.assertTrue(milestone(number).strip().startswith("Not started."), number)
 
-    def test_readme_marks_evaluation_implemented_and_observability_next(self):
+    def test_readme_marks_evaluation_implemented_and_security_next(self):
         readme = read(REPO_ROOT / "README.md")
         rows = {row.split("|")[1].strip(): row for row in readme.splitlines()
                 if re.match(r"^\| \d+ \|", row)}
         self.assertIn("[Lab 09](labs/09-evaluation/README.md)", rows["9"])
-        for number in ["10", "11", "12"]:
+        for number in ["11", "12"]:
             self.assertTrue(rows[number].rstrip().endswith("| Planned |"), rows[number])
         not_yet = next(line for line in readme.splitlines() if "**Not implemented yet:**" in line)
         self.assertNotIn("evaluation", not_yet)
-        self.assertIn("observability", not_yet)
-        self.assertIn("│   └── 09-evaluation/", readme)
-        self.assertIn("observability (Milestone 10, next)", normalized(readme))
+        self.assertIn("security", not_yet)
+        self.assertIn("│   ├── 09-evaluation/", readme)
+        self.assertIn("security (Milestone 11, next)", normalized(readme))
 
     def test_labs_index_links_lab_nine_only(self):
         index = read(REPO_ROOT / "labs" / "README.md")
         self.assertIn("| [`09-evaluation`](09-evaluation/README.md) | 9 — Evaluation |", index)
-        self.assertIn("| `10-observability` | 10 — Observability |", index)
+        self.assertIn("| [`10-observability`](10-observability/README.md) | 10 — Observability |", index)
 
     def test_landing_page_shows_evaluation_implemented_and_the_rest_planned(self):
         landing = normalized(read(SITE / "index.html"))
@@ -142,20 +142,21 @@ class StatusTest(unittest.TestCase):
         self.assertIn("/blob/main/labs/09-evaluation/README.md\">Evaluation</a>", path)
         planned = landing.split('class="roadmap-note"')[1].split("</p>")[0]
         self.assertNotIn("Evaluation", planned)
-        for name in ["Observability", "Security", "Deployment"]:
+        self.assertNotIn("Observability", planned)
+        for name in ["Security", "Deployment"]:
             self.assertIn(name, planned)
 
     def test_the_landing_page_counts_the_same_number_of_labs_everywhere(self):
         landing = normalized(read(SITE / "index.html"))
         path = landing.split('class="path"')[1].split("</ol>")[0]
         labs = path.count("<li>")
-        self.assertEqual(9, labs)
-        self.assertIn("Nine runnable Java labs", landing)
+        self.assertEqual(10, labs)
+        self.assertIn("Ten runnable Java labs", landing)
         self.assertIn(f"{labs} runnable Java labs</h3>", landing)
-        self.assertIn("Labs 01 to 09", landing)
+        self.assertIn("Labs 01 to 10", landing)
 
     def test_no_future_milestone_lab_exists(self):
-        for name in ["10-observability", "11-security", "12-production"]:
+        for name in ["11-security", "12-production"]:
             self.assertFalse((REPO_ROOT / "labs" / name).exists(), name)
 
     def test_evaluation_is_not_the_headline(self):
@@ -199,9 +200,10 @@ class EvaluationIsNotACapabilityTest(unittest.TestCase):
         self.assertIn("does not recommend an evaluation framework", self.readme)
         self.assertIn("labs/09-evaluation/README.md", self.readme)
 
-    def test_later_questions_are_only_observability_and_security(self):
+    def test_later_question_is_only_security(self):
         template_tail = self.template.split("## Production questions for later")[1].split("## Final")[0]
-        self.assertIn("Milestones 10 and 11", template_tail)
+        self.assertIn("Milestone 11", template_tail)
+        self.assertNotIn("Milestones 10 and 11", template_tail)
         self.assertNotIn("Milestones 9", read(SITE / "readiness-assessment" / "index.html"))
         self.assertNotIn("Milestones 9", read(SITE / "js" / "readiness-export.js"))
         for path in [ASSESSMENT_DIR / "README.md", ASSESSMENT_DIR / "ASSESSMENT.md"]:

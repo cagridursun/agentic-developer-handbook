@@ -66,7 +66,21 @@ Short working definitions for this handbook. Where two terms are often mixed up,
 
 **Model judge (LLM-as-a-judge).** A model prompted to grade another output. It can assess qualities a rule cannot, but it is another probabilistic system with its own variance and biases, so it needs calibration against human judgment and is not ground truth.
 
-**Observability.** Evidence from a running system: logs, metrics, and traces for model calls, tool calls, latency, and failures.
+**Observability.** The ability to reconstruct what a running system did from the data it records: logs, metrics, and traces for model calls, tool calls, latency, and failures. It observes the system; it does not decide anything for it. See [Lab 10](../labs/10-observability/README.md).
+
+**Telemetry.** The data an observable system emits about itself: its logs, metrics, and traces.
+
+**Instrumentation.** The code that produces telemetry, such as starting and ending a span around a model call or a tool call.
+
+**Log.** One timestamped event record, ideally with structured fields, such as `event=tool_call tool=getServiceStatus status=OK`. A log says what happened at one moment.
+
+**Metric.** A numeric measurement aggregated over time or across runs, such as `agent.tool.calls = 8`. A metric summarizes; it cannot explain one run.
+
+**Trace.** The structured record of one request or run and its nested operations, made of spans that share one correlation id. For an agent, one trace holds the model calls, decisions, and tool calls of one run.
+
+**Span.** One unit of work inside a trace: what it was, which span it belongs to, when it started and ended, how it ended, and a few attributes.
+
+**Correlation ID.** An identifier shared by everything that belongs to one run (in a trace, the trace id), so logs and spans of one execution can be found and separated from all others.
 
 **Guardrail.** A check the application enforces on input or output. Schema validation, allow-lists, and human approval are guardrails. An instruction in the prompt is not a guardrail, and it is not authorization.
 
@@ -108,7 +122,11 @@ A test asks whether a deterministic component obeys its contract, and it should 
 
 ## Evaluation vs observability
 
-Evaluation is controlled evidence about quality: cases you chose, checked before you rely on a version. Observability is runtime evidence about what actually happened: which model and tool ran, how long it took, and where it failed on a real request. Neither replaces the other, and neither is monitoring or security testing.
+Evaluation is controlled evidence about quality: cases you chose, checked before you rely on a version. Observability is runtime evidence about what actually happened: which model and tool ran, how long it took, and where it failed on a real request. Neither replaces the other, and neither is monitoring or security testing. A trace of one failed run can become a new evaluation case; an evaluation set will never cover every real request.
+
+## Observability vs logging
+
+A print statement records that something happened. Observability needs the events to carry consistent structure, a correlation id, context, timestamps and durations, and relationships between them, so one run can be reconstructed. Logs are one of its three signals, not the whole of it, and observing does not mean recording every byte: what may be recorded is a security question.
 
 ## RAG vs fine-tuning
 

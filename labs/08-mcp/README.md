@@ -277,7 +277,7 @@ MCP requests sent: 1
 
 Read the two proposals in step 1 and step 2 side by side: they have the same shape. Only the **route** — chosen by the runtime — differs. "MCP requests sent" counts what actually crossed the process boundary: nothing, for a proposal the application refused.
 
-This is educational output, not observability. Logs, metrics, and traces are Milestone 10.
+This is educational output, not observability. Logs, metrics, and traces are taught in [Lab 10](../10-observability/README.md).
 
 ## Failure boundaries
 
@@ -381,7 +381,7 @@ MCP is not automatically better than REST, gRPC, or an SDK client. If you do ado
 ## What we STILL do not have
 
 - No evaluation of whether the agent behaves correctly
-- No observability — the trace is printed text, not telemetry
+- No observability — the trace is printed text, not telemetry ([Lab 10](../10-observability/README.md) teaches observability)
 - No authentication or authorization between client and server (STDIO inherits the parent's trust; network transports need real auth)
 - No MCP resources, prompts, sampling, elicitation, roots, or completions
 - No Streamable HTTP, no remote or hosted servers, no multiple servers, no server registry

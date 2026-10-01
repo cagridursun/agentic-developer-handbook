@@ -5,7 +5,7 @@
 
 import {
   QUESTIONS, CAPABILITIES, AUTHORITY_QUESTIONS, RUNTIME_QUESTIONS,
-  EVALUATION_QUESTIONS, PRODUCTION_QUESTIONS, STATUS,
+  EVALUATION_QUESTIONS, OBSERVABILITY_QUESTIONS, PRODUCTION_QUESTIONS, STATUS,
 } from "./readiness.js";
 import { summarize } from "./readiness-logic.js";
 
@@ -96,8 +96,14 @@ export function buildAssessmentMarkdown(state) {
     push(`### ${item.text}`, "", text(state.production[item.id]), "");
   }
 
+  push("## Observability plan", "");
+  push("Not a capability: how a failed run will be reconstructed. Lab 10 teaches the concepts.", "");
+  for (const item of OBSERVABILITY_QUESTIONS) {
+    push(`### ${item.text}`, "", text(state.production[item.id]), "");
+  }
+
   push("## Production questions for later", "");
-  push("Asked now, answered in Milestones 10 and 11. Not implemented here.", "");
+  push("Asked now, answered in Milestone 11. Not implemented here.", "");
   for (const item of PRODUCTION_QUESTIONS) {
     push(`### ${item.text}`, "", text(state.production[item.id]), "");
   }

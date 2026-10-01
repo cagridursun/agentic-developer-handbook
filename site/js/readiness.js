@@ -132,8 +132,19 @@ export const EVALUATION_QUESTIONS = [
   { id: "evalTriggers", text: "What change would trigger re-evaluation?" },
 ];
 
+// Observability is also a plan, not a capability. The old single
+// "observability" production question was replaced by these six with new ids, so answers stored for it are not reinterpreted; the
+// storage key and state shape are unchanged.
+export const OBSERVABILITY_QUESTIONS = [
+  { id: "obsReconstruct", text: "How will you reconstruct a failed agent run?" },
+  { id: "obsLogged", text: "What should be logged?" },
+  { id: "obsNeverLogged", text: "What should never be logged?" },
+  { id: "obsCorrelation", text: "How will model and tool calls be correlated?" },
+  { id: "obsMetrics", text: "What metrics indicate unhealthy behavior?" },
+  { id: "obsTrace", text: "What trace information is needed for diagnosis?" },
+];
+
 export const PRODUCTION_QUESTIONS = [
-  { id: "observability", text: "What must be observable?" },
   { id: "trust", text: "What trust and security boundaries exist?" },
 ];
 

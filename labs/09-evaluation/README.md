@@ -119,7 +119,7 @@ For an agent, the final answer is the smallest part of the behavior. Two runs ca
 
 [`AgentRunResult`](src/main/java/dev/agentic/handbook/labs/evaluation/AgentRunResult.java) already carries all of that — the same plain record as Labs 07 and 08 — and adds `requests()`: every tool the model *asked for*, including a rejected one that ended the run. A trajectory is what was proposed, not only what was executed; the unknown-service case depends on it.
 
-**An evaluation trace is not an observability trace.** This one is captured for a controlled run and judged against expected behavior. Observability traces are runtime telemetry from a production system. They answer a different question, and they are Milestone 10. Nothing here is OpenTelemetry, and nothing here is production logging.
+**An evaluation trace is not an observability trace.** This one is captured for a controlled run and judged against expected behavior. Observability traces are runtime telemetry from a production system. They answer a different question, and they are taught in [Lab 10](../10-observability/README.md). Nothing here is OpenTelemetry, and nothing here is production logging.
 
 ## Evaluate the final answer
 
@@ -232,7 +232,7 @@ Other pairs that get confused:
 - **Demo ≠ evaluation.** A demo shows that something can work. An evaluation shows how often, and where, it does not.
 - **Evaluation dataset ≠ production traffic.** The set is hand-picked and fixed; production is whatever users send. A good set is informed by production, and never a substitute for watching it.
 - **Final-answer quality ≠ whole-agent quality.** An answer can be right for the wrong reasons, or wrong after a flawless trajectory.
-- **Observability ≠ evaluation.** Observability shows what happened on a real request. Evaluation gives controlled evidence about quality on cases you chose. Milestone 10.
+- **Observability ≠ evaluation.** Observability shows what happened on a real request. Evaluation gives controlled evidence about quality on cases you chose. Taught in [Lab 10](../10-observability/README.md).
 - **Evaluation ≠ monitoring.** Monitoring watches a running system over time. Evaluation checks a version, before you rely on it.
 - **Evaluation ≠ security testing.** Whether a hostile input can subvert the system is a different question with different cases and a different mindset. Milestone 11.
 
@@ -359,7 +359,7 @@ After this lab, we can say something about how the system behaves on cases we ch
 - How often does a given behavior occur in production?
 - How do I connect the events of one run, across a model call, a tool, and a remote server?
 
-Evaluation gives controlled evidence about quality. Observability gives runtime evidence about what actually happened. That is **Milestone 10 — Observability**. Not implemented here.
+Evaluation gives controlled evidence about quality. Observability gives runtime evidence about what actually happened. That is **Milestone 10 — Observability**, taught in [Lab 10](../10-observability/README.md). Not implemented in this lab.
 
 ## Sources consulted
 
