@@ -128,7 +128,7 @@ Model decision: FINAL ANSWER
 Stop reason: FINAL_ANSWER
 ```
 
-This is educational output, not observability. Logs, metrics, traces, and token accounting are Milestone 10.
+This is educational output, not observability. Logs, metrics, traces, and token accounting are taught in [Lab 10](../10-observability/README.md).
 
 ## Why do we call this an agent now?
 

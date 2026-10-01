@@ -38,12 +38,22 @@ External model-provider integration tests, when they exist, will be opt-in and w
 
 ## Evaluation is deterministic by default
 
-Evaluation sits around the system, not inside it. [Lab 09](../labs/09-evaluation/README.md) runs the Lab 07 runtime against a small versioned set of cases and checks the trajectory and the final answer with deterministic code. The default run needs no key and makes no model call; scripted behaviors make the harness inspectable, and a live model is an opt-in system version evaluated by the same cases and checks. An evaluation trace is captured for a controlled run and judged against expected behavior. It is not an observability trace: telemetry from a running system is a later milestone.
+Evaluation sits around the system, not inside it. [Lab 09](../labs/09-evaluation/README.md) runs the Lab 07 runtime against a small versioned set of cases and checks the trajectory and the final answer with deterministic code. The default run needs no key and makes no model call; scripted behaviors make the harness inspectable, and a live model is an opt-in system version evaluated by the same cases and checks. An evaluation trace is captured for a controlled run and judged against expected behavior. It is not an observability trace: the record of what one run actually did is the subject of the next section.
+
+## Three planes, and the observability plane only observes
+
+A model-backed system can be described as three planes. They are a way to think about responsibilities, not a layering every application must implement and not a package structure.
+
+- **Control plane:** decision authority, validation, safety constraints, tool permissions. The application owns it. The allowlist and the step budget live here.
+- **Execution plane:** model calls, tools, MCP, memory, and the observations that flow back. This is the work the run does.
+- **Observability plane:** logs, metrics, and traces about the other two.
+
+The observability plane **observes**; it never decides. Nothing the runtime branches on should come from telemetry, and the system must make the same decisions with recording switched off. [Lab 10](../labs/10-observability/README.md) instruments the Lab 07 runtime this way: a span records that the model proposed a tool, that the application validated it, and that the tool executed it, and recording the validation grants nothing. Keep it small: a trace id, a few spans, and a handful of counters teach the architecture, and a telemetry platform is not required to understand it. What may be recorded, and who may read it, is the next milestone's question.
 
 ## Simplest useful form first
 
-A concept appears first in the smallest form that still teaches it. Structured output begins as "validate a response against a schema", not as a survey of every provider's JSON mode. RAG begins only when a lookup problem actually needs retrieval. The production concerns — evaluation, observability, security, deployment — are later milestones because they are about operating the system, not about defining the first call.
+A concept appears first in the smallest form that still teaches it. Structured output begins as "validate a response against a schema", not as a survey of every provider's JSON mode. RAG begins only when a lookup problem actually needs retrieval. Evaluation and observability are covered by Labs 09 and 10. The remaining production concerns — security and deployment — are later milestones because they are about operating the system, not about defining the first call.
 
 ## What is intentionally absent
 
-There is still no Spring Boot, no Spring AI, no provider abstraction, and no database, broker, or container runtime. Lab 01 uses one provider SDK directly, without a wrapper, because one implementation does not justify an abstraction. Lab 08 uses the official MCP Java SDK the same way — directly, over STDIO, with no framework integration and no generic tool-plugin layer. Lab 09 evaluates with a plain-Java harness — no evaluation framework, no dataset format, no judge model, and no stored history. Infrastructure arrives with the milestone that needs it.
+There is still no Spring Boot, no Spring AI, no provider abstraction, and no database, broker, or container runtime. Lab 01 uses one provider SDK directly, without a wrapper, because one implementation does not justify an abstraction. Lab 08 uses the official MCP Java SDK the same way — directly, over STDIO, with no framework integration and no generic tool-plugin layer. Lab 09 evaluates with a plain-Java harness — no evaluation framework, no dataset format, no judge model, and no stored history. Lab 10 uses an in-memory, plain-Java trace model — no OpenTelemetry, no collector, no tracing or metrics backend, and no stored traces. Infrastructure arrives with the milestone that needs it.

@@ -108,9 +108,23 @@ anticipate.
   it — the human edit stays in the design.
 - **Re-evaluate when:** the style prompt or the model changes.
 
+## Observability plan
+
+- **Reconstructing a bad draft:** the notes version, the model and its settings,
+  the prompt version, and the draft the model returned, tied together by one
+  request id.
+- **Logged:** request id, model name, input size, token usage if the provider
+  reports it, duration, and outcome.
+- **Never logged:** customer names or security details from the internal notes,
+  and any credentials.
+- **Correlation:** the single model call carries the request id.
+- **Unhealthy metrics:** failed calls, token use per request, and how much the
+  editor changes the draft.
+- **Trace for diagnosis:** one span for the model call; there are no tools or
+  steps to relate.
+
 ## Production questions for later
 
-- **Observable:** input size, token cost, how much the editor changes the draft.
 - **Trust boundaries:** the internal notes may contain customer names or
   security fixes that must not be published verbatim — sanitize before the
   prompt, review after.

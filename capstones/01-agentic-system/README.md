@@ -92,6 +92,8 @@ Explicit live run (Gemini decides the steps, same bounded runtime, requires `GOO
 
 A note on what the tests prove: they prove application behavior — retrieval selection, tool order, validation, stopping. They do **not** prove "this agent is good." Systematic behavioral evaluation — checking the trajectory and the final answer across representative cases — is what [Lab 09](../../labs/09-evaluation/README.md) teaches, and this capstone does not pretend to be it. Finishing the capstone does not depend on Lab 09; if you read it afterward, ask what you would evaluate here: which cases, and which behavior would count as success.
 
+Three different questions are easy to blur. Verification asks whether the code obeys its contracts. Evaluation asks whether behavior met expectations across cases. Observability — [Lab 10](../../labs/10-observability/README.md) — asks what happened during one execution. Each serves a different purpose, and none replaces another. Finishing the capstone does not depend on Lab 10 either.
+
 ## Reflection
 
 1. Which capability did you initially want to use but eventually reject?

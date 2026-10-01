@@ -107,10 +107,24 @@ Retrieve → one model call. Both steps are known before the question arrives.
 - **Re-evaluate when:** the manuals, the retrieval method, the prompt, or the
   model changes.
 
+## Observability plan
+
+- **Reconstructing a wrong answer:** the question, the sections retrieved with
+  their ids, the prompt version, and the answer returned, tied together by one
+  request id.
+- **Logged:** request id, retrieved section ids and ranks, model name,
+  duration, and whether the answer was "no answer found".
+- **Never logged:** the full text of customer questions that contain personal
+  data, and any credentials.
+- **Correlation:** the request id shared by the retrieval step and the model
+  call.
+- **Unhealthy metrics:** "no answer found" rate, latency, and token cost per
+  question.
+- **Trace for diagnosis:** a retrieval span (which sections) and a model span
+  (what it was given).
+
 ## Production questions for later
 
-- **Observable:** the retrieved sections per question, "no answer found" rate,
-  latency, token cost.
 - **Trust boundaries:** retrieved manual text is input to the prompt and should
   be treated as data, not instructions; permission filtering happens before
   retrieval results reach the model.

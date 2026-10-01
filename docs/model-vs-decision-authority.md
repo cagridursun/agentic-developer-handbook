@@ -122,10 +122,16 @@ Delegating a decision to a model is a design choice; checking that the delegatio
 
 The model may propose "check the recent deployment". The application still decides whether that tool is allowed, whether the arguments are valid, and whether it executes. The evaluation asks a different question about the same delegation: across our cases, does the model propose what we intended? A healthy service that gets a deployment lookup is an allowed, valid, harmless call — and still a regression the evaluation should catch. The envelope stops a bad proposal from executing; the evaluation tells you how often the model makes proposals you would not want.
 
+## Observing a delegation
+
+A trace can make the boundary visible after the fact. [Lab 10](../labs/10-observability/README.md) records, for each proposed tool call, three spans with three different actors: the model proposed the call (`AGENT_DECISION`), the application validated and allowed or refused it (`TOOL_VALIDATION`), and the tool executed it (`TOOL_EXECUTION`). A run in which the model proposes the same lookup four times shows four proposals, four allowances, and four executions, and a step budget that stopped it — the control that ended the run was the application's.
+
+Recording is not authorizing. The actor on a span is a label that says who acted; it grants nothing, and no decision in the runtime comes from the trace. A trace of a model decision is evidence about the delegation, not a reason to trust it.
+
 ## The rule in one place
 
 - **Model:** reason, generate, recommend, propose.
 - **Application / runtime:** constrain, validate, authorize, execute, stop.
 - **Human or business policy:** retains final authority where the risk requires it.
 
-This is the same boundary [Lab 03](../labs/03-tool-calling/README.md) draws for one tool round, [Lab 07](../labs/07-agent-runtime/README.md) draws for the loop, [Lab 08](../labs/08-mcp/README.md) keeps when a tool moves behind a protocol, and [Lab 09](../labs/09-evaluation/README.md) evaluates without changing — stated once, as its own concept, because it applies to every system in this handbook, agentic or not.
+This is the same boundary [Lab 03](../labs/03-tool-calling/README.md) draws for one tool round, [Lab 07](../labs/07-agent-runtime/README.md) draws for the loop, [Lab 08](../labs/08-mcp/README.md) keeps when a tool moves behind a protocol, [Lab 09](../labs/09-evaluation/README.md) evaluates without changing, and [Lab 10](../labs/10-observability/README.md) records without changing — stated once, as its own concept, because it applies to every system in this handbook, agentic or not.

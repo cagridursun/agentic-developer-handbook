@@ -148,10 +148,24 @@ minutes; the handoff says so when the budget ended the run early.
 - **Re-evaluate when:** the prompt, the model, a tool, a runbook, or a runtime
   limit changes.
 
+## Observability plan
+
+- **Reconstructing a failed run:** a trace of the run: every model call, every
+  proposed step, whether the application allowed or rejected it, every tool call
+  with its arguments and a summary of its result, and the stop reason.
+  [Lab 10](../../../labs/10-observability/README.md) shows the shape.
+- **Logged:** structured events with the run id, span id, tool name, status, and
+  duration.
+- **Never logged:** credentials, authorization headers, and whole tool payloads;
+  summaries only.
+- **Correlation:** one run id on every model call and tool call.
+- **Unhealthy metrics:** runs that end in the step limit or an error, tool
+  errors and rejections, steps per run, and run duration.
+- **Trace for diagnosis:** the ordered, nested spans of one run, so a repeated
+  tool call or a rejected proposal is visible.
+
 ## Production questions for later
 
-- **Observable:** every proposed step, every rejection, every tool call with
-  its arguments, token cost and duration per run.
 - **Trust boundaries:** tool results and runbooks are data, not instructions;
   arguments are validated against known service names; the runtime's identity
   is read-only.

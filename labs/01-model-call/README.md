@@ -100,7 +100,7 @@ Not implemented here, deliberately. A production caller of this exact code would
 - **Cost tracking**: every call is billed; log token usage per request.
 - **Rate limits**: providers throttle by requests and tokens per minute.
 - **Model configuration**: temperature, maximum output tokens, and safety settings are explicit request options, not defaults to inherit blindly.
-- **Observability**: record which model, which prompt version, latency, and outcome. The observability milestone covers this properly.
+- **Observability**: record which model, which prompt version, latency, and outcome. [Lab 10](../10-observability/README.md) covers this properly.
 
 ## Sources consulted
 

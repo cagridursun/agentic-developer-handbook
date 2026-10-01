@@ -67,7 +67,32 @@ MCP does not create the agent, and it does not decide what the agent may do. A s
 Evaluation and observability surround the runtime. They are not steps inside the prompt.
 
 - Evaluation asks whether the system behaves as intended across representative cases, before and after a change — in its final answer and in the trajectory that produced it. A test checks that a component obeys its contract; an evaluation checks behavior, and a model-backed system can pass every test while its behavior gets worse. [Lab 09](../labs/09-evaluation/README.md) builds the smallest version of this around the Lab 07 agent.
-- Observability shows what a running system did: which model was called, which tool ran, how long it took, and where it failed. Evaluation gives controlled evidence about quality; observability gives runtime evidence about what actually happened.
+- Observability shows what a running system did: which model was called, which tool ran, how long it took, and where it failed. Evaluation gives controlled evidence about quality; observability gives runtime evidence about what actually happened. [Lab 10](../labs/10-observability/README.md) records one run of the Lab 07 agent as a trace.
+
+Observability wraps the whole run. It records every step and changes none of them:
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│ OBSERVABILITY: logs / metrics / traces                               │
+└──────────────────────────────────────────────────────────────────────┘
+                                  ▲
+                                  │  the run emits events; a person reads them
+                                  ▼
+User → Agent Runtime → Model → Decision → Tool / MCP → Observation
+                         ▲                                  │
+                         └─────── next Model decision ◄─────┘
+                                  │
+                                  ▼
+                           Final response
+```
+
+The two-way arrow is about information, not control. The run emits events into observability, and a person reads them afterwards to understand the run. Nothing flows back into the run's decisions: observability observes, it does not decide. The same events mean different things in the three signals:
+
+- A **log** is one timestamped event: `event=tool_call tool=getServiceStatus status=OK`.
+- A **metric** is a number aggregated across runs: `agent.tool.calls = 8`.
+- A **trace** is the structured record of one run: a tree of spans that share one correlation id, so a model decision, the tool call it proposed, and the tool result belong together.
+
+Logs tell you individual events, metrics tell you aggregate behavior, and traces tell you how events belong to one run. An agent benefits from traces because one request becomes a chain of decisions, tool calls, and observations.
 
 Security applies at every boundary, not as a final layer painted on at deployment:
 

@@ -156,13 +156,37 @@ _Answer._
 
 _Answer: a new prompt, model, tool, skill, retrieved source, or runtime rule._
 
+## Observability plan
+
+If a model influences any decision, decide *before* a run fails how you will reconstruct it afterwards. This is not a capability to select and not a tool to choose: it is what lets you answer "what actually happened during this run?" when evaluation did not predict the failure. [Lab 10](../../labs/10-observability/README.md) teaches the concepts. If no model influences a decision, write "No model-influenced decisions" and stop.
+
+### How will you reconstruct a failed agent run?
+
+_Answer: which questions you must be able to answer afterwards — which model was called, which decisions were made, which tools ran with which arguments, what they returned, and why the run stopped._
+
+### What should be logged?
+
+_Answer: events with structure and context, not free text._
+
+### What should never be logged?
+
+_Answer: secrets, credentials, and data you have no reason to keep. Observable does not mean record every byte._
+
+### How will model and tool calls be correlated?
+
+_Answer: what identifier ties every model call and tool call of one run together._
+
+### What metrics indicate unhealthy behavior?
+
+_Answer: a few counts or durations across runs, and what each cannot tell you._
+
+### What trace information is needed for diagnosis?
+
+_Answer: the steps of one run, their order and relationships, durations, and failure details._
+
 ## Production questions for later
 
-Ask these now; answer them in Milestones 10 and 11. Do not implement them here.
-
-### What must be observable?
-
-_Answer._
+Ask this now; answer it in Milestone 11. Do not implement it here.
 
 ### What trust and security boundaries exist?
 
