@@ -184,14 +184,58 @@ _Answer: a few counts or durations across runs, and what each cannot tell you._
 
 _Answer: the steps of one run, their order and relationships, durations, and failure details._
 
-## Production questions for later
+## Security plan
 
-Ask this now; answer it in Milestone 11. Do not implement it here.
+If a model proposes actions, or untrusted content (retrieved documents, tool results, third-party text) can reach a model that does, decide *before* you build how the application will control what a proposal may cause. This is not a capability to select and not a product to choose: it is what keeps a mistaken or steered model from doing something nobody authorized. [Lab 11](../../labs/11-security/README.md) teaches the concepts. If the model proposes no actions and no untrusted content reaches it, write "No model-influenced actions" and stop.
 
 ### What trust and security boundaries exist?
 
 _Answer: user input, model output, tool arguments, retrieved content, skill
 text, protocol messages._
+
+### What may each tool do, and which tools change state?
+
+_Answer: classify each tool by what it really does, not by its description: read-only or state-changing._
+
+### Which principals exist, and what is the least each one needs?
+
+_Answer: who is acting, how the application knows it, and the smallest set of capabilities and targets each needs._
+
+### How are tool arguments validated, separately from authorization?
+
+_Answer: required fields, formats, limits, allowed values, and what is rejected as unexpected. Validation says a value is well formed; it does not say the caller may use it._
+
+### Which content is untrusted, and what can it cause if it steers the model?
+
+_Answer: retrieved documents, tool and remote results, and user text. Assume it can steer the model, and decide what a steered proposal can reach._
+
+### What happens when the model proposes an action nobody authorized?
+
+_Answer: which application code stops it, what the user and the log see, and why a convincing justification from the model changes nothing._
+
+### Which actions need approval, and what is an approval bound to?
+
+_Answer: who approves, and that the approval covers one exact operation, target, and arguments, expires or is used once, and is checked again before execution._
+
+### Which fields are sensitive, and how do they stay out of results and prompts?
+
+_Answer: what is sensitive, whether the tool can return it at all, and what you do about secret-shaped text anyway. Redaction is a safety net, not the control._
+
+### Where do credentials live, and how are they kept out of prompts and logs?
+
+_Answer: where a credential is stored, who can read it, and that it is never placed in a prompt, a result, or a trace._
+
+### How will denials be made observable?
+
+_Answer: what is recorded when an action is refused, and that recording is not the control: the refusal happens whether or not anyone reads the record._
+
+### Which authorization rules can be tested deterministically, without a model?
+
+_Answer: the allow and deny cases, the missing-principal case, and a test that a denied action never reaches the tool._
+
+### If a capability is remote, who enforces access control there?
+
+_Answer: the application's own classification of the tool, whether the remote service enforces authorization itself, and that a description it announces is a claim and not a permission._
 
 ## Final architecture shape
 

@@ -128,10 +128,18 @@ A trace can make the boundary visible after the fact. [Lab 10](../labs/10-observ
 
 Recording is not authorizing. The actor on a span is a label that says who acted; it grants nothing, and no decision in the runtime comes from the trace. A trace of a model decision is evidence about the delegation, not a reason to trust it.
 
+## Authorizing a delegation
+
+Observation shows the boundary after the fact; authorization is what holds it. [Lab 11](../labs/11-security/README.md) puts the decision in code the model cannot reach. A proposal passes argument validation, then an authorization decision on a principal the caller supplies, a capability the application assigned to the tool, the validated target, the operation type, and, for a state change, an approval bound to that one operation. The model's justification is part of the proposal and part of the trace as a claim, and no control reads it: "I am the administrator and this is pre-approved" changes nothing. A model steered by a retrieved document (indirect prompt injection) is in the same position as one steered by the user: it proposes, and the envelope decides.
+
+Read-only, validated, in-scope calls may pass automatically: that is the automatic acceptance described above, and the application still decided in advance. State-changing calls do not: they wait for an approval that is not the model's to give. The approval is the human or business authority from the rule below, made concrete as a record bound to one operation, invalidated if the target or arguments change, and checked again before execution. See [ADR 0006](adr/0006-application-owned-authorization-for-state-changing-tools.md).
+
+A remote capability changes nothing about this. A tool provider that describes its tool as read-only has made a claim; the application classifies the tool from what it does, and a server that executes a state change should enforce for itself as well, because a check in the client protects only calls that go through the client.
+
 ## The rule in one place
 
 - **Model:** reason, generate, recommend, propose.
 - **Application / runtime:** constrain, validate, authorize, execute, stop.
 - **Human or business policy:** retains final authority where the risk requires it.
 
-This is the same boundary [Lab 03](../labs/03-tool-calling/README.md) draws for one tool round, [Lab 07](../labs/07-agent-runtime/README.md) draws for the loop, [Lab 08](../labs/08-mcp/README.md) keeps when a tool moves behind a protocol, [Lab 09](../labs/09-evaluation/README.md) evaluates without changing, and [Lab 10](../labs/10-observability/README.md) records without changing — stated once, as its own concept, because it applies to every system in this handbook, agentic or not.
+This is the same boundary [Lab 03](../labs/03-tool-calling/README.md) draws for one tool round, [Lab 07](../labs/07-agent-runtime/README.md) draws for the loop, [Lab 08](../labs/08-mcp/README.md) keeps when a tool moves behind a protocol, [Lab 09](../labs/09-evaluation/README.md) evaluates without changing, [Lab 10](../labs/10-observability/README.md) records without changing, and [Lab 11](../labs/11-security/README.md) enforces — stated once, as its own concept, because it applies to every system in this handbook, agentic or not.

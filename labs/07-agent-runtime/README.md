@@ -174,7 +174,7 @@ Nothing relies on "the model will eventually stop."
 
 ## The model is not the executor
 
-Model-generated tool names and arguments are untrusted input. The allowlist is a visible `switch` — never reflection — and every argument is validated before a Java method runs. Tools are read-only by design: side-effecting actions (deploy, restart, send, delete) drag in authorization, approval, idempotency, rollback, and audit. Those matter, and none of them are needed to understand the loop. High-impact actions behind human approval is the production pattern; it is named here, not implemented.
+Model-generated tool names and arguments are untrusted input. The allowlist is a visible `switch` — never reflection — and every argument is validated before a Java method runs. Tools are read-only by design: side-effecting actions (deploy, restart, send, delete) drag in authorization, approval, idempotency, rollback, and audit. Those matter, and none of them are needed to understand the loop. High-impact actions behind human approval is the production pattern; it is named here, not implemented — [Lab 11](../11-security/README.md) builds a small, simulated version of it.
 
 ## Reflection
 
@@ -207,7 +207,7 @@ If it is justified, decide before writing the loop: What actions are allowed? Wh
 
 - No MCP and no remote tools
 - No side-effecting tools
-- No human approval flow
+- No human approval flow ([Lab 11](../11-security/README.md) builds a small, simulated one)
 - No durable agent state
 - No automatic skill routing
 - No parallel tool execution

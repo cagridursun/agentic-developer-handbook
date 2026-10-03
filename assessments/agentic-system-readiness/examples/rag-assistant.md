@@ -123,11 +123,29 @@ Retrieve → one model call. Both steps are known before the question arrives.
 - **Trace for diagnosis:** a retrieval span (which sections) and a model span
   (what it was given).
 
-## Production questions for later
+## Security plan
 
-- **Trust boundaries:** retrieved manual text is input to the prompt and should
-  be treated as data, not instructions; permission filtering happens before
-  retrieval results reach the model.
+- **Boundaries:** retrieved manual text is input to the prompt and is data, not
+  instructions. Permission filtering happens before retrieval results reach the
+  model, because the model cannot be asked to keep a document secret.
+- **Tools and state changes:** the only tool is the retrieval lookup, which is
+  read-only. There is no state-changing tool, so there is no approval flow.
+- **Principals and least privilege:** the retrieval runs as the asking user, so
+  it can return only what that user may already read. A broad service identity
+  would make the assistant a way around permissions.
+- **Validation:** the query is length-limited text; the manual identifier, if
+  there is one, is validated against known ids.
+- **Untrusted content:** a manual page can contain text that tries to steer the
+  model (indirect prompt injection). With no state-changing tool, the worst
+  outcome is a misleading answer, so answers cite the passages used and are
+  labelled as drawn from them. [Lab 11](../../../labs/11-security/README.md)
+  shows the controls for tools that change state.
+- **Sensitive data and credentials:** the retrieval index is not given secrets,
+  and keys never enter a prompt or a log.
+- **Denials and tests:** a denied retrieval is logged with its reason, and the
+  "this user may not read that manual" case is a deterministic test with no
+  model.
+- **Remote capability:** none.
 
 ## Final architecture shape
 

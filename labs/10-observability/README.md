@@ -500,7 +500,7 @@ Questions this lab does not solve:
 - Can tool results leak sensitive data into a log or a trace?
 - How should tenant and user boundaries work in recorded data?
 
-That is **Milestone 11 — Security**. Not implemented here.
+That is **Milestone 11 — Security**, taught in [Lab 11](../11-security/README.md). This lab does not solve it, and its redactor is still only the heuristic described above.
 
 ## Sources consulted
 
