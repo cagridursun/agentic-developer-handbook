@@ -82,6 +82,32 @@ Short working definitions for this handbook. Where two terms are often mixed up,
 
 **Correlation ID.** An identifier shared by everything that belongs to one run (in a trace, the trace id), so logs and spans of one execution can be found and separated from all others.
 
+**Threat model.** A short, explicit account of what is being protected (assets), who acts (actors), where trust changes (trust boundaries), and which properties are threatened (confidentiality, integrity, availability, accountability). It separates what is assumed, what is a threat, what is a control, and what risk remains. See [Lab 11](../labs/11-security/README.md).
+
+**Trust boundary.** A place where data or a request crosses from one level of trust to another, such as user input into the model, retrieved content into the prompt, a model's output into a tool call, or a call to a remote tool provider. Each crossing needs a decision made by application code.
+
+**Authentication.** Establishing who is making a request. It is not authorization, and the model never performs it: a principal the model merely names is not an authenticated principal. Lab 11 does not implement authentication; the caller supplies the principal.
+
+**Authorization.** The application's decision about whether an authenticated principal may perform an operation on a target, given the operation's type and any approval. It is code, not a prompt, and it fails closed. See [LLM vs Decision Authority](model-vs-decision-authority.md).
+
+**Least privilege.** Granting a principal or a tool only the capabilities and the scope the task needs, so that a compromised or mistaken caller can cause only limited harm. A read-only role, a short scope, and tools classified by what they really do are the working form of it.
+
+**Prompt injection.** Text that changes a model's behavior in a way the application developer did not intend. Because a model does not separate instructions from data, it cannot be fully prevented by prompting; the defense is to limit what a steered model can cause. Not a synonym for a jailbreak, which is the subset aimed at safety rules.
+
+**Direct prompt injection.** Prompt injection in the input a user supplies to the model.
+
+**Indirect prompt injection.** Prompt injection in content the model retrieves or receives from elsewhere, such as a document, a ticket, a web page, or a tool result. The user did not write it and may not see it.
+
+**Input validation.** Checking that a value is well formed for its purpose: present, the right type and format, within limits, and nothing unexpected. It is not authorization: a well-formed request can still be one the caller may not make.
+
+**Sensitive information.** Data that must not be exposed through a result, a prompt, a log, or a trace: credentials, personal data, and confidential business data. What counts as sensitive is a decision the application makes in advance.
+
+**Secret redaction.** Removing known secret values and secret-shaped text from what is recorded or returned. It is a heuristic safety net: a secret in a shape it does not know passes through, so it supports, and does not replace, keeping secrets out of results in the first place.
+
+**Approval boundary.** The point at which a state-changing operation waits for an approval bound to exactly that operation: its tool, target, arguments, requester, and approver. An approval for one operation does not authorize another, and it is checked again before execution.
+
+**Security event.** A named record of a security-relevant decision, such as an authorization denial, a validation failure, an approval, a redaction, or an execution, recorded in the trace. It records; it does not enforce.
+
 **Guardrail.** A check the application enforces on input or output. Schema validation, allow-lists, and human approval are guardrails. An instruction in the prompt is not a guardrail, and it is not authorization.
 
 **Model proposal.** A candidate action or recommendation produced by the model that still passes through application controls before anything happens. A proposal is influence, not execution.
@@ -127,6 +153,14 @@ Evaluation is controlled evidence about quality: cases you chose, checked before
 ## Observability vs logging
 
 A print statement records that something happened. Observability needs the events to carry consistent structure, a correlation id, context, timestamps and durations, and relationships between them, so one run can be reconstructed. Logs are one of its three signals, not the whole of it, and observing does not mean recording every byte: what may be recorded is a security question.
+
+## Validation vs authorization
+
+Validation asks whether a value is well formed for the tool: present, the right type, within limits, nothing unexpected. Authorization asks whether this caller may do this to this target. `restartService(billing, ROLLING, 30)` is valid for everyone and authorized for few. A request can fail either check and pass the other, so they are separate stages, and neither is a model's job. See [Lab 11](../labs/11-security/README.md).
+
+## Observability vs enforcement
+
+A trace records that an action was denied. Authorization is what denies it. Logging a denial does not prevent the action, and a system that makes a security decision by reading its own telemetry has made telemetry an authority. Observability observes; the application's controls decide.
 
 ## RAG vs fine-tuning
 

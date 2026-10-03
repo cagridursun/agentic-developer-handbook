@@ -164,11 +164,31 @@ minutes; the handoff says so when the budget ended the run early.
 - **Trace for diagnosis:** the ordered, nested spans of one run, so a repeated
   tool call or a rejected proposal is visible.
 
-## Production questions for later
+## Security plan
 
-- **Trust boundaries:** tool results and runbooks are data, not instructions;
-  arguments are validated against known service names; the runtime's identity
-  is read-only.
+- **Boundaries:** tool results and runbooks are data, not instructions.
+- **Tools and state changes:** every tool is read-only (status and deployment
+  lookups). That is a classification of what the tools do, written in code, not
+  of what a description says. A restart or rollback would be a state-changing
+  tool and would need authorization and an approval before it is added;
+  [Lab 11](../../../labs/11-security/README.md) shows the shape.
+- **Principals and least privilege:** the runtime's identity is read-only and
+  limited to the services in scope.
+- **Validation:** arguments are validated against known service names and
+  incident id formats, and an argument the tool does not declare is rejected,
+  separately from authorization.
+- **Untrusted content:** a runbook or an incident note can contain an
+  instruction. The model may propose a call because of it; the application's
+  allowlist, validation, and the read-only identity decide whether it runs, and
+  none of them reads the model's justification.
+- **Sensitive data and credentials:** results return only allowlisted fields;
+  credentials stay in the application and out of prompts and traces.
+- **Denials and tests:** a refused proposal is recorded with its reason; the
+  allow, deny, and missing-principal cases are deterministic tests, including
+  that a denied call never reaches the tool.
+- **Remote capability:** none in this design. If one were added behind MCP, the
+  application would classify its tools itself and the remote service would
+  enforce access control too.
 
 ## Final architecture shape
 

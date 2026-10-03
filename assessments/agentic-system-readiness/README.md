@@ -111,12 +111,12 @@ Is the capability local?
 
 A remote capability does not automatically require MCP, and MCP does not replace REST, gRPC, or an SDK client; an MCP server can even sit in front of one. If MCP is a candidate, the decision-authority questions still apply in full: a server announcing a tool does not make it executable. The application keeps the allowlist — discovery is not permission — and another autonomous agent is not an MCP question at all (A2A and multi-agent systems come later).
 
-## Production questions, asked early
-
-## Evaluation plan, and production questions asked early
+## Evaluation, observability, and security plans
 
 If a model influences any decision, the template asks for an evaluation plan before the design is relied on: which representative cases, what behavior counts as success, which failures can be checked deterministically, which need human judgment, and what change would trigger re-evaluation. Evaluation is not another row in the capability table. It is not a runtime capability you add; it is how you find out whether the capabilities you chose are behaving. The assessment does not recommend an evaluation framework and does not evaluate anything — [Lab 09](../../labs/09-evaluation/README.md) teaches the concepts.
 
 If a model influences any decision, the template also asks for an observability plan: how you would reconstruct a failed run, what should and should never be logged, how model and tool calls are correlated, which metrics would indicate unhealthy behavior, and what trace information diagnosis needs. Like evaluation, observability is not a row in the capability table and the assessment recommends no observability framework or product; [Lab 10](../../labs/10-observability/README.md) teaches the concepts. The assessment does not observe anything.
 
-The template still ends with one question for a later milestone — which trust and security boundaries exist. The assessment asks it so the design leaves room for the answer. It does not implement security; that is Milestone 11.
+If a model proposes actions, or untrusted content can reach a model that does, the template then asks for a security plan: which trust boundaries exist; what each tool really does and which ones change state; which principals exist and the least each needs; how arguments are validated, separately from authorization; which content is untrusted and what it can cause if it steers the model; what happens when the model proposes an unauthorized action; which actions need an approval and what it is bound to; which fields are sensitive and where credentials live; how denials are observable without recording being the control; which authorization rules can be tested deterministically; and, for a remote capability, who enforces access control there. Like evaluation and observability, security is not a row in the capability table, there is no score, and the assessment recommends no security product or framework. [Lab 11](../../labs/11-security/README.md) teaches the concepts. The assessment secures nothing: answering these questions on paper is not a control.
+
+The template has no deployment questions. How the system is built, configured, and run is Milestone 12 and is not implemented.

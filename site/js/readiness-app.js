@@ -4,7 +4,7 @@
 
 import {
   STAGES, ANSWERS, QUESTIONS, CAPABILITIES, STATUS, AUTHORITY_QUESTIONS,
-  RUNTIME_QUESTIONS, EVALUATION_QUESTIONS, OBSERVABILITY_QUESTIONS, PRODUCTION_QUESTIONS, EXAMPLES, REFLECTION_QUESTIONS,
+  RUNTIME_QUESTIONS, EVALUATION_QUESTIONS, OBSERVABILITY_QUESTIONS, SECURITY_QUESTIONS, EXAMPLES, REFLECTION_QUESTIONS,
 } from "./readiness.js";
 import { summarize, deterministicFirst } from "./readiness-logic.js";
 import { loadState, saveState, resetState } from "./readiness-storage.js";
@@ -287,10 +287,10 @@ function renderRuntime() {
         (value) => { state.production[question.id] = value; persist(); }));
   }
 
-  const production = document.getElementById("production-fields");
-  production.replaceChildren();
-  for (const question of PRODUCTION_QUESTIONS) {
-    production.append(textareaField("production-" + question.id, question.text,
+  const security = document.getElementById("security-fields");
+  security.replaceChildren();
+  for (const question of SECURITY_QUESTIONS) {
+    security.append(textareaField("production-" + question.id, question.text,
         state.production[question.id],
         (value) => { state.production[question.id] = value; persist(); }));
   }

@@ -71,25 +71,27 @@ class LabEightExistsTest(unittest.TestCase):
 
 class StatusTest(unittest.TestCase):
 
-    def test_roadmap_marks_eight_done_and_eleven_onward_not_started(self):
+    def test_roadmap_marks_eight_done_and_twelve_not_started(self):
         eight = milestone(8)
         self.assertTrue(eight.strip().startswith("Done. The lab is [labs/08-mcp](labs/08-mcp/README.md)."),
                         eight[:120])
-        for number in range(11, 13):
-            self.assertTrue(milestone(number).strip().startswith("Not started."), number)
+        self.assertTrue(milestone(11).strip().startswith(
+            "Done. The lab is [labs/11-security](labs/11-security/README.md)."))
+        self.assertTrue(milestone(12).strip().startswith("Not started."))
 
-    def test_readme_marks_mcp_implemented_and_security_next(self):
+    def test_readme_marks_mcp_implemented_and_deployment_next(self):
         readme = read(REPO_ROOT / "README.md")
         rows = {row.split("|")[1].strip(): row for row in readme.splitlines()
                 if re.match(r"^\| \d+ \|", row)}
         self.assertIn("[Lab 08](labs/08-mcp/README.md)", rows["8"])
-        for number in ["11", "12"]:
-            self.assertTrue(rows[number].rstrip().endswith("| Planned |"), rows[number])
+        self.assertIn("[Lab 11](labs/11-security/README.md)", rows["11"])
+        self.assertTrue(rows["12"].rstrip().endswith("| Planned |"), rows["12"])
         not_yet = next(line for line in readme.splitlines() if "**Not implemented yet:**" in line)
         self.assertNotIn("MCP", not_yet)
-        self.assertIn("security", not_yet)
+        self.assertNotIn("security", not_yet)
+        self.assertIn("deployment", not_yet)
         self.assertIn("│   ├── 08-mcp/", readme)
-        self.assertIn("security (Milestone 11, next)", normalized(readme))
+        self.assertIn("deployment (Milestone 12, next)", normalized(readme))
 
     def test_labs_index_links_lab_eight_and_no_later_placeholder(self):
         index = read(REPO_ROOT / "labs" / "README.md")
@@ -142,7 +144,7 @@ class ScopeTest(unittest.TestCase):
                               if "jev" in p.name.lower() and ".git" not in p.parts])
 
     def test_no_future_milestone_lab_exists(self):
-        for name in ["11-security", "12-production"]:
+        for name in ["12-production"]:
             self.assertFalse((REPO_ROOT / "labs" / name).exists(), name)
 
 

@@ -111,25 +111,27 @@ class LabNineExistsTest(unittest.TestCase):
 
 class StatusTest(unittest.TestCase):
 
-    def test_roadmap_marks_nine_done_and_eleven_onward_not_started(self):
+    def test_roadmap_marks_nine_done_and_twelve_not_started(self):
         nine = milestone(9)
         self.assertTrue(nine.strip().startswith(
             "Done. The lab is [labs/09-evaluation](labs/09-evaluation/README.md)."), nine[:120])
-        for number in range(11, 13):
-            self.assertTrue(milestone(number).strip().startswith("Not started."), number)
+        self.assertTrue(milestone(11).strip().startswith(
+            "Done. The lab is [labs/11-security](labs/11-security/README.md)."))
+        self.assertTrue(milestone(12).strip().startswith("Not started."))
 
-    def test_readme_marks_evaluation_implemented_and_security_next(self):
+    def test_readme_marks_evaluation_implemented_and_deployment_next(self):
         readme = read(REPO_ROOT / "README.md")
         rows = {row.split("|")[1].strip(): row for row in readme.splitlines()
                 if re.match(r"^\| \d+ \|", row)}
         self.assertIn("[Lab 09](labs/09-evaluation/README.md)", rows["9"])
-        for number in ["11", "12"]:
-            self.assertTrue(rows[number].rstrip().endswith("| Planned |"), rows[number])
+        self.assertIn("[Lab 11](labs/11-security/README.md)", rows["11"])
+        self.assertTrue(rows["12"].rstrip().endswith("| Planned |"), rows["12"])
         not_yet = next(line for line in readme.splitlines() if "**Not implemented yet:**" in line)
         self.assertNotIn("evaluation", not_yet)
-        self.assertIn("security", not_yet)
+        self.assertNotIn("security", not_yet)
+        self.assertIn("deployment", not_yet)
         self.assertIn("│   ├── 09-evaluation/", readme)
-        self.assertIn("security (Milestone 11, next)", normalized(readme))
+        self.assertIn("deployment (Milestone 12, next)", normalized(readme))
 
     def test_labs_index_links_lab_nine_only(self):
         index = read(REPO_ROOT / "labs" / "README.md")
@@ -143,20 +145,20 @@ class StatusTest(unittest.TestCase):
         planned = landing.split('class="roadmap-note"')[1].split("</p>")[0]
         self.assertNotIn("Evaluation", planned)
         self.assertNotIn("Observability", planned)
-        for name in ["Security", "Deployment"]:
-            self.assertIn(name, planned)
+        self.assertNotIn("Security", planned)
+        self.assertIn("Deployment", planned)
 
     def test_the_landing_page_counts_the_same_number_of_labs_everywhere(self):
         landing = normalized(read(SITE / "index.html"))
         path = landing.split('class="path"')[1].split("</ol>")[0]
         labs = path.count("<li>")
-        self.assertEqual(10, labs)
-        self.assertIn("Ten runnable Java labs", landing)
+        self.assertEqual(11, labs)
+        self.assertIn("Eleven runnable Java labs", landing)
         self.assertIn(f"{labs} runnable Java labs</h3>", landing)
-        self.assertIn("Labs 01 to 10", landing)
+        self.assertIn("Labs 01 to 11", landing)
 
     def test_no_future_milestone_lab_exists(self):
-        for name in ["11-security", "12-production"]:
+        for name in ["12-production"]:
             self.assertFalse((REPO_ROOT / "labs" / name).exists(), name)
 
     def test_evaluation_is_not_the_headline(self):
@@ -200,10 +202,10 @@ class EvaluationIsNotACapabilityTest(unittest.TestCase):
         self.assertIn("does not recommend an evaluation framework", self.readme)
         self.assertIn("labs/09-evaluation/README.md", self.readme)
 
-    def test_later_question_is_only_security(self):
-        template_tail = self.template.split("## Production questions for later")[1].split("## Final")[0]
-        self.assertIn("Milestone 11", template_tail)
-        self.assertNotIn("Milestones 10 and 11", template_tail)
+    def test_later_question_became_the_security_plan(self):
+        self.assertIn("## Security plan", self.template)
+        self.assertNotIn("## Production questions for later", self.template)
+        self.assertNotIn("Milestones 10 and 11", self.template)
         self.assertNotIn("Milestones 9", read(SITE / "readiness-assessment" / "index.html"))
         self.assertNotIn("Milestones 9", read(SITE / "js" / "readiness-export.js"))
         for path in [ASSESSMENT_DIR / "README.md", ASSESSMENT_DIR / "ASSESSMENT.md"]:
@@ -272,9 +274,10 @@ class HandbookDocumentsTest(unittest.TestCase):
 
 class ScopeTest(unittest.TestCase):
 
-    def test_no_adr_was_created_for_a_lab_local_harness(self):
+    def test_no_new_adr_was_created_for_a_lab_local_harness(self):
+        # ADR 0006 belongs to Milestone 11; Lab 9's harness added none.
         adrs = sorted(p.name for p in (REPO_ROOT / "docs" / "adr").glob("0*.md"))
-        self.assertEqual(5, len(adrs), adrs)
+        self.assertEqual(6, len(adrs), adrs)
 
     def test_jev_is_still_only_a_track_c_note(self):
         roadmap = read(REPO_ROOT / "ROADMAP.md")

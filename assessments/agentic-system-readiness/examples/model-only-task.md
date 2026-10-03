@@ -123,11 +123,23 @@ anticipate.
 - **Trace for diagnosis:** one span for the model call; there are no tools or
   steps to relate.
 
-## Production questions for later
+## Security plan
 
-- **Trust boundaries:** the internal notes may contain customer names or
-  security fixes that must not be published verbatim — sanitize before the
-  prompt, review after.
+- **Boundaries:** the internal notes go in, and a draft comes out for a human.
+  The notes may contain customer names or security fixes that must not be
+  published verbatim: sanitize before the prompt, review after.
+- **Tools and state changes:** none. The model proposes text, not actions, so
+  there is no tool to authorize and no approval flow to build. Do not add one
+  for a draft.
+- **Untrusted content:** the notes are internal but still data, not
+  instructions; a note that says "ignore the rules" can change the draft, which
+  is why a person reviews it. Nothing it says can cause an action.
+- **Sensitive data and credentials:** the model provider's key is held by the
+  application and never placed in a prompt or a log (see the observability
+  plan). Customer names are the sensitive data; redaction is a safety net, not a
+  promise.
+- **Approval:** the human review of the draft is the approval.
+- **Remote capability:** none.
 
 ## Final architecture shape
 

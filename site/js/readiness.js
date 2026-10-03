@@ -144,8 +144,22 @@ export const OBSERVABILITY_QUESTIONS = [
   { id: "obsTrace", text: "What trace information is needed for diagnosis?" },
 ];
 
-export const PRODUCTION_QUESTIONS = [
+// Security is a plan too, not a capability. The first question keeps its old id
+// ("trust"), so an answer stored for it is still shown for the same question;
+// the others are new ids. The storage key and state shape are unchanged.
+export const SECURITY_QUESTIONS = [
   { id: "trust", text: "What trust and security boundaries exist?" },
+  { id: "secToolPermissions", text: "What may each tool do, and which tools change state?" },
+  { id: "secLeastPrivilege", text: "Which principals exist, and what is the least each one needs?" },
+  { id: "secValidation", text: "How are tool arguments validated, separately from authorization?" },
+  { id: "secUntrusted", text: "Which content is untrusted, and what can it cause if it steers the model?" },
+  { id: "secUnauthorizedProposal", text: "What happens when the model proposes an action nobody authorized?" },
+  { id: "secApproval", text: "Which actions need approval, and what is an approval bound to?" },
+  { id: "secSensitive", text: "Which fields are sensitive, and how do they stay out of results and prompts?" },
+  { id: "secCredentials", text: "Where do credentials live, and how are they kept out of prompts and logs?" },
+  { id: "secDenials", text: "How will denials be made observable?" },
+  { id: "secTests", text: "Which authorization rules can be tested deterministically, without a model?" },
+  { id: "secRemote", text: "If a capability is remote, who enforces access control there?" },
 ];
 
 // Summaries only — the canonical worked examples are Markdown in the

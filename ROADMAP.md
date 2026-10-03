@@ -8,7 +8,7 @@ The learning path is a teaching sequence, not an architecture every application 
 
 ## Track A — Canonical Learning Path
 
-The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 10 are done. Later milestones are planned work and are not implemented.
+The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 11 are done. Later milestones are planned work and are not implemented.
 
 ### Milestone 0 — Foundation
 
@@ -86,9 +86,9 @@ Reconstruct what one real run did: a trace id shared by every span, nested model
 
 ### Milestone 11 — Security
 
-Not started.
+Done. The lab is [labs/11-security](labs/11-security/README.md).
 
-Boundaries: user input, model output, tool arguments, retrieved content, skill text, and protocol messages. The model is not the authorization layer.
+Boundaries: user input, model output, tool arguments, retrieved content, and protocol messages. The model is not the authorization layer. The lab starts from a retrieved incident note that steers a simulated model into an unauthorized state change, then adds application-owned controls at the execution boundary: independent argument validation, a small deterministic authorization policy that fails closed, least-privilege principals, approvals bound to one exact operation and checked again before execution, a result allowlist and redaction so a fake secret never leaves, and security events recorded in a small Lab 10 style trace. It also shows, with a simulated provider, why a remote tool's description is not authorization. Everything is simulated and in memory, with no new dependency. It is not an identity system, a policy engine, an approval platform, or data loss prevention; see [ADR 0006](docs/adr/0006-application-owned-authorization-for-state-changing-tools.md). Skill text as a security boundary is covered only by the project principles, not by this lab.
 
 ### Milestone 12 — Deployment
 
@@ -191,7 +191,7 @@ In progress.
 
 Established:
 
-- The experience-first format validated in Labs 05, 06, 07, 08, 09, and 10: limitation → naive approach → failure → design → reflection → decision
+- The experience-first format validated in Labs 05, 06, 07, 08, 09, 10, and 11: limitation → naive approach → failure → design → reflection → decision
 - Reflection sections in each experience-first lab
 - "Do I actually need this?" decision checkpoints reinforcing that not every capability is needed
 - [Capstone 01 — Build a Small Agentic System](capstones/01-agentic-system/README.md): composing already-taught concepts with a decisions-first exercise and a reference that deliberately excludes capabilities
