@@ -316,10 +316,10 @@ class RepositoryRoadmapTest(unittest.TestCase):
 
     def test_states_match_current_project_reality(self):
         by_title = {m.title: m for m in self.milestones}
-        # Milestones 0-10 are done; Security (11) and everything after is open.
+        # Milestones 0-11 are done; Deployment (12) and everything after is open.
         for number in range(13):
             title = next(t for t in by_title if t.startswith(f"Milestone {number} "))
-            self.assertEqual("closed" if number <= 10 else "open", by_title[title].state, title)
+            self.assertEqual("closed" if number <= 11 else "open", by_title[title].state, title)
         self.assertEqual("open", by_title["Project Milestone — Community Foundations"].state)
 
     def test_every_milestone_has_a_track(self):

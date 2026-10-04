@@ -5,7 +5,7 @@
 
 import {
   QUESTIONS, CAPABILITIES, AUTHORITY_QUESTIONS, RUNTIME_QUESTIONS,
-  EVALUATION_QUESTIONS, OBSERVABILITY_QUESTIONS, PRODUCTION_QUESTIONS, STATUS,
+  EVALUATION_QUESTIONS, OBSERVABILITY_QUESTIONS, SECURITY_QUESTIONS, STATUS,
 } from "./readiness.js";
 import { summarize } from "./readiness-logic.js";
 
@@ -102,9 +102,9 @@ export function buildAssessmentMarkdown(state) {
     push(`### ${item.text}`, "", text(state.production[item.id]), "");
   }
 
-  push("## Production questions for later", "");
-  push("Asked now, answered in Milestone 11. Not implemented here.", "");
-  for (const item of PRODUCTION_QUESTIONS) {
+  push("## Security plan", "");
+  push("Not a capability: what controls what a model's proposal may cause. Lab 11 teaches the concepts.", "");
+  for (const item of SECURITY_QUESTIONS) {
     push(`### ${item.text}`, "", text(state.production[item.id]), "");
   }
 

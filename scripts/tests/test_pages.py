@@ -64,12 +64,12 @@ class SiteEntryTest(unittest.TestCase):
         self.assertIn(f'href="{REPOSITORY_URL}/blob/main/labs/08-mcp/README.md">MCP</a>', path)
         self.assertIn(f'href="{REPOSITORY_URL}/blob/main/labs/09-evaluation/README.md">Evaluation</a>', path)
         self.assertIn(f'href="{REPOSITORY_URL}/blob/main/labs/10-observability/README.md">Observability</a>', path)
-        self.assertEqual(10, path.count("<li>"))
+        self.assertIn(f'href="{REPOSITORY_URL}/blob/main/labs/11-security/README.md">Security</a>', path)
+        self.assertEqual(11, path.count("<li>"))
         planned = landing.split('class="roadmap-note"')[1].split("</p>")[0]
-        for milestone in ["Security", "Deployment"]:
-            self.assertNotIn(milestone, path)
-            self.assertIn(milestone, planned)
-        for implemented in ["MCP", "Evaluation", "Observability"]:
+        self.assertNotIn("Deployment", path)
+        self.assertIn("Deployment", planned)
+        for implemented in ["MCP", "Evaluation", "Observability", "Security"]:
             self.assertNotIn(implemented, planned)
 
 

@@ -24,6 +24,7 @@
     <module>labs/08-mcp</module>
     <module>labs/09-evaluation</module>
     <module>labs/10-observability</module>
+    <module>labs/11-security</module>
     <module>capstones/01-agentic-system/starter</module>
     <module>capstones/01-agentic-system/reference</module>
   </modules>

@@ -99,9 +99,11 @@ component contracts; there is no model behavior to evaluate.
 No model-influenced decisions. Ordinary software observability is enough:
 request metrics and error rates, and a request id in the logs.
 
-## Production questions for later
+## Security plan
 
-The existing authorization checks.
+No model-influenced actions: there is no model, so there is nothing for a model
+to propose. The order lookup keeps the application's existing authorization
+checks. [Lab 11](../../../labs/11-security/README.md) is not needed here.
 
 ## Final architecture shape
 

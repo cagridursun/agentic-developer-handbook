@@ -115,66 +115,69 @@ class LabTenExistsTest(unittest.TestCase):
 
 class StatusTest(unittest.TestCase):
 
-    def test_roadmap_marks_ten_done_and_eleven_onward_not_started(self):
+    def test_roadmap_marks_ten_done_and_twelve_not_started(self):
         ten = milestone(10)
         self.assertTrue(ten.strip().startswith(
             "Done. The lab is [labs/10-observability](labs/10-observability/README.md)."), ten[:120])
         self.assertNotIn("is the intended direction", ten)
-        for number in range(11, 13):
-            self.assertTrue(milestone(number).strip().startswith("Not started."), number)
-        self.assertIn("Milestones 0 through 10 are done", read(REPO_ROOT / "ROADMAP.md"))
+        self.assertTrue(milestone(11).strip().startswith(
+            "Done. The lab is [labs/11-security](labs/11-security/README.md)."))
+        self.assertTrue(milestone(12).strip().startswith("Not started."))
+        self.assertIn("Milestones 0 through 11 are done", read(REPO_ROOT / "ROADMAP.md"))
 
-    def test_readme_marks_observability_implemented_and_security_next(self):
+    def test_readme_marks_observability_implemented_and_deployment_next(self):
         readme = read(REPO_ROOT / "README.md")
         rows = {row.split("|")[1].strip(): row for row in readme.splitlines()
                 if re.match(r"^\| \d+ \|", row)}
         self.assertIn("[Lab 10](labs/10-observability/README.md)", rows["10"])
-        for number in ["11", "12"]:
-            self.assertTrue(rows[number].rstrip().endswith("| Planned |"), rows[number])
+        self.assertIn("[Lab 11](labs/11-security/README.md)", rows["11"])
+        self.assertTrue(rows["12"].rstrip().endswith("| Planned |"), rows["12"])
         not_yet = next(line for line in readme.splitlines() if "**Not implemented yet:**" in line)
         self.assertNotIn("observability", not_yet)
-        self.assertIn("security", not_yet)
+        self.assertNotIn("security", not_yet)
         self.assertIn("deployment", not_yet)
         self.assertIn("│   ├── 09-evaluation/", readme)
-        self.assertIn("│   └── 10-observability/", readme)
+        self.assertIn("│   ├── 10-observability/", readme)
         self.assertIn('evaluation["Evaluation"] --> observability["Observability"]', readme)
-        self.assertIn("ten runnable labs", normalized(readme))
-        self.assertIn("security (Milestone 11, next)", normalized(readme))
+        self.assertIn("eleven runnable labs", normalized(readme))
+        self.assertIn("deployment (Milestone 12, next)", normalized(readme))
 
-    def test_labs_index_links_lab_ten_only(self):
+    def test_labs_index_links_lab_ten(self):
         index = read(REPO_ROOT / "labs" / "README.md")
         self.assertIn("| [`10-observability`](10-observability/README.md) | 10 — Observability |", index)
-        self.assertIn("| `11-security` | 11 — Security |", index)
-        self.assertIn("Ten labs are available", index)
+        self.assertIn("| [`11-security`](11-security/README.md) | 11 — Security |", index)
+        self.assertIn("Eleven labs are available", index)
 
     def test_landing_page_shows_observability_implemented_and_the_rest_planned(self):
         landing = normalized(read(SITE / "index.html"))
         path = landing.split('class="path"')[1].split("</ol>")[0]
         self.assertIn("/blob/main/labs/10-observability/README.md\">Observability</a>", path)
-        self.assertEqual(10, path.count("<li>"))
+        self.assertEqual(11, path.count("<li>"))
         planned = landing.split('class="roadmap-note"')[1].split("</p>")[0]
         self.assertNotIn("Observability", planned)
-        for name in ["Security", "Deployment"]:
-            self.assertIn(name, planned)
+        self.assertNotIn("Security", planned)
+        self.assertIn("Deployment", planned)
 
     def test_the_landing_page_counts_the_same_number_of_labs_everywhere(self):
         landing = normalized(read(SITE / "index.html"))
         path = landing.split('class="path"')[1].split("</ol>")[0]
         labs = path.count("<li>")
-        self.assertEqual(10, labs)
-        self.assertIn("Ten runnable Java labs", landing)
+        self.assertEqual(11, labs)
+        self.assertIn("Eleven runnable Java labs", landing)
         self.assertIn(f"{labs} runnable Java labs</h3>", landing)
-        self.assertIn("Labs 01 to 10", landing)
+        self.assertIn("Labs 01 to 11", landing)
 
     def test_no_stale_lab_counts_remain(self):
         for relative in ["README.md", "labs/README.md", "site/index.html"]:
             text = read(REPO_ROOT / relative)
             for stale in ["nine runnable", "Nine runnable", "Nine labs", "9 runnable", "Labs 01–09",
-                          "Labs 01 to 09", "observability (Milestone 10, next)"]:
+                          "Labs 01 to 09", "observability (Milestone 10, next)", "Ten runnable", "Ten labs",
+                          "ten runnable", "10 runnable", "Labs 01–10", "Labs 01 to 10",
+                          "security (Milestone 11, next)"]:
                 self.assertNotIn(stale, text, f"{relative}: {stale}")
 
     def test_no_future_milestone_lab_exists(self):
-        for name in ["11-security", "12-production"]:
+        for name in ["12-production"]:
             self.assertFalse((REPO_ROOT / "labs" / name).exists(), name)
 
     def test_earlier_labs_link_forward_to_lab_ten(self):
@@ -216,10 +219,10 @@ class ObservabilityIsNotACapabilityTest(unittest.TestCase):
         self.assertIn("recommends no observability framework or product", self.readme)
         self.assertIn("labs/10-observability/README.md", self.readme)
 
-    def test_the_only_later_question_is_security(self):
-        template_tail = self.template.split("## Production questions for later")[1].split("## Final")[0]
-        self.assertIn("Milestone 11", template_tail)
-        self.assertNotIn("What must be observable", template_tail)
+    def test_the_later_question_became_the_security_plan(self):
+        self.assertIn("## Security plan", self.template)
+        self.assertNotIn("## Production questions for later", self.template)
+        self.assertNotIn("What must be observable", self.template.split("## Security plan")[1])
         for path in [SITE / "readiness-assessment" / "index.html", SITE / "js" / "readiness-export.js",
                      ASSESSMENT_DIR / "README.md", ASSESSMENT_DIR / "ASSESSMENT.md"]:
             self.assertNotIn("Milestones 10 and 11", read(path), path.name)
@@ -244,7 +247,7 @@ class ObservabilityIsNotACapabilityTest(unittest.TestCase):
             self.assertNotIn("**Observable:**", text, path.name)
 
     def test_the_assessment_does_not_score(self):
-        plan = self.template.split("## Observability plan")[1].split("## Production questions")[0].lower()
+        plan = self.template.split("## Observability plan")[1].split("## Security plan")[0].lower()
         for word in ["score", "grade", "rating"]:
             self.assertNotIn(word, plan, word)
 
@@ -306,7 +309,7 @@ class ScopeTest(unittest.TestCase):
 
     def test_no_adr_was_created_for_a_lab_local_trace_model(self):
         adrs = sorted(p.name for p in (REPO_ROOT / "docs" / "adr").glob("0*.md"))
-        self.assertEqual(5, len(adrs), adrs)
+        self.assertEqual(6, len(adrs), adrs)  # 0006 belongs to Milestone 11
 
     def test_jev_is_still_only_a_track_c_note(self):
         roadmap = read(REPO_ROOT / "ROADMAP.md")

@@ -94,6 +94,8 @@ A note on what the tests prove: they prove application behavior — retrieval se
 
 Three different questions are easy to blur. Verification asks whether the code obeys its contracts. Evaluation asks whether behavior met expectations across cases. Observability — [Lab 10](../../labs/10-observability/README.md) — asks what happened during one execution. Each serves a different purpose, and none replaces another. Finishing the capstone does not depend on Lab 10 either.
 
+A fourth question is security: what is the system *permitted* to do, whatever the model proposes? [Lab 11](../../labs/11-security/README.md) answers it with application-owned controls. Evaluation tests behavior across cases, observability explains what one execution did, and security enforces the behavior that is permitted. This capstone's tools are all read-only, which is why it can stay small, but its retrieved runbooks are still untrusted text. The capstone does not depend on Lab 11 and does not implement its controls; if you add a state-changing tool to your own design, Lab 11 is where to look first.
+
 ## Reflection
 
 1. Which capability did you initially want to use but eventually reject?

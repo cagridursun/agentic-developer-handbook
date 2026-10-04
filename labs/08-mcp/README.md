@@ -386,7 +386,7 @@ MCP is not automatically better than REST, gRPC, or an SDK client. If you do ado
 - No MCP resources, prompts, sampling, elicitation, roots, or completions
 - No Streamable HTTP, no remote or hosted servers, no multiple servers, no server registry
 - No retries, backoff, circuit breakers, or reconnection
-- No side-effecting remote tools and no human approval flow
+- No side-effecting remote tools and no human approval flow ([Lab 11](../11-security/README.md) simulates both, and shows why a remote tool's description is not authorization)
 - No A2A and no multi-agent system
 
 ## What limitation remains?

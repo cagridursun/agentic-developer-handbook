@@ -234,7 +234,7 @@ Other pairs that get confused:
 - **Final-answer quality ≠ whole-agent quality.** An answer can be right for the wrong reasons, or wrong after a flawless trajectory.
 - **Observability ≠ evaluation.** Observability shows what happened on a real request. Evaluation gives controlled evidence about quality on cases you chose. Taught in [Lab 10](../10-observability/README.md).
 - **Evaluation ≠ monitoring.** Monitoring watches a running system over time. Evaluation checks a version, before you rely on it.
-- **Evaluation ≠ security testing.** Whether a hostile input can subvert the system is a different question with different cases and a different mindset. Milestone 11.
+- **Evaluation ≠ security testing.** Whether a hostile input can subvert the system is a different question with different cases and a different mindset. [Milestone 11](../11-security/README.md).
 
 ## Deterministic checks vs model judges
 

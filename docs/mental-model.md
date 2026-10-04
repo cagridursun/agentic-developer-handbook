@@ -64,7 +64,7 @@ MCP does not create the agent, and it does not decide what the agent may do. A s
 
 ## Around the runtime
 
-Evaluation and observability surround the runtime. They are not steps inside the prompt.
+Evaluation and observability surround the runtime. They are not steps inside the prompt. Security, below, is different again: it is a set of decisions the application makes at each boundary.
 
 - Evaluation asks whether the system behaves as intended across representative cases, before and after a change — in its final answer and in the trajectory that produced it. A test checks that a component obeys its contract; an evaluation checks behavior, and a model-backed system can pass every test while its behavior gets worse. [Lab 09](../labs/09-evaluation/README.md) builds the smallest version of this around the Lab 07 agent.
 - Observability shows what a running system did: which model was called, which tool ran, how long it took, and where it failed. Evaluation gives controlled evidence about quality; observability gives runtime evidence about what actually happened. [Lab 10](../labs/10-observability/README.md) records one run of the Lab 07 agent as a trace.
@@ -104,6 +104,27 @@ Security applies at every boundary, not as a final layer painted on at deploymen
 - messages from MCP servers and from other agents
 
 The model is not the authorization layer. A prompt that says "only answer if the user is allowed" does not enforce access control. The application does.
+
+### Security: decisions at the execution boundary
+
+[Lab 11](../labs/11-security/README.md) makes that concrete for one boundary, the one between a model's proposal and a tool that changes something. The model's output is untrusted text, and so is anything it read, including a retrieved document, so the application puts its own decisions between the proposal and the tool:
+
+```
+Model
+  ↓ proposes (tool, arguments, a justification the application never reads)
+Application boundary (the gateway)
+  ├── is this a tool the application registered?
+  ├── is there a principal, supplied by the caller and never by the model?
+  ├── are the arguments valid?             ← validation
+  ├── may this principal do this, here?    ← authorization (fails closed)
+  ├── is it a state change? hold it until an approval bound to exactly this operation exists
+  ↓ only then
+Tool (the execution layer)
+  ↓ result
+Application boundary: only allowlisted fields continue; secrets are scrubbed
+```
+
+Validation asks whether a value is well formed; authorization asks whether this caller may do this. They catch different things and neither replaces the other. Prompt injection, direct or through a retrieved document, is not defended by asking the model to resist: it is bounded by making sure a steered model can only propose, and that a proposal needs the application's permission. Observability sits beside this and does not belong in it: a trace can record that an action was denied, but the denial happened in application code whether or not anyone reads the trace. Security enforces what is permitted; it does not replace evaluation (does the system behave as intended?) or observability (what happened?). Lab 11 is a teaching model. It does not authenticate anyone, and deployment (Milestone 12) is not implemented.
 
 ## Influence is not authority
 
