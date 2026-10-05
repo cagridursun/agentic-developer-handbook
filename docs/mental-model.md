@@ -124,7 +124,24 @@ Tool (the execution layer)
 Application boundary: only allowlisted fields continue; secrets are scrubbed
 ```
 
-Validation asks whether a value is well formed; authorization asks whether this caller may do this. They catch different things and neither replaces the other. Prompt injection, direct or through a retrieved document, is not defended by asking the model to resist: it is bounded by making sure a steered model can only propose, and that a proposal needs the application's permission. Observability sits beside this and does not belong in it: a trace can record that an action was denied, but the denial happened in application code whether or not anyone reads the trace. Security enforces what is permitted; it does not replace evaluation (does the system behave as intended?) or observability (what happened?). Lab 11 is a teaching model. It does not authenticate anyone, and deployment (Milestone 12) is not implemented.
+Validation asks whether a value is well formed; authorization asks whether this caller may do this. They catch different things and neither replaces the other. Prompt injection, direct or through a retrieved document, is not defended by asking the model to resist: it is bounded by making sure a steered model can only propose, and that a proposal needs the application's permission. Observability sits beside this and does not belong in it: a trace can record that an action was denied, but the denial happened in application code whether or not anyone reads the trace. Security enforces what is permitted; it does not replace evaluation (does the system behave as intended?) or observability (what happened?). Lab 11 is a teaching model. It does not authenticate anyone.
+
+### Deployment: the same boundary, packaged and run
+
+[Lab 12](../labs/12-deployment/README.md) answers a different question: how does this application run somewhere other than the IDE, without losing any of the above? It is the runtime around the boundary, not a new layer inside it.
+
+```
+Source → build → tests → one artifact (jar) → container image → running process
+                                                                   │
+   configuration (environment, validated)  ───────────────────────►│
+   secrets (supplied at runtime, never packaged) ──────────────────►│
+                                                                   ▼
+   probes: liveness (is it alive?)   readiness (should it get work?)
+   door → the same gateway: validate → authorize → approve → tool
+   shutdown: not ready → finish work already started → stop
+```
+
+The rule is the one this section has stated all along: the model is not the security boundary, and neither is the container. A deployed application is as authorized as its code, and no more: a network, a port binding, or an image does not grant authority, and a configuration value cannot remove a control. Packaging and running are the deployment's job; deciding what is permitted remains the application's.
 
 ## Influence is not authority
 

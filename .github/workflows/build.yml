@@ -23,5 +23,30 @@ jobs:
           java-version: "27"
           cache: maven
 
+      - name: Check the Java version
+        run: java -version
+
+      # Compiles every module, runs every test (including the Lab 12 deployment tests),
+      # and packages the Lab 12 jar. The commit is baked into the jar as its build id.
       - name: Verify
-        run: ./mvnw -B verify
+        run: ./mvnw -B verify -Dbuild.id=${{ github.sha }}
+
+      # The same jar that was just built and tested: started, probed, and stopped with SIGTERM.
+      - name: Smoke test the packaged jar
+        run: labs/12-deployment/scripts/smoke-test.sh
+
+      - name: Upload the deployment artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: lab-12-deployment-${{ github.sha }}
+          path: |
+            labs/12-deployment/target/lab-12-deployment.jar
+            labs/12-deployment/target/lib/
+          if-no-files-found: error
+
+      # Builds the image. Nothing is pushed, no registry login happens, and the build uses no secrets.
+      - name: Build the container image
+        run: docker build -f labs/12-deployment/Dockerfile --build-arg BUILD_ID=${{ github.sha }} -t helio-assistant:ci .
+
+      - name: Smoke test the container image
+        run: labs/12-deployment/scripts/container-smoke-test.sh helio-assistant:ci

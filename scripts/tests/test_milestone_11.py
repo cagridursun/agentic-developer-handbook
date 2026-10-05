@@ -4,8 +4,7 @@ Standard-library unittest only — no Maven, no network. The Java tests in
 labs/11-security prove the controls work; these checks keep the rest of the
 repository telling the same story: security is taught and available, the
 vulnerable example stays isolated and opt-in, no identity, policy, secrets, or
-DLP platform crept in, the capstone does not depend on it, and nothing after
-Milestone 11 (deployment) is presented as done.
+DLP platform crept in, the capstone does not depend on it, and Milestone 12 is recorded as its own lab.
 
 Run from the repository root:
 
@@ -127,9 +126,13 @@ class LabElevenExistsTest(unittest.TestCase):
         self.assertIn("FAKE_API_TOKEN_FOR_TESTING_ONLY", read(
             LAB / "src" / "main" / "java" / "dev" / "agentic" / "handbook" / "labs" / "security" / "HelioPlatform.java"))
 
-    def test_no_deployment_infrastructure_was_added(self):
-        for name in ["Dockerfile", "docker-compose.yml", "docker-compose.yaml", "compose.yaml", "Jenkinsfile"]:
+    def test_no_deployment_infrastructure_beyond_lab_twelve_was_added(self):
+        # Milestone 12 added one Dockerfile, in its own lab. Nothing else of this kind exists.
+        for name in ["docker-compose.yml", "docker-compose.yaml", "compose.yaml", "Jenkinsfile"]:
             self.assertEqual([], [p for p in REPO_ROOT.rglob(name) if ".git" not in p.parts and "target" not in p.parts], name)
+        dockerfiles = [p.relative_to(REPO_ROOT).as_posix() for p in REPO_ROOT.rglob("Dockerfile")
+                       if ".git" not in p.parts and "target" not in p.parts]
+        self.assertEqual(["labs/12-deployment/Dockerfile"], dockerfiles)
         self.assertFalse((REPO_ROOT / "labs" / "12-production").exists())
 
     def test_sources_are_dated_versioned_and_never_use_bare_owasp_ids(self):
@@ -148,47 +151,48 @@ class LabElevenExistsTest(unittest.TestCase):
 
 class StatusTest(unittest.TestCase):
 
-    def test_roadmap_marks_eleven_done_and_twelve_not_started(self):
+    def test_roadmap_marks_eleven_done_and_twelve_done_after_it(self):
         eleven = milestone(11)
         self.assertTrue(eleven.strip().startswith(
             "Done. The lab is [labs/11-security](labs/11-security/README.md)."), eleven[:120])
-        self.assertTrue(milestone(12).strip().startswith("Not started."))
+        self.assertTrue(milestone(12).strip().startswith(
+            "Done. The lab is [labs/12-deployment](labs/12-deployment/README.md)."))
         roadmap = read(REPO_ROOT / "ROADMAP.md")
-        self.assertIn("Milestones 0 through 11 are done", roadmap)
-        self.assertNotIn("Milestones 0 through 10 are done", roadmap)
+        self.assertIn("Milestones 0 through 12 are done", roadmap)
+        self.assertNotIn("Milestones 0 through 11 are done", roadmap)
 
     def test_readme_marks_security_implemented_and_deployment_next(self):
         readme = read(REPO_ROOT / "README.md")
         rows = {row.split("|")[1].strip(): row for row in readme.splitlines()
                 if re.match(r"^\| \d+ \|", row)}
         self.assertIn("[Lab 11](labs/11-security/README.md)", rows["11"])
-        self.assertTrue(rows["12"].rstrip().endswith("| Planned |"), rows["12"])
-        not_yet = next(line for line in readme.splitlines() if "**Not implemented yet:**" in line)
+        self.assertIn("[Lab 12](labs/12-deployment/README.md)", rows["12"])
+        not_yet = next(line for line in readme.splitlines() if "**Not implemented:**" in line)
         self.assertNotIn("security", not_yet)
-        self.assertIn("deployment", not_yet)
-        self.assertIn("│   └── 11-security/", readme)
+        self.assertIn("production platform", not_yet)
+        self.assertIn("│   ├── 11-security/", readme)
         self.assertIn('observability["Observability"] --> security["Security"]', readme)
-        self.assertIn("eleven runnable labs", normalized(readme))
-        self.assertIn("deployment (Milestone 12, next)", normalized(readme))
+        self.assertIn("twelve runnable labs", normalized(readme))
+        self.assertNotIn("deployment (Milestone 12, next)", normalized(readme))
 
     def test_labs_index_links_lab_eleven(self):
         index = read(REPO_ROOT / "labs" / "README.md")
         self.assertIn("| [`11-security`](11-security/README.md) | 11 — Security |", index)
-        self.assertIn("| `12-production` | 12 — Deployment |", index)
-        self.assertIn("Eleven labs are available", index)
+        self.assertIn("| [`12-deployment`](12-deployment/README.md) | 12 — Deployment |", index)
+        self.assertIn("Twelve labs are available", index)
         self.assertIn("## After Lab 11", index)
 
     def test_landing_page_shows_security_implemented_and_deployment_planned(self):
         landing = normalized(read(SITE / "index.html"))
         path = landing.split('class="path"')[1].split("</ol>")[0]
         self.assertIn("/blob/main/labs/11-security/README.md\">Security</a>", path)
-        self.assertEqual(11, path.count("<li>"))
-        self.assertIn("Eleven runnable Java labs", landing)
-        self.assertIn("11 runnable Java labs</h3>", landing)
-        self.assertIn("Labs 01 to 11", landing)
+        self.assertEqual(12, path.count("<li>"))
+        self.assertIn("Twelve runnable Java labs", landing)
+        self.assertIn("12 runnable Java labs</h3>", landing)
+        self.assertIn("Labs 01 to 12", landing)
         planned = landing.split('class="roadmap-note"')[1].split("</p>")[0]
         self.assertNotIn("Security", planned)
-        self.assertIn("Deployment", planned)
+        self.assertIn("not a production platform", planned)
 
     def test_no_stale_lab_counts_remain(self):
         for relative in ["README.md", "labs/README.md", "site/index.html", "ROADMAP.md"]:
@@ -305,7 +309,7 @@ class HandbookDocumentsTest(unittest.TestCase):
         text = normalized(read(REPO_ROOT / "docs" / "architecture.md"))
         self.assertIn("## Security is the control plane at the execution boundary", text)
         self.assertIn("adr/0006-application-owned-authorization-for-state-changing-tools.md", text)
-        self.assertIn("deployment, which is a later milestone and is not implemented", text)
+        self.assertIn("is deployment, which [Lab 12](../labs/12-deployment/README.md) takes up", text)
 
     def test_decision_authority_says_authorization_holds_the_boundary(self):
         text = normalized(read(REPO_ROOT / "docs" / "model-vs-decision-authority.md"))

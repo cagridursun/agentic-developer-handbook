@@ -114,6 +114,26 @@ Short working definitions for this handbook. Where two terms are often mixed up,
 
 **Decision authority.** The component or policy whose decision becomes binding on the system: application code, business policy, or a human. A model can inform that decision; it holds authority only where the application deliberately, and safely, delegates it. See [LLM vs Decision Authority](model-vs-decision-authority.md).
 
+**Deployment.** Packaging an application and running it somewhere other than the developer's machine, so that it starts, serves, is observed, and stops in a controlled way. Deployment runs the application's decisions; it does not make them. See [Lab 12](../labs/12-deployment/README.md).
+
+**Deployment artifact.** The single thing a build produces and a deployment runs: here, one jar plus its runtime dependency, identified by a version and a build id packaged inside it. The tests run against the code that becomes the artifact, and the artifact is not edited afterwards.
+
+**Immutable artifact.** An artifact that is built once and never changed: the same one is run in every environment, and only configuration differs. Build once, run the same artifact.
+
+**Containerization.** Packaging the artifact with a minimal runtime into an image that runs the same way anywhere a container runtime exists. A container isolates a process; it is not an authorization boundary.
+
+**Configuration.** The values that differ between environments, such as a port, an environment name, and a log level, supplied from outside the artifact and validated at startup. Configuration chooses between behaviors the code already has; it must not silently change a security guarantee.
+
+**Secret injection.** Supplying a secret to a running process from outside the artifact, at runtime, so it is never in source, in an image layer, in a sample configuration, or in a log. A production system uses a dedicated secret manager for this.
+
+**Liveness.** Whether the process is alive and not stuck. A failing liveness probe means restart it. It says nothing about whether the application should receive work.
+
+**Readiness.** Whether the application should receive work right now: configured, started, and able to enforce its controls. A not-ready application stays alive and is simply not sent work, as during shutdown.
+
+**Graceful shutdown.** Stopping in an order that protects work in progress: stop being ready, refuse new work, let work already started finish within a grace period, record that it happened, then exit. An agent run in flight may hold a tool execution, a pending approval, or a partial workflow, which is why killing it is worse than stopping a stateless service.
+
+**Deployment boundary.** The line between what the deployment controls (how the application is packaged, configured, reached, and stopped) and what the application controls (what each caller may cause). Moving the application into a container, or behind a network rule, changes the first and never replaces the second.
+
 ## Model vs agent
 
 A model generates a response for one input. An agent is the application around a model: a runtime, a loop, and a stop condition. If the program cannot take a second step based on the first result, it is not an agent yet.
@@ -161,6 +181,14 @@ Validation asks whether a value is well formed for the tool: present, the right 
 ## Observability vs enforcement
 
 A trace records that an action was denied. Authorization is what denies it. Logging a denial does not prevent the action, and a system that makes a security decision by reading its own telemetry has made telemetry an authority. Observability observes; the application's controls decide.
+
+## Liveness vs readiness
+
+Liveness asks whether the process is alive; readiness asks whether it should be sent work. During graceful shutdown the application is still alive and no longer ready. Using one signal for both either restarts an application that was merely draining or sends work to one that cannot take it. See [Lab 12](../labs/12-deployment/README.md).
+
+## Container vs authorization
+
+A container, a firewall rule, or a loopback-only port limits who can reach the application. Authorization decides what each caller who does reach it may cause. Neither replaces the other, and a user does not gain authority because the application runs in a container.
 
 ## RAG vs fine-tuning
 

@@ -20,16 +20,16 @@ It is not an agent framework, a library catalog, or a skill marketplace.
 
 ```mermaid
 flowchart LR
-    model["Model"] --> structured["Structured Output"] --> tools["Tools"] --> knowledge["Knowledge / RAG"] --> memory["Memory"] --> skills["Skills"] --> runtime["Agent Runtime"] --> mcp["MCP"] --> evaluation["Evaluation"] --> observability["Observability"] --> security["Security"]
+    model["Model"] --> structured["Structured Output"] --> tools["Tools"] --> knowledge["Knowledge / RAG"] --> memory["Memory"] --> skills["Skills"] --> runtime["Agent Runtime"] --> mcp["MCP"] --> evaluation["Evaluation"] --> observability["Observability"] --> security["Security"] --> deployment["Deployment"]
 ```
 
 This is a learning path, not a mandatory architecture. Stop when the problem is solved. A single LLM call is not an agent. A database lookup does not become RAG because the application also calls a model. A local Java method does not need MCP.
 
-> **Available today:** eleven runnable labs — from a single model call to a bounded agent runtime that reaches one capability through MCP, then a small evaluation of that agent's behavior, then a trace of one run so a failure can be diagnosed, and then application-owned security controls around what that agent's proposals may cause — a composition capstone, and an architecture readiness assessment.
+> **Available today:** twelve runnable labs — from a single model call to a bounded agent runtime that reaches one capability through MCP, then a small evaluation of that agent's behavior, then a trace of one run so a failure can be diagnosed, and then application-owned security controls around what that agent's proposals may cause, and then the same application packaged and run as a deployable artifact without weakening any of those controls — a composition capstone, and an architecture readiness assessment.
 >
 > **Start with** [Lab 01 — Your first model call](labs/01-model-call/README.md). `./mvnw verify` builds and tests everything without an API key.
 >
-> **Not implemented yet:** deployment — it is on the [roadmap](ROADMAP.md), not a feature.
+> **Not implemented:** a production platform. Lab 12 is a teaching deployment; what it leaves out is listed in its README and on the [roadmap](ROADMAP.md).
 
 ## Why this project exists
 
@@ -44,7 +44,7 @@ The canonical implementation is Java 27, the current feature release; the handbo
 **New to agentic systems?**
 
 1. Start with [Lab 01](labs/01-model-call/README.md): one model call, and why it is not an agent.
-2. Follow the labs in order through [Lab 07](labs/07-agent-runtime/README.md), the first bounded agent runtime, [Lab 08](labs/08-mcp/README.md), where one of its capabilities moves outside the process behind MCP, [Lab 09](labs/09-evaluation/README.md), where you learn to check that agent's behavior across cases instead of trusting a demo, [Lab 10](labs/10-observability/README.md), where you reconstruct what one failed run actually did, and [Lab 11](labs/11-security/README.md), where you decide what a model's proposal is allowed to cause. Each lab adds one concept to the last.
+2. Follow the labs in order through [Lab 07](labs/07-agent-runtime/README.md), the first bounded agent runtime, [Lab 08](labs/08-mcp/README.md), where one of its capabilities moves outside the process behind MCP, [Lab 09](labs/09-evaluation/README.md), where you learn to check that agent's behavior across cases instead of trusting a demo, [Lab 10](labs/10-observability/README.md), where you reconstruct what one failed run actually did, [Lab 11](labs/11-security/README.md), where you decide what a model's proposal is allowed to cause, and [Lab 12](labs/12-deployment/README.md), where you package and run that application without losing any of those decisions. Each lab adds one concept to the last.
 3. After Lab 07, try [Capstone 01](capstones/01-agentic-system/README.md): compose what you learned around one realistic problem.
 4. Already have a use case? Use the [readiness assessment](assessments/agentic-system-readiness/README.md) to decide whether it needs an LLM, RAG, tools, memory, or an agent at all.
 
@@ -73,7 +73,7 @@ cd agentic-developer-handbook
 | 9 | Evaluation | How do I know the system does what I intended? | [Lab 09](labs/09-evaluation/README.md) |
 | 10 | Observability | What actually happened during this run? | [Lab 10](labs/10-observability/README.md) |
 | 11 | Security | What has to be checked at each boundary? | [Lab 11](labs/11-security/README.md) |
-| 12 | Deployment | What does it take to run it as a production system? | Planned |
+| 12 | Deployment | How do I run the same application, with the same controls, outside my IDE? | [Lab 12](labs/12-deployment/README.md) |
 
 Multi-agent systems, A2A, and fine-tuning come later, and many applications never need them. The numbered milestones are tracked in [ROADMAP.md](ROADMAP.md); the reasoning behind the path is in [VISION.md](VISION.md).
 
@@ -147,7 +147,8 @@ agentic-developer-handbook/
 │   ├── 08-mcp/
 │   ├── 09-evaluation/
 │   ├── 10-observability/
-│   └── 11-security/
+│   ├── 11-security/
+│   └── 12-deployment/
 ├── capstones/
 │   ├── README.md
 │   └── 01-agentic-system/
@@ -159,13 +160,13 @@ agentic-developer-handbook/
 └── .github/
 ```
 
-[labs/README.md](labs/README.md) describes how labs are written and lists the eleven runnable labs.
+[labs/README.md](labs/README.md) describes how labs are written and lists the twelve runnable labs.
 
 ## Current status
 
-Labs 01–11 run end to end: from a single model call to a bounded, read-only agent runtime (Lab 07), the same runtime reaching one capability that lives in another process through MCP (Lab 08), and then an evaluation set and a small harness that check that agent's behavior — the final answer and the trajectory — and catch a deliberate regression (Lab 09), and then a trace, a few structured log lines, and a handful of metrics that let you reconstruct why one run failed (Lab 10), and then application-owned controls — argument validation, authorization, bound approvals, and redaction — that decide what a model's proposal is allowed to cause, with direct and indirect prompt injection as the test (Lab 11). Capstone 01 and the readiness assessment build on them. The remaining production concern — deployment (Milestone 12, next) — is on the roadmap and is not implemented.
+Labs 01–12 run end to end: from a single model call to a bounded, read-only agent runtime (Lab 07), the same runtime reaching one capability that lives in another process through MCP (Lab 08), and then an evaluation set and a small harness that check that agent's behavior — the final answer and the trajectory — and catch a deliberate regression (Lab 09), and then a trace, a few structured log lines, and a handful of metrics that let you reconstruct why one run failed (Lab 10), and then application-owned controls — argument validation, authorization, bound approvals, and redaction — that decide what a model's proposal is allowed to cause, with direct and indirect prompt injection as the test (Lab 11), and then that same application packaged as one jar, configured from the environment, started with liveness and readiness endpoints, shut down gracefully, and built into a minimal non-root container image, with tests that prove deployment did not bypass those controls (Lab 12). Capstone 01 and the readiness assessment build on them. The numbered path ends here. Lab 12 is a teaching deployment, not a production platform: Kubernetes, cloud infrastructure, secret managers, identity, autoscaling, and full telemetry platforms are not implemented, and its README says what the gap to production is.
 
-Nothing here stores embeddings, and the only agent is the bounded runtime introduced in Lab 07; Labs 08, 09, 10, and 11 reuse it rather than adding another. This is a learning path, not a production platform. Progress is tracked in [ROADMAP.md](ROADMAP.md) and mirrored to [GitHub milestones](https://github.com/cagridursun/agentic-developer-handbook/milestones).
+Nothing here stores embeddings, and the only agent is the bounded runtime introduced in Lab 07; Labs 08, 09, 10, 11, and 12 reuse it rather than adding another. This is a learning path, not a production platform. Progress is tracked in [ROADMAP.md](ROADMAP.md) and mirrored to [GitHub milestones](https://github.com/cagridursun/agentic-developer-handbook/milestones).
 
 ## Contributing
 

@@ -111,13 +111,14 @@ class LabNineExistsTest(unittest.TestCase):
 
 class StatusTest(unittest.TestCase):
 
-    def test_roadmap_marks_nine_done_and_twelve_not_started(self):
+    def test_roadmap_marks_nine_done_and_twelve_done_after_it(self):
         nine = milestone(9)
         self.assertTrue(nine.strip().startswith(
             "Done. The lab is [labs/09-evaluation](labs/09-evaluation/README.md)."), nine[:120])
         self.assertTrue(milestone(11).strip().startswith(
             "Done. The lab is [labs/11-security](labs/11-security/README.md)."))
-        self.assertTrue(milestone(12).strip().startswith("Not started."))
+        self.assertTrue(milestone(12).strip().startswith(
+            "Done. The lab is [labs/12-deployment](labs/12-deployment/README.md)."))
 
     def test_readme_marks_evaluation_implemented_and_deployment_next(self):
         readme = read(REPO_ROOT / "README.md")
@@ -125,13 +126,13 @@ class StatusTest(unittest.TestCase):
                 if re.match(r"^\| \d+ \|", row)}
         self.assertIn("[Lab 09](labs/09-evaluation/README.md)", rows["9"])
         self.assertIn("[Lab 11](labs/11-security/README.md)", rows["11"])
-        self.assertTrue(rows["12"].rstrip().endswith("| Planned |"), rows["12"])
-        not_yet = next(line for line in readme.splitlines() if "**Not implemented yet:**" in line)
+        self.assertIn("[Lab 12](labs/12-deployment/README.md)", rows["12"])
+        not_yet = next(line for line in readme.splitlines() if "**Not implemented:**" in line)
         self.assertNotIn("evaluation", not_yet)
         self.assertNotIn("security", not_yet)
-        self.assertIn("deployment", not_yet)
+        self.assertIn("production platform", not_yet)
         self.assertIn("│   ├── 09-evaluation/", readme)
-        self.assertIn("deployment (Milestone 12, next)", normalized(readme))
+        self.assertNotIn("deployment (Milestone 12, next)", normalized(readme))
 
     def test_labs_index_links_lab_nine_only(self):
         index = read(REPO_ROOT / "labs" / "README.md")
@@ -146,16 +147,16 @@ class StatusTest(unittest.TestCase):
         self.assertNotIn("Evaluation", planned)
         self.assertNotIn("Observability", planned)
         self.assertNotIn("Security", planned)
-        self.assertIn("Deployment", planned)
+        self.assertIn("not a production platform", planned)
 
     def test_the_landing_page_counts_the_same_number_of_labs_everywhere(self):
         landing = normalized(read(SITE / "index.html"))
         path = landing.split('class="path"')[1].split("</ol>")[0]
         labs = path.count("<li>")
-        self.assertEqual(11, labs)
-        self.assertIn("Eleven runnable Java labs", landing)
+        self.assertEqual(12, labs)
+        self.assertIn("Twelve runnable Java labs", landing)
         self.assertIn(f"{labs} runnable Java labs</h3>", landing)
-        self.assertIn("Labs 01 to 11", landing)
+        self.assertIn("Labs 01 to 12", landing)
 
     def test_no_future_milestone_lab_exists(self):
         for name in ["12-production"]:
