@@ -136,10 +136,14 @@ Read-only, validated, in-scope calls may pass automatically: that is the automat
 
 A remote capability changes nothing about this. A tool provider that describes its tool as read-only has made a claim; the application classifies the tool from what it does, and a server that executes a state change should enforce for itself as well, because a check in the client protects only calls that go through the client.
 
+## Deploying a delegation
+
+Packaging the application changes where it runs, not who decides. [Lab 12](../labs/12-deployment/README.md) starts the same gateway behind an HTTP door, and its tests assert the denial and also that the privileged operation never executed. A container, a firewall, or a loopback bind is not decision authority: it limits who can reach the application, while the application still decides what each caller may cause. Configuration may choose a port or offer fewer tools; it has no setting that grants authority, so a deployment cannot quietly change who decides. Lab 12 does not authenticate callers, which is why the principal it reads is a stand-in for a verified identity and a residual risk the lab states.
+
 ## The rule in one place
 
 - **Model:** reason, generate, recommend, propose.
 - **Application / runtime:** constrain, validate, authorize, execute, stop.
 - **Human or business policy:** retains final authority where the risk requires it.
 
-This is the same boundary [Lab 03](../labs/03-tool-calling/README.md) draws for one tool round, [Lab 07](../labs/07-agent-runtime/README.md) draws for the loop, [Lab 08](../labs/08-mcp/README.md) keeps when a tool moves behind a protocol, [Lab 09](../labs/09-evaluation/README.md) evaluates without changing, [Lab 10](../labs/10-observability/README.md) records without changing, and [Lab 11](../labs/11-security/README.md) enforces — stated once, as its own concept, because it applies to every system in this handbook, agentic or not.
+This is the same boundary [Lab 03](../labs/03-tool-calling/README.md) draws for one tool round, [Lab 07](../labs/07-agent-runtime/README.md) draws for the loop, [Lab 08](../labs/08-mcp/README.md) keeps when a tool moves behind a protocol, [Lab 09](../labs/09-evaluation/README.md) evaluates without changing, [Lab 10](../labs/10-observability/README.md) records without changing, [Lab 11](../labs/11-security/README.md) enforces, and [Lab 12](../labs/12-deployment/README.md) keeps intact when the application is packaged and run — stated once, as its own concept, because it applies to every system in this handbook, agentic or not.

@@ -115,15 +115,16 @@ class LabTenExistsTest(unittest.TestCase):
 
 class StatusTest(unittest.TestCase):
 
-    def test_roadmap_marks_ten_done_and_twelve_not_started(self):
+    def test_roadmap_marks_ten_done_and_twelve_done_after_it(self):
         ten = milestone(10)
         self.assertTrue(ten.strip().startswith(
             "Done. The lab is [labs/10-observability](labs/10-observability/README.md)."), ten[:120])
         self.assertNotIn("is the intended direction", ten)
         self.assertTrue(milestone(11).strip().startswith(
             "Done. The lab is [labs/11-security](labs/11-security/README.md)."))
-        self.assertTrue(milestone(12).strip().startswith("Not started."))
-        self.assertIn("Milestones 0 through 11 are done", read(REPO_ROOT / "ROADMAP.md"))
+        self.assertTrue(milestone(12).strip().startswith(
+            "Done. The lab is [labs/12-deployment](labs/12-deployment/README.md)."))
+        self.assertIn("Milestones 0 through 12 are done", read(REPO_ROOT / "ROADMAP.md"))
 
     def test_readme_marks_observability_implemented_and_deployment_next(self):
         readme = read(REPO_ROOT / "README.md")
@@ -131,41 +132,41 @@ class StatusTest(unittest.TestCase):
                 if re.match(r"^\| \d+ \|", row)}
         self.assertIn("[Lab 10](labs/10-observability/README.md)", rows["10"])
         self.assertIn("[Lab 11](labs/11-security/README.md)", rows["11"])
-        self.assertTrue(rows["12"].rstrip().endswith("| Planned |"), rows["12"])
-        not_yet = next(line for line in readme.splitlines() if "**Not implemented yet:**" in line)
+        self.assertIn("[Lab 12](labs/12-deployment/README.md)", rows["12"])
+        not_yet = next(line for line in readme.splitlines() if "**Not implemented:**" in line)
         self.assertNotIn("observability", not_yet)
         self.assertNotIn("security", not_yet)
-        self.assertIn("deployment", not_yet)
+        self.assertIn("production platform", not_yet)
         self.assertIn("│   ├── 09-evaluation/", readme)
         self.assertIn("│   ├── 10-observability/", readme)
         self.assertIn('evaluation["Evaluation"] --> observability["Observability"]', readme)
-        self.assertIn("eleven runnable labs", normalized(readme))
-        self.assertIn("deployment (Milestone 12, next)", normalized(readme))
+        self.assertIn("twelve runnable labs", normalized(readme))
+        self.assertNotIn("deployment (Milestone 12, next)", normalized(readme))
 
     def test_labs_index_links_lab_ten(self):
         index = read(REPO_ROOT / "labs" / "README.md")
         self.assertIn("| [`10-observability`](10-observability/README.md) | 10 — Observability |", index)
         self.assertIn("| [`11-security`](11-security/README.md) | 11 — Security |", index)
-        self.assertIn("Eleven labs are available", index)
+        self.assertIn("Twelve labs are available", index)
 
     def test_landing_page_shows_observability_implemented_and_the_rest_planned(self):
         landing = normalized(read(SITE / "index.html"))
         path = landing.split('class="path"')[1].split("</ol>")[0]
         self.assertIn("/blob/main/labs/10-observability/README.md\">Observability</a>", path)
-        self.assertEqual(11, path.count("<li>"))
+        self.assertEqual(12, path.count("<li>"))
         planned = landing.split('class="roadmap-note"')[1].split("</p>")[0]
         self.assertNotIn("Observability", planned)
         self.assertNotIn("Security", planned)
-        self.assertIn("Deployment", planned)
+        self.assertIn("not a production platform", planned)
 
     def test_the_landing_page_counts_the_same_number_of_labs_everywhere(self):
         landing = normalized(read(SITE / "index.html"))
         path = landing.split('class="path"')[1].split("</ol>")[0]
         labs = path.count("<li>")
-        self.assertEqual(11, labs)
-        self.assertIn("Eleven runnable Java labs", landing)
+        self.assertEqual(12, labs)
+        self.assertIn("Twelve runnable Java labs", landing)
         self.assertIn(f"{labs} runnable Java labs</h3>", landing)
-        self.assertIn("Labs 01 to 11", landing)
+        self.assertIn("Labs 01 to 12", landing)
 
     def test_no_stale_lab_counts_remain(self):
         for relative in ["README.md", "labs/README.md", "site/index.html"]:

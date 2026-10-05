@@ -421,7 +421,7 @@ Short guidance: none; the justification is recorded and never read by a control 
 - No data loss prevention; redaction is a heuristic
 - No real MCP security: no OAuth, no token audience validation, no server authentication
 - No handling of memory poisoning, RAG corpus poisoning, multimodal injection, or Skill bundles
-- No deployment, no container, no environment configuration, and no secret management
+- No deployment, no container, no environment configuration, and no secret management (see [Lab 12](../12-deployment/README.md), which packages and runs this application)
 
 ## What limitation remains?
 
@@ -435,7 +435,7 @@ Questions this lab does not solve:
 - What survives a restart: the approvals, the policy, the trace?
 - How is the running system updated without opening a window in which the controls are off?
 
-That is **Milestone 12 — Deployment**. Not implemented here: no Docker, no environment configuration, and no deployment infrastructure exist in the repository.
+That is **Milestone 12 — Deployment**, taught in [Lab 12](../12-deployment/README.md). Not implemented here: no Docker, no environment configuration, and no deployment infrastructure exist in this lab.
 
 ## Sources consulted
 

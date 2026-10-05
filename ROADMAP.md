@@ -8,7 +8,7 @@ The learning path is a teaching sequence, not an architecture every application 
 
 ## Track A — Canonical Learning Path
 
-The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 11 are done. Later milestones are planned work and are not implemented.
+The maintainer-curated sequence of concepts and runnable labs. Milestones 0 through 12 are done. The numbered path ends here; the planned work in the other tracks is not implemented.
 
 ### Milestone 0 — Foundation
 
@@ -92,9 +92,9 @@ Boundaries: user input, model output, tool arguments, retrieved content, and pro
 
 ### Milestone 12 — Deployment
 
-Not started.
+Done. The lab is [labs/12-deployment](labs/12-deployment/README.md).
 
-What has to be true to run the reference system as a deployed application. Docker is the intended packaging direction when this milestone starts. It is not part of the repository yet.
+Package and run the Lab 11 application boundary without weakening it. The lab adds a small deployable artifact: one jar built once, validated environment-driven configuration that fails fast and has no setting for authorization, separate liveness and readiness endpoints, graceful shutdown that finishes work already started, structured deployment events, a minimal multi-stage non-root Dockerfile, and a CI extension that packages the artifact and builds the image without pushing it. Deterministic tests prove the deployed application still validates, authorizes, and holds approvals, and that a container is not an authorization boundary. Secrets are supplied at runtime, not packaged into the artifact. It is a teaching deployment, not a production platform: no Kubernetes, cloud, secret manager, identity, scaling, or full OpenTelemetry. The lab ends with a production gap analysis. No new ADR was needed: the lab applies [ADR 0006](docs/adr/0006-application-owned-authorization-for-state-changing-tools.md) and records its lab-level choices in its README.
 
 ## Track B — Open Source & Community
 

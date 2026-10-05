@@ -71,13 +71,14 @@ class LabEightExistsTest(unittest.TestCase):
 
 class StatusTest(unittest.TestCase):
 
-    def test_roadmap_marks_eight_done_and_twelve_not_started(self):
+    def test_roadmap_marks_eight_done_and_twelve_done_after_it(self):
         eight = milestone(8)
         self.assertTrue(eight.strip().startswith("Done. The lab is [labs/08-mcp](labs/08-mcp/README.md)."),
                         eight[:120])
         self.assertTrue(milestone(11).strip().startswith(
             "Done. The lab is [labs/11-security](labs/11-security/README.md)."))
-        self.assertTrue(milestone(12).strip().startswith("Not started."))
+        self.assertTrue(milestone(12).strip().startswith(
+            "Done. The lab is [labs/12-deployment](labs/12-deployment/README.md)."))
 
     def test_readme_marks_mcp_implemented_and_deployment_next(self):
         readme = read(REPO_ROOT / "README.md")
@@ -85,13 +86,13 @@ class StatusTest(unittest.TestCase):
                 if re.match(r"^\| \d+ \|", row)}
         self.assertIn("[Lab 08](labs/08-mcp/README.md)", rows["8"])
         self.assertIn("[Lab 11](labs/11-security/README.md)", rows["11"])
-        self.assertTrue(rows["12"].rstrip().endswith("| Planned |"), rows["12"])
-        not_yet = next(line for line in readme.splitlines() if "**Not implemented yet:**" in line)
+        self.assertIn("[Lab 12](labs/12-deployment/README.md)", rows["12"])
+        not_yet = next(line for line in readme.splitlines() if "**Not implemented:**" in line)
         self.assertNotIn("MCP", not_yet)
         self.assertNotIn("security", not_yet)
-        self.assertIn("deployment", not_yet)
+        self.assertIn("production platform", not_yet)
         self.assertIn("│   ├── 08-mcp/", readme)
-        self.assertIn("deployment (Milestone 12, next)", normalized(readme))
+        self.assertNotIn("deployment (Milestone 12, next)", normalized(readme))
 
     def test_labs_index_links_lab_eight_and_no_later_placeholder(self):
         index = read(REPO_ROOT / "labs" / "README.md")

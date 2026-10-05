@@ -57,18 +57,17 @@ class SiteEntryTest(unittest.TestCase):
         self.assertIn(REPOSITORY_URL + "/blob/main/labs/01-model-call/README.md", landing)
         self.assertIn("You probably don't need all of these.", landing)
 
-    def test_evaluation_is_on_the_path_and_later_milestones_stay_planned(self):
+    def test_the_path_ends_with_a_deployment_that_is_not_a_production_platform(self):
         landing = re.sub(r"\s+", " ", read(SITE / "index.html"))
-        self.assertIn("not implemented yet", landing)
         path = landing.split('class="path"')[1].split("</ol>")[0]
         self.assertIn(f'href="{REPOSITORY_URL}/blob/main/labs/08-mcp/README.md">MCP</a>', path)
         self.assertIn(f'href="{REPOSITORY_URL}/blob/main/labs/09-evaluation/README.md">Evaluation</a>', path)
         self.assertIn(f'href="{REPOSITORY_URL}/blob/main/labs/10-observability/README.md">Observability</a>', path)
         self.assertIn(f'href="{REPOSITORY_URL}/blob/main/labs/11-security/README.md">Security</a>', path)
-        self.assertEqual(11, path.count("<li>"))
+        self.assertEqual(12, path.count("<li>"))
         planned = landing.split('class="roadmap-note"')[1].split("</p>")[0]
-        self.assertNotIn("Deployment", path)
-        self.assertIn("Deployment", planned)
+        self.assertIn(f'href="{REPOSITORY_URL}/blob/main/labs/12-deployment/README.md">Deployment</a>', path)
+        self.assertIn("not a production platform", planned)
         for implemented in ["MCP", "Evaluation", "Observability", "Security"]:
             self.assertNotIn(implemented, planned)
 

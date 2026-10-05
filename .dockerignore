@@ -1,0 +1,16 @@
+# The Docker build context for labs/12-deployment/Dockerfile is the repository root.
+# Keep it small, and keep anything local or secret out of it.
+.git
+.github
+.idea
+.vscode
+.claude
+.cursor
+**/target
+**/__pycache__
+.env
+**/*.env
+site
+docs
+assessments
+scripts

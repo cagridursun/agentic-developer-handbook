@@ -96,6 +96,8 @@ Three different questions are easy to blur. Verification asks whether the code o
 
 A fourth question is security: what is the system *permitted* to do, whatever the model proposes? [Lab 11](../../labs/11-security/README.md) answers it with application-owned controls. Evaluation tests behavior across cases, observability explains what one execution did, and security enforces the behavior that is permitted. This capstone's tools are all read-only, which is why it can stay small, but its retrieved runbooks are still untrusted text. The capstone does not depend on Lab 11 and does not implement its controls; if you add a state-changing tool to your own design, Lab 11 is where to look first.
 
+A fifth question is how the system runs: packaged, configured, probed, and stopped without weakening any control. [Lab 12](../../labs/12-deployment/README.md) answers it: deployment packages the application boundary and does not redefine it, and a container is not an authorization boundary. The capstone does not depend on Lab 12 and ships no deployment files.
+
 ## Reflection
 
 1. Which capability did you initially want to use but eventually reject?
